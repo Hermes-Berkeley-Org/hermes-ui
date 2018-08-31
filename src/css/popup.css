@@ -1,0 +1,94 @@
+#black-transparent-screen {
+	visibility: hidden;
+	height: 100%;
+	width: 100%;
+	background-color: #000;
+	z-index: 10000;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+
+/* Toggle this class - hide and show the popup */
+#black-transparent-screen.show {
+    visibility: visible;
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+    opacity: 0.5;
+}
+
+#black-transparent-screen.disappear {
+	visibility: hidden;
+	-webkit-animation: fadeOut 0.5s;
+	animation: fadeOut 0.5s;
+	opacity: 0;
+}
+
+#vitamin-form, #vitamin-problem {
+	position: absolute;
+	overflow-y: auto;
+	left: 25%;
+	top: -200%;
+	width: 50%;
+	height: 62.5%;
+	background-color: #fff;
+	z-index: 10001;
+	border-radius: 15px;
+	padding: 3%;
+}
+
+#resource-form {
+	position: absolute;
+	overflow-y: auto;
+	left: 25%;
+	top: -200%;
+	width: 50%;
+	height: 50%;
+	background-color: #fff;
+	z-index: 10002;
+	border-radius: 15px;
+	padding: 3%;
+}
+
+#vitamin-form.show, #vitamin-problem.show, #resource-form.show {
+	top: 18.75%;
+	-webkit-animation: slideIn 0.5s;
+    animation: slideIn 0.5s;
+}
+
+.popup-input {
+	width: 100%;
+}
+
+.mcq-choices {
+	width: 80%;
+}
+
+.incorrect {
+	color: red;
+}
+
+#skip {
+	cursor: pointer;
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 0.5;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 0.5;}
+}
+
+@-webkit-keyframes slideIn {
+    from { top: -200%; } 
+    to { top: 18.75%; } 
+}
+
+@keyframes slideIn {
+    from { top: -200%; } 
+    to { top: 18.75%; } 
+}

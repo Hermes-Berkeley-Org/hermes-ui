@@ -1,0 +1,189 @@
+html,html *{
+	box-sizing: border-box !important;
+}
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+#footer {
+	position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.navbar-btn {
+	background-color: #18BC9C;
+	border-radius: 15px;
+}
+
+.full-section {
+	height: 100vh;
+}
+
+.full-section-shifted {
+	height: 92.5vh;
+}
+
+.wrapper {
+	padding-top: 110px;
+	padding-left: 5%;
+	padding-bottom: 40px;
+}
+@media (max-width: 979px) {
+  .wrapper {
+    padding-top: 75px;
+  }
+}
+
+.content header {
+	padding-top: 0px;
+}
+@media (max-width: 979px) {
+  .content header {
+    padding-top: 0px;
+  }
+}
+
+table {
+	width: 100%;
+  margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+td {
+	/* padding: 25px 50px 75px; */
+	/* color:red; */
+	padding: 0px 0px 0px -60px;
+	font-weight:normal;
+	/* padding-top:0px;
+	padding-right:5px;
+	padding-bottom: 0px;
+	padding-left: 5px; */
+}
+
+th {
+	/* padding: 25px 50px 75px; */
+	padding: 0px 0px 0px -60px;
+	/* padding-top:0px;
+	padding-right:5px;
+	padding-bottom: 0px;
+	padding-left: 5px; */
+}
+
+.classtable {
+	width: 100%;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	text-align: center;
+}
+
+
+#lec_table #lec_table_header {
+	font-size: 1.5em;
+	color: white;
+	background-color: #18BC9C;
+	font-weight: bold;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#lec_table #lecture-list {
+	overflow-y: auto;
+	height: 60vh;
+	width: 100%;
+}
+
+#lec_table #lecture-list .lec-row.gray-row {
+	background-color: #eee;
+}
+
+#lec_table #lecture-list .lec-row:hover {
+	background: #fefbd8;
+}
+
+#lec_table #lecture-list .extra-content {
+	background: rgb(24, 188, 156, 0.1);
+}
+
+#transcript {
+	height: 20vh;
+	overflow-y: scroll;
+}
+
+.transcript-box {
+	width: 50vw;
+}
+
+.transcript-box:hover {
+	background: #fefbd8;
+}
+
+input#suggestion {
+	border:none;
+}
+
+input#suggestion:focus {
+    outline:none;
+}
+
+div.class-box {
+	display: table;
+	height: 100px;
+	width: 100%;
+	line-height: 100px;
+	background-color: #ddd;
+	text-align: center;
+}
+
+div.class-box:hover {
+	background-color: #ccc;
+}
+
+div.class-box h6 {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.dropdown {
+	visibility: hidden;
+}
+
+ul.dropdown-menu li {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+ul.dropdown-menu li:hover {
+	cursor: pointer;
+	background-color: #fefbd8;
+}
+
+.mcq-choices {
+	display: inline;
+}
+
+.tt-suggestion {
+  background-color : #ffffff;
+}
+
+.input-reduce-padding {
+	padding: 1px 3px;
+}
+
+.yt-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.flash {
+	list-style-type: none;
+	color: #ff0000;
+	font-size: 12px
+}
+
+.unregistered {
+	color: #ff0000;
+}
