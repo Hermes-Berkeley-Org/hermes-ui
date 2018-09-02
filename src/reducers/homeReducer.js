@@ -1,27 +1,22 @@
-import { SAVE_ACCESS_TOKEN, GET_ACCESS_TOKEN_SUCCESS, GET_ACCESS_TOKEN_STARTED, GET_ACCESS_TOKEN_FAILURE } from '../actions/types.js'
+import { GET_HOME_DATA_STARTED, GET_HOME_DATA_SUCCESS, GET_HOME_DATA_FAILURE } from '../actions/types.js'
 
 export default (state = {}, action) => {
  switch (action.type) {
-    case SAVE_ACCESS_TOKEN:
-        localStorage.setItem('ACCESS_TOKEN', action.payload);
-        return state
-    case GET_ACCESS_TOKEN_STARTED:
+    case GET_HOME_DATA_STARTED:
         return Object.assign({}, state, {
             ...state,
             loading: true
         })
-    case GET_ACCESS_TOKEN_SUCCESS:
+    case GET_HOME_DATA_SUCCESS:
         return Object.assign({}, state, {
             ...state,
             loading: false,
-            isAuthenticated: true,
-            token: action.payload.token
+            data: action.payload
         })
-    case GET_ACCESS_TOKEN_FAILURE:
+    case GET_HOME_DATA_FAILURE:
         return Object.assign({}, state, {
             ...state,
             loading: false,
-            isAuthenticated: false,
             actionPayloadError: action.payload.error
         })
     default:
