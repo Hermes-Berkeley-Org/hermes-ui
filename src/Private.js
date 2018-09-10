@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { authenticate } from './actions/accessToken.js'
+import { authenticate, sendFailure } from './actions/accessToken.js'
 
 import { connect } from 'react-redux';
 
@@ -9,6 +9,10 @@ import Login from './Login.js'
 import PropTypes from 'prop-types'
 
 import ReactLoading from 'react-loading';
+
+import CryptoAES from 'crypto-js/aes'
+import CryptoJS from 'crypto-js'
+
 
 class Private extends Component {
 
@@ -27,7 +31,18 @@ class Private extends Component {
   }
 
   componentWillMount() {
-      this.props.authenticate()
+    const encryptedToken = localStorage.getItem('token')
+    if (encryptedToken !== undefined) {
+        const bytes = CryptoAES.decrypt(
+            localStorage.getItem('token').toString(),
+            process.env.REACT_APP_SECRET_KEY
+        )
+        this.props.authenticate(
+          JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+        )
+    } else {
+        this.props.sendFailure()
+    }
   }
 }
 
@@ -46,7 +61,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  authenticate: () => dispatch(authenticate())
+  authenticate: (token) => dispatch(authenticate(token)),
+  sendFailure: () => dispatch(sendFailure())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Private);

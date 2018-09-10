@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { saveAccessToken } from './actions/accessToken.js'
+import CryptoAES from 'crypto-js/aes'
+
+// import { saveAccessToken } from './actions/accessToken.js'
 
 const queryString = require('query-string');
 const axios = require('axios');
@@ -19,14 +21,12 @@ class OkAuthorized extends Component {
   }
 
   componentDidMount() {
+
     const urlParams = queryString.parse(this.props.location.search);
     const code = urlParams.code;
     const state = JSON.parse(utf8.decode(base64.decode(urlParams.state)))
 
     const currentUrl = new URL(window.location.href);
-
-    // Jumping scope trick to be able to access actions from axios. See: https://toddmotto.com/understanding-the-this-keyword-in-javascript/
-    const self = this;
 
     axios({
       method: 'post',
@@ -42,23 +42,18 @@ class OkAuthorized extends Component {
         'redirect_uri': `${currentUrl.origin}/authorized`
       })
     }).then(function (response) {
-      const accessToken = response.data['access_token'];
-      console.log(accessToken)
-      self.props.saveAccessToken(accessToken);
+      const accessToken = response.data['access_token']
+      const refreshToken = response.data['refresh_token']
+      localStorage.setItem('token', CryptoAES.encrypt(
+        JSON.stringify({ accessToken, refreshToken }),
+        process.env.REACT_APP_SECRET_KEY
+      ))
       window.location = state.next;
     }).catch(function (error) {
-      window.location = `${currentUrl.origin}/` // TODO: error route
+      window.location = `${currentUrl.origin}/error` // TODO: error route
     });
   }
 
 }
 
-const mapStateToProps = state => ({
- ...state
-})
-
-const mapDispatchToProps = dispatch => ({
-  saveAccessToken: (accessToken) => dispatch(saveAccessToken(accessToken))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(OkAuthorized);
+export default OkAuthorized;

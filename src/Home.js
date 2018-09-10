@@ -21,17 +21,18 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.getData()
+    this.props.getData(this.props.accessToken)
   }
 
 }
 
 const mapStateToProps = state => ({
-  ...state.homeReducer
+  ...state.homeReducer,
+  ...state.authReducer
 })
 
 const mapDispatchToProps = dispatch => ({
-  getData: () => dispatch(getData())
+  getData: (accessToken) => dispatch(getData(accessToken))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

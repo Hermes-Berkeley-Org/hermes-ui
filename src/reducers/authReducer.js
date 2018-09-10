@@ -2,9 +2,12 @@ import { SAVE_ACCESS_TOKEN, GET_ACCESS_TOKEN_SUCCESS, GET_ACCESS_TOKEN_STARTED, 
 
 export default (state = {}, action) => {
  switch (action.type) {
-    case SAVE_ACCESS_TOKEN:
-        localStorage.setItem('ACCESS_TOKEN', action.payload);
-        return state
+    // case SAVE_ACCESS_TOKEN:
+    //     return Object.assign({}, state, {
+    //         ...state,
+    //         token: action.payload.token,
+    //         refreshToken: action.payload.refreshToken
+    //     })
     case GET_ACCESS_TOKEN_STARTED:
         return Object.assign({}, state, {
             ...state,
@@ -15,14 +18,14 @@ export default (state = {}, action) => {
             ...state,
             loading: false,
             isAuthenticated: true,
-            token: action.payload.token
+            accessToken: action.payload.accessToken,
+            refreshToken: action.payload.refreshToken
         })
     case GET_ACCESS_TOKEN_FAILURE:
         return Object.assign({}, state, {
             ...state,
             loading: false,
-            isAuthenticated: false,
-            actionPayloadError: action.payload.error
+            isAuthenticated: false
         })
     default:
         return state
