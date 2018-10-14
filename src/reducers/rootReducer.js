@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
-import authReducer from './authReducer';
+import okAuthReducer from './okAuthReducer';
+import googleAuthReducer from './googleAuthReducer'
 import homeReducer from './homeReducer'
+import courseReducer from './courseReducer'
 
 export default combineReducers({
- authReducer, homeReducer
+ okAuthReducer, homeReducer, courseReducer, googleAuthReducer
 });

@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 
-import { authenticate, sendFailure } from './actions/accessToken.js'
+import { authenticate, sendFailure } from './actions/okAccessToken.js'
 
 import { connect } from 'react-redux';
 
-import Login from './Login.js'
+import OkLogin from './OkLogin.js'
 
 import PropTypes from 'prop-types'
 
 import ReactLoading from 'react-loading';
 
-import CryptoAES from 'crypto-js/aes'
-import CryptoJS from 'crypto-js'
 
-
-class Private extends Component {
+class OkPrivate extends Component {
 
   render() {
     if (this.props.loading) {
@@ -26,43 +23,37 @@ class Private extends Component {
         </div>
       );
     } else {
-      return <Login/>
+      return <OkLogin nextUrl={this.props.nextUrl}/>
     }
   }
 
   componentWillMount() {
     const encryptedToken = localStorage.getItem('token')
     if (encryptedToken !== undefined) {
-        const bytes = CryptoAES.decrypt(
-            localStorage.getItem('token').toString(),
-            process.env.REACT_APP_SECRET_KEY
-        )
-        this.props.authenticate(
-          JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
-        )
+        this.props.okAuthenticate(encryptedToken)
     } else {
-        this.props.sendFailure()
+        this.props.okSendFailure()
     }
   }
 }
 
-Private.defaultProps = {
+OkPrivate.defaultProps = {
     loading: true
 }
 
-Private.propTypes = {
+OkPrivate.propTypes = {
     loading: PropTypes.bool.isRequired,
     isAuthenticated: PropTypes.bool,
-    authenticate: PropTypes.func.isRequired
+    okAuthenticate: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  ...state.authReducer
+  ...state.okAuthReducer
 })
 
 const mapDispatchToProps = dispatch => ({
-  authenticate: (token) => dispatch(authenticate(token)),
-  sendFailure: () => dispatch(sendFailure())
+  okAuthenticate: (token) => dispatch(authenticate(token)),
+  okSendFailure: () => dispatch(sendFailure())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Private);
+export default connect(mapStateToProps, mapDispatchToProps)(OkPrivate);

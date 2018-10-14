@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import OkRedirect from './OkRedirect.js'
 
-class Login extends Component {
+class OkLogin extends Component {
   render() {
     return (
-      <OkRedirect nextUrl="/home"/>
+      <OkRedirect nextUrl={this.props.nextUrl || "/home"}/>
     );
   }
 }
 
-export default Login;
+export default OkLogin;

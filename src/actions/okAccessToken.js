@@ -1,22 +1,19 @@
-import { SAVE_ACCESS_TOKEN, GET_ACCESS_TOKEN_SUCCESS, GET_ACCESS_TOKEN_STARTED, GET_ACCESS_TOKEN_FAILURE } from './types.js'
+import { GET_OK_ACCESS_TOKEN_SUCCESS, GET_OK_ACCESS_TOKEN_STARTED, GET_OK_ACCESS_TOKEN_FAILURE } from './types.js'
+import { decrypt } from './security.js'
 
 const axios = require('axios');
 const queryString = require('query-string')
 
 export const sendFailure = () => dispatch => {
   dispatch({
-    type: GET_ACCESS_TOKEN_FAILURE
+    type: GET_OK_ACCESS_TOKEN_FAILURE
   })
 }
 
 const refresh = (refreshToken) => dispatch => {
   const currentUrl = new URL(window.location.href);
-  axios({
-    method: 'post',
-    url: process.env.REACT_APP_TOKEN_URL,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
+  axios(process.env.REACT_APP_OK_TOKEN_URL, {
+    method: 'POST',
     data: queryString.stringify({
       'refresh_token': refreshToken,
       'client_secret': process.env.REACT_APP_CLIENT_SECRET,
@@ -26,7 +23,7 @@ const refresh = (refreshToken) => dispatch => {
     })
   }).then(function (response) {
     dispatch({
-      type: GET_ACCESS_TOKEN_SUCCESS,
+      type: GET_OK_ACCESS_TOKEN_SUCCESS,
       payload: {
         accessToken: response.data['access_token'],
         refreshToken: response.data['refresh_token']
@@ -34,25 +31,23 @@ const refresh = (refreshToken) => dispatch => {
     })
   }).catch(function (accessTokenError) {
     dispatch({
-      type: GET_ACCESS_TOKEN_FAILURE,
+      type: GET_OK_ACCESS_TOKEN_FAILURE,
       payload: { error: accessTokenError }
     })
   });
 }
 
-export const authenticate = ({ accessToken, refreshToken }) => dispatch => {
+export const authenticate = (encryptedTokens) => dispatch => {
+  const { accessToken, refreshToken } = decrypt(encryptedTokens)
   dispatch({
-    type: GET_ACCESS_TOKEN_STARTED
+    type: GET_OK_ACCESS_TOKEN_STARTED
   })
-  axios({
-    method: 'get',
-    url: `${process.env.REACT_APP_TEST_TOKEN_URL}?${queryString.stringify({'access_token': accessToken})}`
-  }).then(function (response) {
-    dispatch({
-      type: GET_ACCESS_TOKEN_SUCCESS,
-      payload: { accessToken, refreshToken }
-    })
-  }).catch(function (accessTokenError) {
-    refresh(refreshToken)
-  });
+  axios(`${process.env.REACT_APP_OK_TEST_TOKEN_URL}?${queryString.stringify({'access_token': accessToken})}`,
+    {}).then(function (response) {
+      dispatch({
+        type: GET_OK_ACCESS_TOKEN_SUCCESS
+      })
+    }).catch(function (accessTokenError) {
+      refresh(refreshToken)
+    });
 }

@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
 import Layout from './Layout.js'
-import PropTypes from 'prop-types'
-
 import { connect } from 'react-redux'
-
 import { getData } from './actions/home.js'
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
   render() {
-    console.log(this.props)
-    if (this.props.data) {
+    if (this.props.homeResponse) {
       return (
         <Layout>
-          {JSON.stringify(this.props.data)}
+          {this.props.homeResponse.data.participations.map((participation, i) => {
+              return (
+                <div key={i}>
+                  <Link key={i} to={`/course/${participation["course_id"]}`}>
+                    {participation.course["display_name"]}
+                  </Link>
+                </div>
+              )
+          })}
         </Layout>
       );
-    } else {
-      return <div>Loading...</div>
     }
+    return null; // TODO: Loading
   }
 
   componentDidMount() {
-    this.props.getData(this.props.accessToken)
+    this.props.getData(localStorage.getItem('token'))
   }
 
 }
 
 const mapStateToProps = state => ({
-  ...state.homeReducer,
-  ...state.authReducer
+  ...state.homeReducer
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import ExternalRedirect from './ExternalRedirect.js'
 
@@ -24,15 +23,15 @@ class OkRedirect extends Component {
 
     this.urlParams = queryString.stringify({
       response_type: 'code',
-      client_id: process.env.REACT_APP_OK_CLIENT_ID,
-      redirect_uri: `${currentUrl.origin}/authorized`,
-      scope: 'email',
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+      redirect_uri: `${currentUrl.origin}/googleAuthorized`,
+      scope: 'https://www.googleapis.com/auth/youtube.readonly',
       state: base64.encode(utf8.encode(state))
     })
   }
 
   render() {
-    return <ExternalRedirect url={`${process.env.REACT_APP_OK_AUTHORIZE_URL}?${this.urlParams}`}/>
+    return <ExternalRedirect url={`${process.env.REACT_APP_GOOGLE_AUTHORIZE_URL}?${this.urlParams}`}/>
   }
 
 }

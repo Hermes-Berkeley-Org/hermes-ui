@@ -1,19 +1,19 @@
-import { GET_HOME_DATA_STARTED, GET_HOME_DATA_SUCCESS, GET_HOME_DATA_FAILURE } from '../actions/types.js'
+import { GET_COURSE_DATA_STARTED, GET_COURSE_DATA_SUCCESS, GET_COURSE_DATA_FAILURE } from '../actions/types.js'
 
 export default (state = {}, action) => {
  switch (action.type) {
-    case GET_HOME_DATA_STARTED:
+    case GET_COURSE_DATA_STARTED:
         return Object.assign({}, state, {
             ...state,
             loading: true
         })
-    case GET_HOME_DATA_SUCCESS:
+    case GET_COURSE_DATA_SUCCESS:
         return Object.assign({}, state, {
             ...state,
             loading: false,
-            homeResponse: action.payload
+            courseResponse: action.payload
         })
-    case GET_HOME_DATA_FAILURE:
+    case GET_COURSE_DATA_FAILURE:
         return Object.assign({}, state, {
             ...state,
             loading: false,

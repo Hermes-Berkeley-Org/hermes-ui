@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+
 import { encrypt } from './actions/security.js'
 
 const queryString = require('query-string');
 const axios = require('axios');
+
 const base64 = require('base-64');
 const utf8 = require('utf8');
 
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
-class OkAuthorized extends Component {
+class GoogleAuthorized extends Component {
 
   render() {
     return <div/>
@@ -23,12 +25,12 @@ class OkAuthorized extends Component {
 
     const currentUrl = new URL(window.location.href);
 
-    axios(process.env.REACT_APP_OK_TOKEN_URL, {
+    axios(process.env.REACT_APP_GOOGLE_TOKEN_URL, {
       method: 'POST',
       data: queryString.stringify({
         code,
-        'client_secret': process.env.REACT_APP_OK_CLIENT_SECRET,
-        'client_id': process.env.REACT_APP_OK_CLIENT_ID,
+        'client_secret': process.env.REACT_APP_GOOGLE_CLIENT_SECRET,
+        'client_id': process.env.REACT_APP_GOOGLE_CLIENT_ID,
         'grant_type': 'authorization_code',
         'redirect_uri': `${currentUrl.origin}/authorized`
       })
@@ -38,10 +40,11 @@ class OkAuthorized extends Component {
       localStorage.setItem('token', encrypt({ accessToken, refreshToken }))
       window.location = state.next;
     }).catch(function (error) {
+      alert(error)
       window.location = `${currentUrl.origin}/error` // TODO: error route
     });
   }
 
 }
 
-export default OkAuthorized;
+export default GoogleAuthorized;
