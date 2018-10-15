@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ExternalRedirect from './ExternalRedirect.js'
+import ExternalRedirect from '../ExternalRedirect'
 
 const URL = require('url-parse');
 
@@ -10,7 +10,7 @@ const cryptoRandomString = require('crypto-random-string');
 const base64 = require('base-64');
 const utf8 = require('utf8')
 
-class OkRedirect extends Component {
+class GoogleRedirect extends Component {
 
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ class OkRedirect extends Component {
     })
 
     this.urlParams = queryString.stringify({
-      response_type: 'code',
+      response_type: 'token',
       client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       redirect_uri: `${currentUrl.origin}/googleAuthorized`,
       scope: 'https://www.googleapis.com/auth/youtube.readonly',
@@ -36,4 +36,4 @@ class OkRedirect extends Component {
 
 }
 
-export default OkRedirect;
+export default GoogleRedirect;

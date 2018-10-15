@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import ExternalRedirect from './ExternalRedirect.js'
+import ExternalRedirect from '../ExternalRedirect.js'
 
 const URL = require('url-parse');
 
@@ -23,7 +23,7 @@ class OkRedirect extends Component {
     })
 
     this.urlParams = queryString.stringify({
-      response_type: 'code',
+      response_type: 'code', // 'token' not supported: !!!!!
       client_id: process.env.REACT_APP_OK_CLIENT_ID,
       redirect_uri: `${currentUrl.origin}/authorized`,
       scope: 'email',

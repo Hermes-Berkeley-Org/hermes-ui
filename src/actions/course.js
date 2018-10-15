@@ -6,7 +6,6 @@ const axios = require('axios');
 
 export const getData = (encryptedTokens) => dispatch => {
   const { accessToken } = decrypt(encryptedTokens)
-  console.log('ACCESS TOKEN', accessToken)
   dispatch({
     type: GET_COURSE_DATA_STARTED
   })

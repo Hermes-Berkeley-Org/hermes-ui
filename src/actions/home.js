@@ -11,13 +11,18 @@ export const getData = (encryptedTokens) => dispatch => {
   dispatch({
     type: GET_HOME_DATA_STARTED
   })
-  axios(`${process.env.REACT_APP_OK_TEST_TOKEN_URL}?${queryString.stringify({'access_token': accessToken})}`,
-    {}).then(function (response) {
+  axios.get(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/home/`,
+    {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }).then(function (response) {
       dispatch({
         type: GET_HOME_DATA_SUCCESS,
         payload: response.data
       })
     }).catch(function (error) {
+      console.log(error)
       dispatch({
         type: GET_HOME_DATA_FAILURE,
         payload: { error }

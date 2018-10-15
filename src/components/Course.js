@@ -4,7 +4,7 @@ import Layout from './Layout.js'
 
 import { connect } from 'react-redux';
 
-import { getData } from './actions/course.js'
+import { getData } from '../actions/course.js'
 
 class Course extends Component {
   render() {
@@ -29,7 +29,7 @@ class Course extends Component {
   }
 
   componentDidMount() {
-    this.props.getData(localStorage.getItem('token'))
+    this.props.getData(localStorage.getItem('okToken'))
   }
 }
 

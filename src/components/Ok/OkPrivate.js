@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import { authenticate, sendFailure } from './actions/okAccessToken.js'
+import { authenticate, sendFailure } from '../../actions/okAccessToken.js'
 
 import { connect } from 'react-redux';
 
-import OkLogin from './OkLogin.js'
+import OkLogin from './OkLogin'
 
 import PropTypes from 'prop-types'
 
@@ -19,7 +19,7 @@ class OkPrivate extends Component {
     } else if (this.props.isAuthenticated) {
       return (
         <div>
-            {React.cloneElement(this.props.children, {...this.props})}
+            {this.props.children}
         </div>
       );
     } else {
@@ -28,7 +28,7 @@ class OkPrivate extends Component {
   }
 
   componentWillMount() {
-    const encryptedToken = localStorage.getItem('token')
+    const encryptedToken = localStorage.getItem('okToken')
     if (encryptedToken !== undefined) {
         this.props.okAuthenticate(encryptedToken)
     } else {

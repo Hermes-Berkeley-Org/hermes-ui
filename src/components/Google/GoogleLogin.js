@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GoogleRedirect from './GoogleRedirect.js'
+import GoogleRedirect from './GoogleRedirect'
 
 class GoogleLogin extends Component {
   render() {

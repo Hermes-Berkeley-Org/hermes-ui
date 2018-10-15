@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css'
-import PublicHome from './PublicHome.js'
-import Home from './Home.js'
-import OkLogin from './OkLogin.js'
-import OkAuthorized from './OkAuthorized.js'
-import GoogleAuthorized from './GoogleAuthorized.js'
-import Course from './Course.js'
-import OkPrivate from './OkPrivate.js'
-import GooglePrivate from './GooglePrivate.js'
+import PublicHome from './PublicHome'
+import Home from './Home'
+import OkLogin from './Ok/OkLogin'
+import OkAuthorized from './Ok/OkAuthorized'
+import GoogleAuthorized from './Google/GoogleAuthorized'
+import Course from './Course'
+import OkPrivate from './Ok/OkPrivate'
+import GooglePrivate from './Google/GooglePrivate'
+import InstructorAuthenticated from './InstructorAuthenticated'
 
 import { Switch, Route } from 'react-router-dom'
 
@@ -28,9 +29,9 @@ class App extends Component {
         <Route exact path="/googleAuthorized" component={GoogleAuthorized}/>
         <Route exact path="/course/:courseId" render={({ location, match }) => (
           <OkPrivate nextUrl={location.pathname}>
-            <GooglePrivate nextUrl={location.pathname}>
+            <InstructorAuthenticated nextUrl={location.pathname}>
               <Course courseId={Number.parseInt(match.params.courseId, 10)}/>
-            </GooglePrivate>
+            </InstructorAuthenticated>
           </OkPrivate>
         )}/>
       </Switch>

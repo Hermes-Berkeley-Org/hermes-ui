@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Layout from './Layout.js'
+import Layout from './Layout'
 
 class PublicHome extends Component {
   render() {

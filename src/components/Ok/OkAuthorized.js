@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { encrypt } from './actions/security.js'
+import { encrypt } from '../../actions/security.js'
 
 const queryString = require('query-string');
 const axios = require('axios');
 const base64 = require('base-64');
 const utf8 = require('utf8');
-
-
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 class OkAuthorized extends Component {
 
@@ -35,10 +32,11 @@ class OkAuthorized extends Component {
     }).then(function (response) {
       const accessToken = response.data['access_token']
       const refreshToken = response.data['refresh_token']
-      localStorage.setItem('token', encrypt({ accessToken, refreshToken }))
+      localStorage.setItem('okToken', encrypt({ accessToken, refreshToken }))
       window.location = state.next;
     }).catch(function (error) {
-      window.location = `${currentUrl.origin}/error` // TODO: error route
+      console.log(error);
+      // window.location = `${currentUrl.origin}/error` // TODO: error route
     });
   }
 

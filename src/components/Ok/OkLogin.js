@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import OkRedirect from './OkRedirect.js'
+import OkRedirect from './OkRedirect'
 
 class OkLogin extends Component {
   render() {

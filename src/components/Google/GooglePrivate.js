@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-
-import { authenticate, sendFailure } from './actions/googleAccessToken.js'
-
+import { authenticate, sendFailure } from '../../actions/googleAccessToken.js'
 import { connect } from 'react-redux';
-
-import GoogleLogin from './GoogleLogin.js'
-
+import GoogleLogin from './GoogleLogin'
 import PropTypes from 'prop-types'
-
 import ReactLoading from 'react-loading';
 
 
@@ -19,7 +14,7 @@ class GooglePrivate extends Component {
     } else if (this.props.isGoogleAuthenticated) {
       return (
         <div>
-            {React.cloneElement(this.props.children, {...this.props})}
+            {this.props.children}
         </div>
       );
     } else {

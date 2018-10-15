@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Img from 'react-image';
 
-import hermesLogo from './img/hermes.png';
+import hermesLogo from '../img/hermes.png';
 
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
