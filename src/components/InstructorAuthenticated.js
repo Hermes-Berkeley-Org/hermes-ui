@@ -8,10 +8,9 @@ import { getRole } from '../actions/user.js'
 class InstructorAuthenticated extends Component {
 
   render() {
-    console.log(this.props)
     if (this.props.instructorLoading) {
       return (<ReactLoading height={'20%'} width={'20%'} />);
-    } else if (this.props.isInstructor) {
+    } else if (this.props.roleData.role === 'instructor') {
       return (
         <GooglePrivate nextUrl={this.props.nextUrl}>
           <div>
@@ -43,13 +42,9 @@ InstructorAuthenticated.propTypes = {
     isInstructor: PropTypes.bool
 }
 
-const mapStateToProps = function(state) {
-  const roleData = state.instructorAuthenticatedReducer
-  return {
-    isInstructor: roleData.role === 'instructor',
-    instructorLoading: roleData.instructorLoading
-  }
-}
+const mapStateToProps = state => ({
+  ...state.instructorAuthenticatedReducer
+})
 
 const mapDispatchToProps = dispatch => ({
   getRole: (tokens, courseId) => dispatch(getRole(tokens, courseId))

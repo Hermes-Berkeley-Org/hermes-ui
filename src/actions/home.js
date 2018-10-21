@@ -1,9 +1,7 @@
 import { GET_HOME_DATA_STARTED, GET_HOME_DATA_SUCCESS, GET_HOME_DATA_FAILURE } from './types.js'
 import { decrypt } from './security.js'
 
-const queryString = require('query-string')
 const axios = require('axios');
-
 
 export const getData = (encryptedTokens) => dispatch => {
   const { accessToken } = decrypt(encryptedTokens)
@@ -22,7 +20,6 @@ export const getData = (encryptedTokens) => dispatch => {
         payload: response.data
       })
     }).catch(function (error) {
-      console.log(error)
       dispatch({
         type: GET_HOME_DATA_FAILURE,
         payload: { error }

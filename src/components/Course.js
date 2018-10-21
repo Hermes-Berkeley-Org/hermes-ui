@@ -1,27 +1,17 @@
 import React, { Component } from 'react';
-
-import Layout from './Layout.js'
-
+import Layout from './Layout'
 import { connect } from 'react-redux';
-
-import { getData } from '../actions/course.js'
+import { getPlaylists, createLecture } from '../actions/course.js'
+import PlaylistTable from './PlaylistTable'
+import AddLectureForm from './AddLectureForm'
 
 class Course extends Component {
   render() {
-    if (this.props.courseResponse) {
+    if (this.props.playlists) {
       return (
         <Layout>
-          {this.props.courseResponse.data.participations.map((participation, i) => {
-              if (participation["course_id"] === this.props.courseId) {
-                return (
-                  <div key={i}>
-                    {JSON.stringify(participation)}
-                  </div>
-                )
-              } else {
-                return null;
-              }
-          })}
+          <PlaylistTable playlists={this.props.playlists}/>
+          <AddLectureForm createLecture={this.props.createLecture}/>
         </Layout>
       );
     }
@@ -29,7 +19,7 @@ class Course extends Component {
   }
 
   componentDidMount() {
-    this.props.getData(localStorage.getItem('okToken'))
+    this.props.getPlaylists(localStorage.getItem('okToken'), this.props.courseId)
   }
 }
 
@@ -38,7 +28,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getData: (accessToken) => dispatch(getData(accessToken))
+  getPlaylists: (accessToken) => dispatch(getPlaylists(accessToken)),
+  createLecture: (accessToken, lecture) => dispatch(createLecture(accessToken, lecture))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Course);

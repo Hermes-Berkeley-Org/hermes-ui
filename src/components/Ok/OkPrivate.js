@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-
 import { authenticate, sendFailure } from '../../actions/okAccessToken.js'
-
 import { connect } from 'react-redux';
-
 import OkLogin from './OkLogin'
-
 import PropTypes from 'prop-types'
-
 import ReactLoading from 'react-loading';
 
 

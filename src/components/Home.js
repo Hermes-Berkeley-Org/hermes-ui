@@ -3,6 +3,7 @@ import Layout from './Layout'
 import { connect } from 'react-redux'
 import { getData } from '../actions/home.js'
 import { Link } from 'react-router-dom'
+import ReactLoading from 'react-loading';
 
 class Home extends Component {
   render() {
@@ -37,11 +38,11 @@ class Home extends Component {
         </Layout>
       );
     }
-    return null; // TODO: Loading
+    return (<ReactLoading height={'20%'} width={'20%'} />);
   }
 
   componentDidMount() {
-    this.props.getData(localStorage.getItem('okToken'))
+    this.props.getHomeData(localStorage.getItem('okToken'))
   }
 
 }
@@ -51,7 +52,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getData: (accessToken) => dispatch(getData(accessToken))
+  getHomeData: (accessToken) => dispatch(getData(accessToken))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

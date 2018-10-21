@@ -11,7 +11,7 @@ export const getRole = (encryptedTokens, courseId) => dispatch => {
   dispatch({
     type: GET_ROLE_SUCCESS,
     payload: {
-      'role': 'student'
+      'role': 'instructor'
     }
   })
   // axios(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/${courseId}/role/`,
