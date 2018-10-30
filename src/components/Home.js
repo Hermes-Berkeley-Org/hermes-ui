@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactLoading from 'react-loading';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { ROLE_STUDENT, ROLE_INSTRUCTOR } from '../constants.js';
 import { getData } from '../actions/home.js';
 import Layout from './Layout';
+import CourseCard from './CourseCard.js';
 
 class Home extends Component {
   render() {
@@ -17,27 +17,15 @@ class Home extends Component {
         <Layout>
           <div>
             <h3>Student</h3>
-            {validStudentActiveClasses.map((participation, i) => {
-                return (
-                  <div key={i}>
-                    <Link key={i} to={`/course/${participation["course_id"]}`}>
-                      {participation.course["display_name"]}
-                    </Link>
-                  </div>
-                )
-            })}
+            {validStudentActiveClasses.map((participation, i) =>
+              <CourseCard key={i} course={participation.course}></CourseCard>
+            )}
           </div>
           <div>
             <h3>Staff</h3>
-            {validStaffActiveClasses.map((participation, i) => {
-                return (
-                  <div key={i}>
-                    <Link key={i} to={`/course/${participation["course_id"]}`}>
-                      {participation.course["display_name"]}
-                    </Link>
-                  </div>
-                )
-            })}
+            {validStaffActiveClasses.map((participation, i) =>
+              <CourseCard key={i} course={participation.course}></CourseCard>
+            )}
           </div>
 
         </Layout>
