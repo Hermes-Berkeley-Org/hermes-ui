@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactLoading from 'react-loading';
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { ROLE_STUDENT, ROLE_INSTRUCTOR } from '../constants.js';
-import { getData } from '../actions/home.js'
-import Layout from './Layout'
+import { getData } from '../actions/home.js';
+import Layout from './Layout';
 
 class Home extends Component {
   render() {
