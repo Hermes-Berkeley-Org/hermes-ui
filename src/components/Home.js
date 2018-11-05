@@ -15,19 +15,27 @@ class Home extends Component {
 
       return (
         <Layout>
-          <div>
-            <h3>Student</h3>
-            {validStudentActiveClasses.map((participation, i) =>
-              <CourseCard key={i} course={participation.course}></CourseCard>
-            )}
+          <div className='container'>
+            <h2>Classes</h2>
+            <div>
+              <h3>Student</h3>
+              <h4>Active courses</h4>
+              <div className='row'>
+                {validStudentActiveClasses.map((participation, i) =>
+                  <CourseCard key={i} course={participation.course}></CourseCard>
+                )}
+              </div>
+            </div>
+            <div>
+              <h3>Staff</h3>
+              <h4>Active courses</h4>
+              <div className='row'>
+                {validStaffActiveClasses.map((participation, i) =>
+                  <CourseCard key={i} course={participation.course}></CourseCard>
+                )}
+              </div>
+            </div>
           </div>
-          <div>
-            <h3>Staff</h3>
-            {validStaffActiveClasses.map((participation, i) =>
-              <CourseCard key={i} course={participation.course}></CourseCard>
-            )}
-          </div>
-
         </Layout>
       );
     }
