@@ -3,40 +3,35 @@ import React, { Component } from 'react';
 class AddLectureForm extends Component {
 
   constructor(props) {
-      super(props);
-      this.state = {
-        playlistTitle: '',
-        playlistDate: '',
-        playlistLink: ''
-      };
-
-      this.handleSubmit = this.handleSubmit.bind(this);
+    super(props);
+    this.state = {
+      playlistTitle: '',
+      playlistDate: '',
+      playlistLink: ''
+    };
   }
 
-  handleSubmit(event) {
-      this.props.createLecture(this.state)
+  handleSubmit() {
+    // TODO: Refactor as redux dispatch
+    this.props.createLecture(this.state);
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-
-        <label>
-        Lecture Title
-        <input type="text" name="playlistTitle" value={this.state.playlistTitle} />
-        </label>
-
-        <label>
-        Lecture Date
-        <input type="date" name="playlistDate" value={this.state.playlistDate} />
-        </label>
-
-        <label>
-        Youtube Lecture/Playlist Link
-        <input type="text" name="playlistLink" value={this.state.playlistLink} />
-        </label>
-
-        <input type="submit" value="Create" />
+      <form onSubmit={this.handleSubmit.bind(this)}>
+        <div className='form-group'>
+          <label htmlFor="playlist-title">Lecture title</label>
+          <input type='email' className="form-control" id='playlist-title' value={this.state.playlistTitle} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="playlist-date">Lecture date</label>
+          <input type='date' className="form-control" id='playlist-date' value={this.state.playlistDate} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor="playlist-link">YouTube lecture/playlist link</label>
+          <input type='text' className="form-control" id='playlist-link' value={this.state.playlistLink} />
+        </div>
+        <input type='submit' className='btn btn-default' value='Create' />
       </form>
     );
   }
