@@ -12,11 +12,13 @@ class Course extends Component {
       return (
         <Layout>
           <div className='container'>
-            <div className='col-md-4 col-md-push-8'>
-              <AddLectureForm createLecture={this.props.createLecture} />
-            </div>
-            <div className='col-md-8 col-md-pull-4'>
-              <PlaylistTable playlists={this.props.playlists} />
+            <div className='row'>
+              <div className='col-md-4 col-md-push-8'>
+                <AddLectureForm createLecture={this.props.createLecture} />
+              </div>
+              <div className='col-md-8 col-md-pull-4'>
+                <PlaylistTable playlists={this.props.playlists} />
+              </div>
             </div>
           </div>
         </Layout>
