@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css'
 import PublicHome from './PublicHome'
 import Home from './Home'
 import OkLogin from './Ok/OkLogin'

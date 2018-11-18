@@ -1,0 +1,11 @@
+.card-course {
+  padding: 15px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.card-course-title {
+  font-size: 1.25em;
+}

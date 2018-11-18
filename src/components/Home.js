@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactLoading from 'react-loading';
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 import { ROLE_STUDENT, ROLE_INSTRUCTOR } from '../constants.js';
-import { getData } from '../actions/home.js'
-import Layout from './Layout'
+import { getData } from '../actions/home.js';
+import Layout from './Layout';
+import CourseCard from './CourseCard.js';
 
 class Home extends Component {
   render() {
@@ -15,31 +15,31 @@ class Home extends Component {
 
       return (
         <Layout>
-          <div>
-            <h3>Student</h3>
-            {validStudentActiveClasses.map((participation, i) => {
-                return (
-                  <div key={i}>
-                    <Link key={i} to={`/course/${participation["course_id"]}`}>
-                      {participation.course["display_name"]}
-                    </Link>
+          <div className='container'>
+            <h2>Classes</h2>
+            <div>
+              <h3>Student</h3>
+              <h4>Active courses</h4>
+              <div className='row'>
+                {validStudentActiveClasses.map((participation) =>
+                  <div className='col-xs-6 col-md-4' key={participation.course.id}>
+                    <CourseCard course={participation.course}></CourseCard>
                   </div>
-                )
-            })}
-          </div>
-          <div>
-            <h3>Staff</h3>
-            {validStaffActiveClasses.map((participation, i) => {
-                return (
-                  <div key={i}>
-                    <Link key={i} to={`/course/${participation["course_id"]}`}>
-                      {participation.course["display_name"]}
-                    </Link>
+                )}
+              </div>
+            </div>
+            <div>
+              <h3>Staff</h3>
+              <h4>Active courses</h4>
+              <div className='row'>
+                {validStaffActiveClasses.map((participation) =>
+                  <div className='col-xs-6 col-md-4' key={participation.course.id}>
+                    <CourseCard course={participation.course}></CourseCard>
                   </div>
-                )
-            })}
+                )}
+              </div>
+            </div>
           </div>
-
         </Layout>
       );
     }

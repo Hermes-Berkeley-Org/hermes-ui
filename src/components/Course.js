@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
-import Layout from './Layout'
 import { connect } from 'react-redux';
-import { getPlaylists, createLecture } from '../actions/course.js'
-import PlaylistTable from './PlaylistTable'
-import AddLectureForm from './AddLectureForm'
+
+import { getPlaylists, createLecture } from '../actions/course.js';
+import AddLectureForm from './AddLectureForm';
+import Layout from './Layout';
+import PlaylistTable from './PlaylistTable';
 
 class Course extends Component {
   render() {
     if (this.props.playlists) {
       return (
         <Layout>
-          <PlaylistTable playlists={this.props.playlists}/>
-          <AddLectureForm createLecture={this.props.createLecture}/>
+          <div className='container'>
+            <h2>Course</h2>
+            <div className='row'>
+              <div className='col-md-4 col-md-push-8'>
+                <h3>Create a lecture</h3>
+                <AddLectureForm createLecture={this.props.createLecture} />
+              </div>
+              <div className='col-md-8 col-md-pull-4'>
+                <h3>Playlist</h3>
+                <PlaylistTable playlists={this.props.playlists} />
+              </div>
+            </div>
+          </div>
         </Layout>
       );
     }
