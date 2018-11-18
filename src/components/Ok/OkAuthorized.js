@@ -20,15 +20,8 @@ class OkAuthorized extends Component {
 
     const currentUrl = new URL(window.location.href);
 
-    axios(process.env.REACT_APP_OK_TOKEN_URL, {
-      method: 'POST',
-      data: queryString.stringify({
-        code,
-        'client_secret': process.env.REACT_APP_OK_CLIENT_SECRET,
-        'client_id': process.env.REACT_APP_OK_CLIENT_ID,
-        'grant_type': 'authorization_code',
-        'redirect_uri': `${currentUrl.origin}/authorized`
-      })
+    axios(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/ok_code?code=${code}`, {
+      method: 'GET'
     }).then(function (response) {
       const accessToken = response.data['access_token']
       const refreshToken = response.data['refresh_token']
