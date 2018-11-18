@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { encrypt } from '../../actions/security.js'
+import { encrypt } from '../../utils/security.js'
 
 const queryString = require('query-string');
 

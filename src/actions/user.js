@@ -1,5 +1,5 @@
 import { GET_ROLE_STARTED, GET_ROLE_SUCCESS, GET_ROLE_FAILURE } from './types.js'
-import { decrypt } from './security.js'
+import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
 

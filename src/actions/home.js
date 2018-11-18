@@ -1,5 +1,5 @@
 import { GET_HOME_DATA_STARTED, GET_HOME_DATA_SUCCESS, GET_HOME_DATA_FAILURE } from './types.js'
-import { decrypt } from './security.js'
+import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
 
