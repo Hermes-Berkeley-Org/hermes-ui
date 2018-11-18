@@ -21,9 +21,9 @@ class Home extends Component {
               <h3>Student</h3>
               <h4>Active courses</h4>
               <div className='row'>
-                {validStudentActiveClasses.map((participation, i) =>
-                  <div className='col-xs-6 col-md-4'>
-                    <CourseCard key={i} course={participation.course}></CourseCard>
+                {validStudentActiveClasses.map((participation) =>
+                  <div className='col-xs-6 col-md-4' key={participation.course.id}>
+                    <CourseCard course={participation.course}></CourseCard>
                   </div>
                 )}
               </div>
@@ -32,9 +32,9 @@ class Home extends Component {
               <h3>Staff</h3>
               <h4>Active courses</h4>
               <div className='row'>
-                {validStaffActiveClasses.map((participation, i) =>
-                  <div className='col-xs-6 col-md-4'>
-                    <CourseCard key={i} course={participation.course}></CourseCard>
+                {validStaffActiveClasses.map((participation) =>
+                  <div className='col-xs-6 col-md-4' key={participation.course.id}>
+                    <CourseCard course={participation.course}></CourseCard>
                   </div>
                 )}
               </div>
