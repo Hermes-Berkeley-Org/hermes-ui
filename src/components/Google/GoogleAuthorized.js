@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { encrypt } from '../../utils/security.js'
+import { encrypt } from '../../utils/security.js';
 
 const queryString = require('query-string');
 
@@ -10,17 +10,18 @@ const utf8 = require('utf8');
 class GoogleAuthorized extends Component {
 
   render() {
-    return <div/>
+    return <div/>;
   }
 
   componentDidMount() {
+    const urlParams = queryString.parse(this.props.location.hash);
+    const state = JSON.parse(utf8.decode(base64.decode(urlParams.state)));
 
-    const urlParams = queryString.parse(this.props.location.hash)
-    const state = JSON.parse(utf8.decode(base64.decode(urlParams.state)))
-
-    const accessToken = urlParams['access_token']
-    const refreshToken = urlParams['refresh_token']
-    localStorage.setItem('googleToken', encrypt({ accessToken, refreshToken }))
+    const accessToken = urlParams['access_token'];
+    localStorage.setItem('googleToken', encrypt({ 
+      accessToken,
+      expirationTime: new Date().getTime() + parseInt(urlParams['expires_in'])
+    }));
 
     window.location = state.next;
   }
