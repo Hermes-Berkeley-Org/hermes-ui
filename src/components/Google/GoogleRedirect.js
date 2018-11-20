@@ -25,7 +25,7 @@ class GoogleRedirect extends Component {
       response_type: 'token',
       client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
       redirect_uri: `${currentUrl.origin}/googleAuthorized`,
-      scope: 'https://www.googleapis.com/auth/youtube.readonly',
+      scope: 'https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.force-ssl',
       state: base64.encode(utf8.encode(state))
     })
   }

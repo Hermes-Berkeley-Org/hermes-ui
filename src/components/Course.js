@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPlaylists, createLecture } from '../actions/course.js';
+import { getCourseData, createLecture } from '../actions/course.js';
 import AddLectureForm from './AddLectureForm';
 import Layout from './Layout';
-import PlaylistTable from './PlaylistTable';
+import LecturesTable from './LecturesTable';
 
 class Course extends Component {
   render() {
-    if (this.props.playlists) {
+    if (this.props.courseData) {
       return (
         <Layout>
           <div className='container'>
-            <h2>Course</h2>
+            <h2>{this.props.courseData.info['display_name']}</h2>
             <div className='row'>
               <div className='col-md-4 col-md-push-8'>
                 <h3>Create a lecture</h3>
@@ -20,7 +20,7 @@ class Course extends Component {
               </div>
               <div className='col-md-8 col-md-pull-4'>
                 <h3>Playlist</h3>
-                <PlaylistTable playlists={this.props.playlists} />
+                <LecturesTable lectures={this.props.courseData.lectures} />
               </div>
             </div>
           </div>
@@ -31,7 +31,7 @@ class Course extends Component {
   }
 
   componentDidMount() {
-    this.props.getPlaylists(localStorage.getItem('okToken'), this.props.courseId)
+    this.props.getCourseData(localStorage.getItem('okToken'), this.props.courseId)
   }
 }
 
@@ -40,7 +40,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getPlaylists: (accessToken) => dispatch(getPlaylists(accessToken)),
+  getCourseData: (accessToken, courseId) => dispatch(getCourseData(accessToken, courseId)),
   createLecture: (accessToken, lecture) => dispatch(createLecture(accessToken, lecture))
 })
 

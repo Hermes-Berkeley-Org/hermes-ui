@@ -8,7 +8,7 @@ const columns = [
   {
     Header: "Lecture",
     id: 'lecture',
-    accessor: d => <Link to={d.route}>{d.title}</Link>
+    accessor: "name"
   },
   {
     Header: "Date",
@@ -16,12 +16,12 @@ const columns = [
   }
 ];
 
-class PlaylistTable extends Component {
+class LecturesTable extends Component {
   render() {
     return (
       <ReactTable
         className={this.props.className}
-        data={this.props.playlists}
+        data={this.props.lectures}
         columns={columns}
         subRowsKey="lectures"
       />
@@ -29,4 +29,4 @@ class PlaylistTable extends Component {
   }
 }
 
-export default PlaylistTable;
+export default LecturesTable;

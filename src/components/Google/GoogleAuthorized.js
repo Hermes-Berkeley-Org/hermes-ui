@@ -18,9 +18,10 @@ class GoogleAuthorized extends Component {
     const state = JSON.parse(utf8.decode(base64.decode(urlParams.state)));
 
     const accessToken = urlParams['access_token'];
-    localStorage.setItem('googleToken', encrypt({ 
+    const expirationTime = new Date().getTime() + parseInt(urlParams['expires_in']) * 1000
+    localStorage.setItem('googleToken', encrypt({
       accessToken,
-      expirationTime: new Date().getTime() + parseInt(urlParams['expires_in'])
+      expirationTime
     }));
 
     window.location = state.next;

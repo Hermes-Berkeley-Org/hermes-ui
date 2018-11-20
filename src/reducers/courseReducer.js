@@ -11,7 +11,7 @@ export default (state = {}, action) => {
         return Object.assign({}, state, {
             ...state,
             loading: false,
-            playlists: action.payload
+            courseData: action.payload
         })
     case GET_PLAYLISTS_DATA_FAILURE:
         return Object.assign({}, state, {
