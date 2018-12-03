@@ -7,7 +7,6 @@ import 'react-table/react-table.css';
 const columns = [
   {
     Header: "Lecture",
-    id: 'lecture',
     accessor: "name"
   },
   {
@@ -23,7 +22,17 @@ class LecturesTable extends Component {
         className={this.props.className}
         data={this.props.lectures}
         columns={columns}
-        subRowsKey="lectures"
+        SubComponent={row => (
+          <div>
+            <ul>
+              {row.original.video_titles.map((title, i) => (
+                <li key={i}>
+                  <Link to={`/course/${this.props.courseId}/lecture/${row.index}/video/${i}`}>{title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       />
     );
   }

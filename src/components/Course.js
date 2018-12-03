@@ -8,7 +8,9 @@ import LecturesTable from './LecturesTable';
 
 class Course extends Component {
   render() {
-    if (this.props.courseData) {
+    if (this.props.loading) {
+      return null;
+    } else if (this.props.courseData) {
       return (
         <Layout>
           <div className='container'>
@@ -19,15 +21,16 @@ class Course extends Component {
                 <AddLectureForm createLecture={this.props.createLecture} />
               </div>
               <div className='col-md-8 col-md-pull-4'>
-                <h3>Playlist</h3>
-                <LecturesTable lectures={this.props.courseData.lectures} />
+                <h3>Lectures</h3>
+                <LecturesTable courseId={this.props.courseId} lectures={this.props.courseData.lectures} />
               </div>
             </div>
           </div>
         </Layout>
       );
+    } else {
+      return <div>Failed to load lectures</div>;
     }
-    return null; // TODO: Loading
   }
 
   componentDidMount() {
@@ -40,8 +43,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCourseData: (accessToken, courseId) => dispatch(getCourseData(accessToken, courseId)),
-  createLecture: (accessToken, lecture) => dispatch(createLecture(accessToken, lecture))
+  getCourseData: (...args) => dispatch(getCourseData(...args)),
+  createLecture: (...args) => dispatch(createLecture(...args))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Course);

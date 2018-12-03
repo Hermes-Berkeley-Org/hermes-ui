@@ -1,4 +1,4 @@
-import { GET_PLAYLISTS_DATA_STARTED, GET_PLAYLISTS_DATA_SUCCESS, GET_PLAYLISTS_DATA_FAILURE } from './types.js'
+import { GET_COURSE_DATA_STARTED, GET_COURSE_DATA_SUCCESS, GET_COURSE_DATA_FAILURE } from './types.js'
 import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
@@ -6,8 +6,8 @@ const axios = require('axios');
 export const getCourseData = (encryptedTokens, courseId) => dispatch => {
   const { accessToken } = decrypt(encryptedTokens)
   dispatch({
-    type: GET_PLAYLISTS_DATA_STARTED
-  })
+    type: GET_COURSE_DATA_STARTED
+  });
   axios.get(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}`,
     {
       headers: {
@@ -15,12 +15,12 @@ export const getCourseData = (encryptedTokens, courseId) => dispatch => {
       }
     }).then(function (response) {
       dispatch({
-        type: GET_PLAYLISTS_DATA_SUCCESS,
+        type: GET_COURSE_DATA_SUCCESS,
         payload: response.data
       })
     }).catch(function (error) {
       dispatch({
-        type: GET_PLAYLISTS_DATA_FAILURE,
+        type: GET_COURSE_DATA_FAILURE,
         payload: { error }
       })
     });
