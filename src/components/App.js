@@ -7,6 +7,7 @@ import OkLogin from './Ok/OkLogin'
 import OkAuthorized from './Ok/OkAuthorized'
 import GoogleAuthorized from './Google/GoogleAuthorized'
 import Course from './Course'
+import Video from './Video'
 import OkPrivate from './Ok/OkPrivate'
 import GooglePrivate from './Google/GooglePrivate'
 import InstructorAuthenticated from './InstructorAuthenticated'
@@ -32,6 +33,17 @@ class App extends Component {
           <OkPrivate nextUrl={location.pathname}>
             <InstructorAuthenticated nextUrl={location.pathname}>
               <Course courseId={Number.parseInt(match.params.courseId, 10)}/>
+            </InstructorAuthenticated>
+          </OkPrivate>
+        )}/>
+        <Route exact path="/course/:courseId/lecture/:lectureIndex/video/:videoIndex" render={({ location, match }) => (
+          <OkPrivate nextUrl={location.pathname}>
+            <InstructorAuthenticated nextUrl={location.pathname}>
+              <Video
+                courseId={Number.parseInt(match.params.courseId, 10)}
+                lectureIndex={Number.parseInt(match.params.lectureIndex, 10)}
+                videoIndex={Number.parseInt(match.params.videoIndex, 10)}
+              />
             </InstructorAuthenticated>
           </OkPrivate>
         )}/>
