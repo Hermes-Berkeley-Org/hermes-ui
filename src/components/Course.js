@@ -18,7 +18,7 @@ class Course extends Component {
             <div className='row'>
               <div className='col-md-4 col-md-push-8'>
                 <h3>Create a lecture</h3>
-                <AddLectureForm createLecture={this.props.createLecture} />
+                <AddLectureForm courseId={this.props.courseId} createLecture={this.props.createLecture} />
               </div>
               <div className='col-md-8 col-md-pull-4'>
                 <h3>Lectures</h3>

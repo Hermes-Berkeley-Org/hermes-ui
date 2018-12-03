@@ -11,9 +11,23 @@ class AddLectureForm extends Component {
     };
   }
 
-  handleSubmit() {
-    // TODO: Refactor as redux dispatch
-    this.props.createLecture(this.state);
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.createLecture(this.props.courseId, {
+      title: this.state.playlistTitle,
+      date: this.state.playlistDate,
+      link: this.state.playlistLink,
+    });
   }
 
   render() {
@@ -21,15 +35,36 @@ class AddLectureForm extends Component {
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div className='form-group'>
           <label htmlFor="playlist-title">Lecture title</label>
-          <input type='email' className="form-control" id='playlist-title' value={this.state.playlistTitle} />
+          <input
+            type='text'
+            className="form-control"
+            id='playlist-title'
+            name='playlistTitle'
+            value={this.state.playlistTitle}
+            onChange={this.handleInputChange.bind(this)}
+          />
         </div>
         <div className='form-group'>
           <label htmlFor="playlist-date">Lecture date</label>
-          <input type='date' className="form-control" id='playlist-date' value={this.state.playlistDate} />
+          <input
+            type='date'
+            className="form-control"
+            id='playlist-date'
+            name='playlistDate'
+            value={this.state.playlistDate}
+            onChange={this.handleInputChange.bind(this)}
+          />
         </div>
         <div className='form-group'>
           <label htmlFor="playlist-link">YouTube lecture/playlist link</label>
-          <input type='text' className="form-control" id='playlist-link' value={this.state.playlistLink} />
+          <input
+            type='text'
+            className="form-control"
+            id='playlist-link'
+            name='playlistLink'
+            value={this.state.playlistLink}
+            onChange={this.handleInputChange.bind(this)}
+          />
         </div>
         <input type='submit' className='btn btn-default' value='Create' />
       </form>

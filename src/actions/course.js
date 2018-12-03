@@ -26,6 +26,34 @@ export const getCourseData = (encryptedTokens, courseId) => dispatch => {
     });
 }
 
-export const createLecture = (encryptedTokens, courseId, lecture) => dispatch => {
-  const { accessToken } = decrypt(encryptedTokens)
+export const createLecture = (courseId, { title, date, link }) => dispatch => {
+  const okEncryptedTokens = localStorage.getItem('okToken');
+  const googleEncryptedTokens = localStorage.getItem('googleToken');
+  const okAccessToken = decrypt(okEncryptedTokens).accessToken;
+  const googleAccessToken = decrypt(googleEncryptedTokens).accessToken;
+
+  const data = new FormData();
+  data.set('title', title);
+  data.set('date', date);
+  data.set('link', link);
+  data.set('youtube_access_token', googleAccessToken);
+
+  axios.post(
+    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/create_lecture`,
+    data,
+    {
+      headers: {
+        'Authorization': `Bearer ${okAccessToken}`,
+        'Content-Type': 'multipart/form-data',
+      }
+    }).then(function (response) {
+      getCourseData(okEncryptedTokens, courseId)(dispatch);
+    }).catch(function (error) {
+      // TODO: Display the error better
+      alert(error);
+      dispatch({
+        type: GET_COURSE_DATA_FAILURE,
+        payload: { error }
+      })
+    });
 }
