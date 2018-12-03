@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import Debug from './Debug'
 import PublicHome from './PublicHome'
 import Home from './Home'
 import OkLogin from './Ok/OkLogin'
@@ -33,6 +35,7 @@ class App extends Component {
             </InstructorAuthenticated>
           </OkPrivate>
         )}/>
+        <Route exact path="/debug" component={Debug}/>
       </Switch>
     );
   }
