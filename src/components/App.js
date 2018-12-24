@@ -1,41 +1,38 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-import Debug from './Debug'
-import PublicHome from './PublicHome'
-import Home from './Home'
-import OkLogin from './Ok/OkLogin'
-import OkAuthorized from './Ok/OkAuthorized'
-import GoogleAuthorized from './Google/GoogleAuthorized'
-import Course from './Course'
-import Video from './Video'
-import OkPrivate from './Ok/OkPrivate'
-import GooglePrivate from './Google/GooglePrivate'
-import InstructorAuthenticated from './InstructorAuthenticated'
-
-import { Switch, Route } from 'react-router-dom'
+import Debug from './Debug.js';
+import PublicHomePage from './PublicHomePage.js';
+import HomePage from './HomePage.js';
+import OkLogin from './Ok/OkLogin.js';
+import OkAuthorized from './Ok/OkAuthorized.js';
+import GoogleAuthorized from './Google/GoogleAuthorized.js';
+import CoursePage from './CoursePage.js';
+import Video from './Video.js';
+import OkPrivate from './Ok/OkPrivate.js';
+import InstructorAuthenticated from './InstructorAuthenticated.js';
 
 class App extends Component {
 
   render() {
-
     return (
       <Switch>
-        <Route exact path="/" component={PublicHome}/>
+        <Route exact path="/" component={PublicHomePage} />
         <Route exact path="/home" render={({ location, match }) => (
-            <OkPrivate nextUrl={location.pathname}>
-              <Home/>
-            </OkPrivate>
-        )}/>
-        <Route exact path="/login" component={OkLogin}/>
-        <Route exact path="/authorized" component={OkAuthorized}/>
-        <Route exact path="/googleAuthorized" component={GoogleAuthorized}/>
+          <OkPrivate nextUrl={location.pathname}>
+            <HomePage />
+          </OkPrivate>
+        )} />
+        <Route exact path="/login" component={OkLogin} />
+        <Route exact path="/authorized" component={OkAuthorized} />
+        <Route exact path="/googleAuthorized" component={GoogleAuthorized} />
         <Route exact path="/course/:courseId" render={({ location, match }) => (
           <OkPrivate nextUrl={location.pathname}>
             <InstructorAuthenticated nextUrl={location.pathname}>
-              <Course courseId={Number.parseInt(match.params.courseId, 10)}/>
+              <CoursePage courseId={Number.parseInt(match.params.courseId, 10)} />
             </InstructorAuthenticated>
           </OkPrivate>
-        )}/>
+        )} />
         <Route exact path="/course/:courseId/lecture/:lectureIndex/video/:videoIndex" render={({ location, match }) => (
           <OkPrivate nextUrl={location.pathname}>
             <InstructorAuthenticated nextUrl={location.pathname}>
@@ -46,8 +43,8 @@ class App extends Component {
               />
             </InstructorAuthenticated>
           </OkPrivate>
-        )}/>
-        <Route exact path="/debug" component={Debug}/>
+        )} />
+        <Route exact path="/debug" component={Debug} />
       </Switch>
     );
   }

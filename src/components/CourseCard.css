@@ -1,11 +1,21 @@
-.card-course {
-  padding: 15px 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
+.card {
+  box-sizing: border-box;
+  padding: 1em;
+  border: 2px solid #DDD;
   border-radius: 4px;
   text-align: center;
+  transition: border-color ease 0.2s;
 }
 
-.card-course-title {
+.card:hover {
+  border-color: #18BC9C;
+}
+
+a.card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-title {
   font-size: 1.25em;
 }

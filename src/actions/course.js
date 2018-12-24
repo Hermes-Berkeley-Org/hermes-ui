@@ -38,6 +38,9 @@ export const createLecture = (courseId, { title, date, link }) => dispatch => {
   data.set('link', link);
   data.set('youtube_access_token', googleAccessToken);
 
+  dispatch({
+    type: GET_COURSE_DATA_STARTED,
+  });
   axios.post(
     `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/create_lecture`,
     data,

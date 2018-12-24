@@ -1,0 +1,36 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  border-bottom: 2px solid #DDD;
+  background-color: #FFF;
+  height: 3em;
+  line-height: 3;
+  z-index: 10000;
+}
+
+.navbar > .container {
+  display: flex;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-brand img {
+  width: 3em;
+  vertical-align: middle;
+}
+
+.navbar-actions ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-actions li {
+  margin: 0 0 0 1em;
+}

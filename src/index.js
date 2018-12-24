@@ -7,6 +7,11 @@ import App from './components/App.js';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './store';
 
+import '@fortawesome/fontawesome-free/css/solid.css';
+import '@fortawesome/fontawesome-free/css/fontawesome.css';
+
+import './base.css';
+
 require('dotenv').config();
 
 ReactDOM.render(
@@ -17,4 +22,5 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
+
 registerServiceWorker();

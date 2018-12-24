@@ -1,0 +1,38 @@
+.container-public {
+  text-align: center;
+}
+
+.container-public h1 {
+  font-size: 3em;
+  color: #18BC9C;
+  margin: 1rem 0;
+  text-transform: uppercase;
+}
+
+.container-public h2 {
+  font-size: 2em;
+  color: #18BC9C;
+  margin: 1rem 0;
+}
+
+.container-public hr {
+  border: none;
+  height: 20px;
+  margin: 0.5rem 0;
+}
+
+.container-public hr::before {
+  padding: 10px;
+  font-size: 20px;
+  background: #FFF;
+  color: #18BC9C;
+}
+
+.container-public hr::after {
+  content: '';
+  display: block;
+  width: 200px;
+  height: 2px;
+  background: #55C7B1;
+  margin-top: -10px;
+}
