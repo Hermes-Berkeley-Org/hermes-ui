@@ -19,7 +19,7 @@
 .course-lecture-creation {
   position: sticky;
   position: -webkit-sticky;
-  top: 3em;
+  top: 4em;
   box-sizing: border-box;
   margin: 0 1em 1em 0;
   padding: 0 1em 1em 1em;
@@ -27,4 +27,5 @@
   width: 316px;
   border: 1px solid #DDD;
   border-radius: 4px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
 }

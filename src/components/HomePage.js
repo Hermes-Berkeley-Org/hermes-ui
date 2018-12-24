@@ -14,7 +14,7 @@ class HomePage extends Component {
     if (this.props.loading) {
       return (
         <div>
-          <h4>{title}</h4>
+          <h3>{title}</h3>
           <Loading />
         </div>
       );
@@ -24,7 +24,7 @@ class HomePage extends Component {
       if (validStudentActiveClasses.length > 0) {
         return (
           <div>
-            <h4>{title}</h4>
+            <h3>{title}</h3>
             <div className='card-list'>
               {validStudentActiveClasses.map((participation) =>
                 <CourseCard key={participation.course.id} course={participation.course}></CourseCard>
@@ -40,8 +40,7 @@ class HomePage extends Component {
     return (
       <Layout>
         <div className='container'>
-          <h2>Classes</h2>
-          <h3>Active Courses</h3>
+          <h2>Courses</h2>
           {this.renderCourses('Student', (course) => course.role === ROLE_STUDENT)}
           {this.renderCourses('Staff', (course) => course.role === ROLE_INSTRUCTOR)}
         </div>

@@ -30,7 +30,7 @@
 .container-public hr::before {
   padding: 10px;
   font-size: 20px;
-  background: #FFF;
+  background-color: #FFF;
   color: #18BC9C;
 }
 
@@ -39,6 +39,6 @@
   display: block;
   width: 200px;
   height: 2px;
-  background: #1AC9A7;
+  background-color: #1AC9A7;
   margin-top: -10px;
 }
