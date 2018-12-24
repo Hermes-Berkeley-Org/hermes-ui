@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Img from 'react-image';
 import { Link } from 'react-router-dom';
 
-import hermesLogo from '../img/hermes.png';
+import hermesLogo from '../img/hermes-white.png';
 import './Navbar.css';
 
 export default class Navbar extends Component {

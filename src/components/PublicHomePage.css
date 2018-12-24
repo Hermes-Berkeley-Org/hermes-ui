@@ -1,4 +1,10 @@
 .container-public {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  transform: translateY(-50%);
+  margin-top: 0 !important;
   text-align: center;
 }
 
@@ -11,7 +17,7 @@
 
 .container-public h2 {
   font-size: 2em;
-  color: #18BC9C;
+  color: #1AC9A7;
   margin: 1rem 0;
 }
 
@@ -33,6 +39,6 @@
   display: block;
   width: 200px;
   height: 2px;
-  background: #55C7B1;
+  background: #1AC9A7;
   margin-top: -10px;
 }

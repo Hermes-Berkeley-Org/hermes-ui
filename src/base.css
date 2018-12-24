@@ -39,16 +39,17 @@ form input {
   margin: 0.25em 0;
   padding: 0.5em;
   font-size: 1em;
-  border: 2px solid #DDD;
+  border: 1px solid #DDD;
+  background-color: #F8F8F8;
   border-radius: 4px;
 }
 
 form input[type='submit'] {
   margin-top: 1em;
-  background-color: #18BC9C;
+  background-color: #1AC9A7;
   font-weight: 700;
   color: #FFF;
-  border-color: rgba(0, 0, 0, 0.20);
+  border-color: #15A287;
 }
 
 .flex-space {
@@ -60,11 +61,11 @@ form input[type='submit'] {
 }
 
 .layout-contents {
-  padding-top: 50px;
+  padding-top: 48px;
 }
 
 .container {
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
   padding: 0 1.5em;
 }

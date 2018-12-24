@@ -1,7 +1,8 @@
 .card {
   box-sizing: border-box;
   padding: 1em;
-  border: 2px solid #DDD;
+  border: 1px solid #DDD;
+  background-color: #F8F8F8;
   border-radius: 4px;
   text-align: center;
   transition: border-color ease 0.2s;

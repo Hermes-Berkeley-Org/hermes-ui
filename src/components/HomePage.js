@@ -41,7 +41,7 @@ class HomePage extends Component {
       <Layout>
         <div className='container'>
           <h2>Classes</h2>
-          <h3>Active courses</h3>
+          <h3>Active Courses</h3>
           {this.renderCourses('Student', (course) => course.role === ROLE_STUDENT)}
           {this.renderCourses('Staff', (course) => course.role === ROLE_INSTRUCTOR)}
         </div>
