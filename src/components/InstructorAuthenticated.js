@@ -5,23 +5,27 @@ import ReactLoading from 'react-loading';
 import GooglePrivate from './Google/GooglePrivate'
 import { getRole } from '../actions/user.js'
 
+import { ROLE_INSTRUCTOR } from '../constants.js'
+
 class InstructorAuthenticated extends Component {
 
   render() {
     if (this.props.instructorLoading) {
       return (<ReactLoading height={'20%'} width={'20%'} />);
-    } else if (this.props.roleData.role === 'instructor') {
+    } else if (this.props.roleData.role === ROLE_INSTRUCTOR) {
+      console.log('INSTRUCTOR');
       return (
         <GooglePrivate nextUrl={this.props.nextUrl}>
           <div>
-            {this.props.children}
+            {React.cloneElement(this.props.children, { role: this.props.roleData.role })}
           </div>
         </GooglePrivate>
       );
     } else {
+      console.log(this.props.roleData.role);
       return (
         <div>
-          {this.props.children}
+          {React.cloneElement(this.props.children, { role: this.props.roleData.role })}
         </div>
       )
     }

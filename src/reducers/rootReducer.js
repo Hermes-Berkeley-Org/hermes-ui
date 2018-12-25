@@ -6,6 +6,7 @@ import courseReducer from './courseReducer'
 import lectureReducer from './lectureReducer'
 import videoReducer from './videoReducer'
 import instructorAuthenticatedReducer from './instructorAuthenticatedReducer'
+import transcriptReducer from './transcriptReducer'
 
 export default combineReducers({
   okAuthReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   lectureReducer,
   videoReducer,
   googleAuthReducer,
-  instructorAuthenticatedReducer
+  instructorAuthenticatedReducer,
+  transcriptReducer
 });

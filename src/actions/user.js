@@ -8,27 +8,24 @@ export const getRole = (encryptedTokens, courseId) => dispatch => {
   dispatch({
     type: GET_ROLE_STARTED
   })
-  dispatch({
-    type: GET_ROLE_SUCCESS,
-    payload: {
-      'role': 'instructor'
-    }
-  })
-  // axios(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/${courseId}/role/`,
-  //   {
-  //     headers: {
-  //       'Authorization': `Bearer ${accessToken}`
-  //     }
-  //   }).then(function (response) {
-  //     dispatch({
-  //       type: GET_ROLE_SUCCESS,
-  //       payload: response.data
-  //     })
-  //   })
-  //   .catch(function (error) {
-  //     dispatch({
-  //       type: GET_ROLE_FAILURE,
-  //       payload: { error }
-  //     })
-  //   });
+  axios(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/user_data`,
+    {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    }).then(function (response) {
+      response.data.participations.filter(participation => participation['course_id'] === courseId).map((participation, index) => (
+        dispatch({
+          type: GET_ROLE_SUCCESS,
+          payload: participation
+        })
+      ));
+
+    })
+    .catch(function (error) {
+      dispatch({
+        type: GET_ROLE_FAILURE,
+        payload: { error }
+      })
+    });
 }
