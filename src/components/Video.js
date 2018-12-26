@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
+import { getTranscript } from '../actions/transcript.js';
 
 import Layout from './Layout';
 import Transcript from './Transcript'
@@ -37,18 +38,20 @@ class Video extends Component {
                     </button>
                   </Link>
 
-                  {!this.props.videoData ? null : (
-                    <YouTube
-                      videoId={this.props.videoData.youtube_id}
-                      opts={{
-                        height: JSON.stringify(window.innerHeight * 0.6),
-                        width: JSON.stringify(window.innerWidth * 0.7),
-                        playerVars: {
-                          autoplay: 1
-                        }
-                      }}
-                    />
-                  )}
+                  {this.props.videoLoading ? 'Video loading...' :
+                    (!this.props.videoData ? 'Failed to load video' :
+                      <YouTube
+                        videoId={this.props.videoData['youtube_id']}
+                        opts={{
+                          height: JSON.stringify(window.innerHeight * 0.6),
+                          width: JSON.stringify(window.innerWidth * 0.7),
+                          playerVars: {
+                            autoplay: 1
+                          }
+                        }}
+                      />
+                    )
+                  }
 
                   {!this.props.lectureData || this.props.videoIndex === 0 ? null : (
                     <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureIndex}/video/${this.props.videoIndex - 1}`}>
@@ -65,7 +68,11 @@ class Video extends Component {
                   }
                 </Row>
                 <Row>
-                  <Transcript courseId={this.props.courseId} lectureIndex={this.props.lectureIndex} videoIndex={this.props.videoIndex}/>
+                  {this.props.transcriptLoading ? 'Transcript loading...' :
+                    (!this.props.transcript ? 'Failed to load transcript' :
+                      <Transcript transcript={this.props.transcript}/>
+                    )
+                  }
                 </Row>
               </Col>
               <Col xs>
@@ -100,6 +107,12 @@ class Video extends Component {
       this.props.lectureIndex,
       this.props.videoIndex
     );
+    this.props.getTranscript(
+      localStorage.getItem('okToken'),
+      this.props.courseId,
+      this.props.lectureIndex,
+      this.props.videoIndex
+    );
   }
 
 }
@@ -108,12 +121,14 @@ const mapStateToProps = state => ({
   ...state.courseReducer,
   ...state.videoReducer,
   ...state.lectureReducer,
+  ...state.transcriptReducer
 });
 
 const mapDispatchToProps = dispatch => ({
   getCourseData: (...args) => dispatch(getCourseData(...args)),
   getVideoData: (...args) => dispatch(getVideoData(...args)),
   getLectureData: (...args) => dispatch(getLectureData(...args)),
+  getTranscript: (...args) => dispatch(getTranscript(...args))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Video);

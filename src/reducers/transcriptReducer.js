@@ -21,6 +21,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         transcriptLoading: false,
+        transcript: null,
         actionPayloadError: action.payload.error
       };
     default:

@@ -1,7 +1,7 @@
-import { 
-  GET_VIDEO_DATA_STARTED, 
-  GET_VIDEO_DATA_SUCCESS, 
-  GET_VIDEO_DATA_FAILURE 
+import {
+  GET_VIDEO_DATA_STARTED,
+  GET_VIDEO_DATA_SUCCESS,
+  GET_VIDEO_DATA_FAILURE
 } from '../actions/types.js'
 
 export default (state = {}, action) => {
@@ -9,7 +9,7 @@ export default (state = {}, action) => {
     case GET_VIDEO_DATA_STARTED:
       return {
         ...state,
-        loading: true
+        videoLoading: true
       };
     case GET_VIDEO_DATA_SUCCESS:
       return {

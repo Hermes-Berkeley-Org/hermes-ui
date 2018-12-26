@@ -52,6 +52,7 @@
     "react-redirect": "^1.0.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
+    "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.3.1",
     "react-table": "^6.8.6",
     "react-window-size": "^1.2.2",
