@@ -1,39 +1,26 @@
 import React, { Component } from 'react';
-import ReactTable from 'react-table';
 import { Link } from 'react-router-dom';
 
-import 'react-table/react-table.css';
-
-const columns = [
-  {
-    Header: "Lecture",
-    accessor: "name"
-  },
-  {
-    Header: "Date",
-    accessor: "date"
-  }
-];
+import './LecturesTable.css';
 
 class LecturesTable extends Component {
   render() {
     return (
-      <ReactTable
-        className={this.props.className}
-        data={this.props.lectures}
-        columns={columns}
-        SubComponent={row => (
-          <div>
-            <ul>
-              {row.original.video_titles.map((title, i) => (
-                <li key={i}>
-                  <Link to={`/course/${this.props.courseId}/lecture/${row.index}/video/${i}`}>{title}</Link>
+      <ul className="lecture-list">
+        {this.props.lectures.map((lecture, lectureIndex) => (
+          <li key={lectureIndex} className="lecture-item">
+            <h3 className="lecture-title"><Link to={`/course/${this.props.courseId}/lecture/${lectureIndex}/video/0`}>{lecture.name}</Link></h3>
+            <div className="lecture-date">{lecture.date}</div>
+            <ul className="lecture-video-list">
+              {lecture.video_titles.map((title, videoIndex) => (
+                <li key={videoIndex} className="lecture-video-item">
+                  <Link to={`/course/${this.props.courseId}/lecture/${lectureIndex}/video/${videoIndex}`}>{title}</Link>
                 </li>
               ))}
             </ul>
-          </div>
-        )}
-      />
+          </li>
+        ))}
+      </ul>
     );
   }
 }
