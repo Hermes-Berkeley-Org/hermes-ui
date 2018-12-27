@@ -1,4 +1,4 @@
-import { GET_OK_ACCESS_TOKEN_SUCCESS, GET_OK_ACCESS_TOKEN_STARTED, GET_OK_ACCESS_TOKEN_FAILURE } from './types.js'
+import { GET_OK_ACCESS_TOKEN_SUCCESS, GET_OK_ACCESS_TOKEN_STARTED, GET_OK_ACCESS_TOKEN_FAILURE, CLEAR_SESSION } from './types.js'
 import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
@@ -7,6 +7,13 @@ const queryString = require('query-string')
 export const sendFailure = () => dispatch => {
   dispatch({
     type: GET_OK_ACCESS_TOKEN_FAILURE
+  })
+}
+
+export const logout = () => dispatch => {
+  localStorage.clear();
+  dispatch({
+    type: CLEAR_SESSION
   })
 }
 
