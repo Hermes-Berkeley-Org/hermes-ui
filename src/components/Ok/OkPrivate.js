@@ -9,7 +9,7 @@ import ReactLoading from 'react-loading';
 class OkPrivate extends Component {
 
   render() {
-    if (this.props.loading) {
+    if (this.props.okLoading) {
       return (<ReactLoading height={'20%'} width={'20%'} />);
     } else if (this.props.isAuthenticated) {
       return (
@@ -33,11 +33,11 @@ class OkPrivate extends Component {
 }
 
 OkPrivate.defaultProps = {
-    loading: true
+    okLoading: true
 }
 
 OkPrivate.propTypes = {
-    loading: PropTypes.bool.isRequired,
+    okLoading: PropTypes.bool.isRequired,
     isAuthenticated: PropTypes.bool,
     okAuthenticate: PropTypes.func.isRequired
 }

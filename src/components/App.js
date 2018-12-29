@@ -13,42 +13,45 @@ import GooglePrivate from './Google/GooglePrivate'
 import InstructorAuthenticated from './InstructorAuthenticated'
 
 import { Switch, Route } from 'react-router-dom'
+import DocumentTitle from 'react-document-title'
 
 class App extends Component {
 
   render() {
 
     return (
-      <Switch>
-        <Route exact path="/" component={PublicHome}/>
-        <Route exact path="/home" render={({ location, match }) => (
+      <DocumentTitle title="Hermes">
+        <Switch>
+          <Route exact path="/" component={PublicHome}/>
+          <Route exact path="/home" render={({ location, match }) => (
+              <OkPrivate nextUrl={location.pathname}>
+                <Home/>
+              </OkPrivate>
+          )}/>
+          <Route exact path="/login" component={OkLogin}/>
+          <Route exact path="/authorized" component={OkAuthorized}/>
+          <Route exact path="/googleAuthorized" component={GoogleAuthorized}/>
+          <Route exact path="/course/:courseId" render={({ location, match }) => (
             <OkPrivate nextUrl={location.pathname}>
-              <Home/>
+              <InstructorAuthenticated nextUrl={location.pathname}>
+                <Course courseId={Number.parseInt(match.params.courseId, 10)}/>
+              </InstructorAuthenticated>
             </OkPrivate>
-        )}/>
-        <Route exact path="/login" component={OkLogin}/>
-        <Route exact path="/authorized" component={OkAuthorized}/>
-        <Route exact path="/googleAuthorized" component={GoogleAuthorized}/>
-        <Route exact path="/course/:courseId" render={({ location, match }) => (
-          <OkPrivate nextUrl={location.pathname}>
-            <InstructorAuthenticated nextUrl={location.pathname}>
-              <Course courseId={Number.parseInt(match.params.courseId, 10)}/>
-            </InstructorAuthenticated>
-          </OkPrivate>
-        )}/>
-        <Route exact path="/course/:courseId/lecture/:lectureIndex/video/:videoIndex" render={({ location, match }) => (
-          <OkPrivate nextUrl={location.pathname}>
-            <InstructorAuthenticated nextUrl={location.pathname}>
-              <Video
-                courseId={Number.parseInt(match.params.courseId, 10)}
-                lectureIndex={Number.parseInt(match.params.lectureIndex, 10)}
-                videoIndex={Number.parseInt(match.params.videoIndex, 10)}
-              />
-            </InstructorAuthenticated>
-          </OkPrivate>
-        )}/>
-        <Route exact path="/debug" component={Debug}/>
-      </Switch>
+          )}/>
+          <Route exact path="/course/:courseId/lecture/:lectureIndex/video/:videoIndex" render={({ location, match }) => (
+            <OkPrivate nextUrl={location.pathname}>
+              <InstructorAuthenticated nextUrl={location.pathname}>
+                <Video
+                  courseId={Number.parseInt(match.params.courseId, 10)}
+                  lectureIndex={Number.parseInt(match.params.lectureIndex, 10)}
+                  videoIndex={Number.parseInt(match.params.videoIndex, 10)}
+                />
+              </InstructorAuthenticated>
+            </OkPrivate>
+          )}/>
+          <Route exact path="/debug" component={Debug}/>
+        </Switch>
+      </DocumentTitle>
     );
   }
 

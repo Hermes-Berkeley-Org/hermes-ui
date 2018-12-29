@@ -1,7 +1,7 @@
-import { 
-  GET_COURSE_DATA_STARTED, 
-  GET_COURSE_DATA_SUCCESS, 
-  GET_COURSE_DATA_FAILURE 
+import {
+  GET_COURSE_DATA_STARTED,
+  GET_COURSE_DATA_SUCCESS,
+  GET_COURSE_DATA_FAILURE
 } from '../actions/types.js'
 
 export default (state = {}, action) => {
@@ -9,18 +9,18 @@ export default (state = {}, action) => {
     case GET_COURSE_DATA_STARTED:
       return {
         ...state,
-        loading: true
+        courseLoading: true
       };
     case GET_COURSE_DATA_SUCCESS:
       return {
         ...state,
-        loading: false,
+        courseLoading: false,
         courseData: action.payload
       };
     case GET_COURSE_DATA_FAILURE:
       return {
         ...state,
-        loading: false,
+        courseLoading: false,
         actionPayloadError: action.payload.error
       };
     default:

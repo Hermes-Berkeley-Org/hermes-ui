@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import YouTube from 'react-youtube';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { Link } from 'react-router-dom';
+import DocumentTitle from 'react-document-title'
 
 import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
@@ -23,6 +24,9 @@ class Video extends Component {
     // TODO: https://stackoverflow.com/questions/19014250/rerender-view-on-browser-resize-with-react
     return (
       <Layout>
+        <DocumentTitle title={!this.props.courseData || !this.props.lectureData || !this.props.videoData ? "Video" :
+              `${this.props.courseData.info['display_name']} | ${this.props.lectureData.name} | ${this.props.videoData.title}`
+        }>
           <Grid>
             <h2>{this.props.lectureData ? this.props.lectureData.name : ''}</h2>
             <Row>
@@ -85,6 +89,7 @@ class Video extends Component {
               </Col>
             </Row>
           </Grid>
+        </DocumentTitle>
       </Layout>
     );
   }

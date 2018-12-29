@@ -5,18 +5,18 @@ export default (state = {}, action) => {
     case GET_HOME_DATA_STARTED:
         return Object.assign({}, state, {
             ...state,
-            loading: true
+            homeLoading: true
         })
     case GET_HOME_DATA_SUCCESS:
         return Object.assign({}, state, {
             ...state,
-            loading: false,
+            homeLoading: false,
             homeResponse: action.payload
         })
     case GET_HOME_DATA_FAILURE:
         return Object.assign({}, state, {
             ...state,
-            loading: false,
+            homeLoading: false,
             actionPayloadError: action.payload.error
         })
     default:
