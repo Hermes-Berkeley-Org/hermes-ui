@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getCourseData, createLecture } from '../actions/course.js';
 import AddLectureForm from './AddLectureForm.js';
 import Layout from './Layout.js';
-import LecturesTable from './LecturesTable.js';
+import LectureList from './LectureList.js';
 import Loading from './Loading.js';
 
 import './CoursePage.css';
@@ -19,14 +19,14 @@ class CoursePage extends Component {
         <div className='container container-course'>
           <h2>{this.props.loading ? 'Course' : this.props.courseData.info['display_name']}</h2>
           <div className='container-course-sections'>
-            <div className='course-lecture-creation'>
-              <h3>Create a lecture</h3>
-              <AddLectureForm courseId={this.props.courseId} createLecture={this.props.createLecture} />
-            </div>
             <div className='course-lectures'>
               {this.props.loading 
                 ? <Loading /> 
-                : <LecturesTable courseId={this.props.courseId} lectures={!this.props.courseData ? [] : this.props.courseData.lectures} />}
+                : <LectureList courseId={this.props.courseId} lectures={!this.props.courseData ? [] : this.props.courseData.lectures} />}
+            </div>
+            <div className='course-lecture-creation'>
+              <h3>Create a lecture</h3>
+              <AddLectureForm courseId={this.props.courseId} createLecture={this.props.createLecture} />
             </div>
           </div>
         </div>

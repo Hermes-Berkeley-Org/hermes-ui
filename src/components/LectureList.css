@@ -1,0 +1,10 @@
+.lecture-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lecture-item {
+  display: block;
+  border-top: 1px solid #DDD;
+}

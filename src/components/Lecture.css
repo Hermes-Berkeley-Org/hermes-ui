@@ -1,0 +1,60 @@
+.lecture {
+  overflow: hidden;
+}
+
+.lecture-info {
+  padding: 1em 1em;
+  display: flex;
+  align-items: center;
+}
+
+.lecture.lecture-expanded .lecture-info {
+  border-bottom: 1px dashed #EEE;
+}
+
+.lecture-details-toggle {
+  transition: transform ease 0.2s;
+  margin: 0 0.5em 0 0;
+  width: 1em;
+  text-align: center;
+}
+
+.lecture.lecture-expanded .lecture-details-toggle {
+  transform: rotate(90deg);
+}
+
+.lecture-title {
+  flex: 1 1 auto;
+  margin: 0 1rem 0 0;
+  color: #18BC9C;
+  text-decoration: none;
+}
+
+.lecture-title a {
+  text-decoration: none;
+}
+
+.lecture-date {
+  flex: none;
+}
+
+.lecture-video-list {
+  margin: 1em 0 1em 1em;
+  padding: 0 0 0 1.5em;
+}
+
+.lecture:not(.lecture-expanded) .lecture-video-list {
+  display: none;
+}
+
+.lecture-video-item {
+  margin: 0.25em 0;
+}
+
+.lecture-video-item a {
+  text-decoration: none;
+}
+
+.lecture-video-item a:hover {
+  color: #18BC9C;
+}
