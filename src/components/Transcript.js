@@ -9,16 +9,16 @@ class Transcript extends Component {
       return <div>Failed to load transcript</div>;
     }
     return (
-        <table>
-          <tbody>
+      <table>
+        <tbody>
           {this.props.transcript.map((transcriptElement, index) => (
             <tr key={index}>
-              <td key={`timestamp-${index}`}>{transcriptElement.begin}</td>
-              <td key={`text-${index}`}>{transcriptElement.text}</td>
+              <td>{transcriptElement.begin}</td>
+              <td>{transcriptElement.text}</td>
             </tr>
           ))}
-          </tbody>
-        </table>
+        </tbody>
+      </table>
     );
   }
 }

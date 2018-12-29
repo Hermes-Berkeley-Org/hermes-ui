@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DocumentTitle from 'react-document-title'
+import DocumentTitle from 'react-document-title';
 
 import { getCourseData, createLecture } from '../actions/course.js';
+import { ROLE_INSTRUCTOR } from '../constants.js'
 import AddLectureForm from './AddLectureForm';
 import Layout from './Layout';
 import LecturesTable from './LecturesTable';
-
-import { ROLE_INSTRUCTOR } from '../constants.js'
 
 class Course extends Component {
   render() {

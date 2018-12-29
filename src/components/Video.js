@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import YouTube from 'react-youtube';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { Link } from 'react-router-dom';
-import DocumentTitle from 'react-document-title'
+import DocumentTitle from 'react-document-title';
 
 import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
 import { getTranscript } from '../actions/transcript.js';
-
 import Layout from './Layout';
-import Transcript from './Transcript'
+import Transcript from './Transcript';
 
 class Video extends Component {
 
@@ -24,9 +23,12 @@ class Video extends Component {
     // TODO: https://stackoverflow.com/questions/19014250/rerender-view-on-browser-resize-with-react
     return (
       <Layout>
-        <DocumentTitle title={!this.props.courseData || !this.props.lectureData || !this.props.videoData ? "Video" :
+        <DocumentTitle
+          title={
+            !this.props.courseData || !this.props.lectureData || !this.props.videoData ?
+              "Video" :
               `${this.props.courseData.info['display_name']} | ${this.props.lectureData.name} | ${this.props.videoData.title}`
-        }>
+          }>
           <Grid>
             <h2>{this.props.lectureData ? this.props.lectureData.name : ''}</h2>
             <Row>
@@ -35,7 +37,7 @@ class Video extends Component {
                   <Link to={`/course/${this.props.courseId}`}>
                     <button className="btn btn-default">
                       Return to {
-                          !this.props.courseData ?
+                        !this.props.courseData ?
                           '' :
                           this.props.courseData.info['display_name']
                       }
@@ -61,22 +63,23 @@ class Video extends Component {
                     <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureIndex}/video/${this.props.videoIndex - 1}`}>
                       <button className="btn btn-default" onClick={this.reloadVideoData}>Previous Video</button>
                     </Link>
-                    )
+                  )
                   }
 
                   {!this.props.lectureData || this.props.videoIndex === this.props.lectureData['video_titles'].length - 1 ? null : (
                     <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureIndex}/video/${this.props.videoIndex + 1}`}>
                       <button className="btn btn-default" onClick={this.reloadVideoData}>Next Video</button>
                     </Link>
-                    )
+                  )
                   }
                 </Row>
                 <Row>
-                  {this.props.transcriptLoading ? 'Transcript loading...' :
-                    (!this.props.transcript ? 'Failed to load transcript' :
-                      <Transcript transcript={this.props.transcript}/>
-                    )
-                  }
+                  {this.props.transcriptLoading ?
+                    'Transcript loading...' :
+                    (!this.props.transcript ?
+                      'Failed to load transcript' :
+                      <Transcript transcript={this.props.transcript} />
+                    )}
                 </Row>
               </Col>
               <Col xs>
@@ -96,13 +99,13 @@ class Video extends Component {
 
   componentDidMount() {
     this.props.getCourseData(
-      localStorage.getItem('okToken'), this.props.courseId);
+      localStorage.getItem('okToken'),
+      this.props.courseId);
     this.props.getLectureData(
       localStorage.getItem('okToken'),
       this.props.courseId,
-      this.props.lectureIndex
-    );
-    this.reloadVideoData()
+      this.props.lectureIndex);
+    this.reloadVideoData();
   }
 
   reloadVideoData() {
@@ -110,14 +113,12 @@ class Video extends Component {
       localStorage.getItem('okToken'),
       this.props.courseId,
       this.props.lectureIndex,
-      this.props.videoIndex
-    );
+      this.props.videoIndex);
     this.props.getTranscript(
       localStorage.getItem('okToken'),
       this.props.courseId,
       this.props.lectureIndex,
-      this.props.videoIndex
-    );
+      this.props.videoIndex);
   }
 
 }

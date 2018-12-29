@@ -2,7 +2,7 @@ import {
   GET_LECTURE_DATA_STARTED,
   GET_LECTURE_DATA_SUCCESS,
   GET_LECTURE_DATA_FAILURE
-} from '../actions/types.js'
+} from '../actions/types.js';
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -26,4 +26,4 @@ export default (state = {}, action) => {
     default:
       return state;
   }
-}
+};

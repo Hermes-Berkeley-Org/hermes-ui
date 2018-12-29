@@ -2,7 +2,7 @@ import {
   GET_TRANSCRIPT_STARTED,
   GET_TRANSCRIPT_SUCCESS,
   GET_TRANSCRIPT_FAILURE
-} from '../actions/types.js'
+} from '../actions/types.js';
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -27,4 +27,4 @@ export default (state = {}, action) => {
     default:
       return state;
   }
-}
+};
