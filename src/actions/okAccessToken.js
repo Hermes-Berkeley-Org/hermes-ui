@@ -12,7 +12,6 @@ export const sendFailure = () => dispatch => {
 
 export const authenticate = (encryptedTokens) => dispatch => {
   const { accessToken, refreshToken } = decrypt(encryptedTokens)
-  console.log("OK ACCESS TOKEN", accessToken)
   dispatch({
     type: GET_OK_ACCESS_TOKEN_STARTED
   })

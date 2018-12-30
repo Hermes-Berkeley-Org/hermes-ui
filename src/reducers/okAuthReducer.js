@@ -8,18 +8,18 @@ export default (state = {}, action) => {
     case GET_OK_ACCESS_TOKEN_STARTED:
         return Object.assign({}, state, {
             ...state,
-            loading: true
+            okLoading: true
         })
     case GET_OK_ACCESS_TOKEN_SUCCESS:
         return Object.assign({}, state, {
             ...state,
-            loading: false,
+            okLoading: false,
             isAuthenticated: true
         })
     case GET_OK_ACCESS_TOKEN_FAILURE:
         return Object.assign({}, state, {
             ...state,
-            loading: false,
+            okLoading: false,
             isAuthenticated: false
         })
     default:

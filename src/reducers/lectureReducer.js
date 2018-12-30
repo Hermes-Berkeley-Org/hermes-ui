@@ -1,7 +1,7 @@
-import { 
-  GET_LECTURE_DATA_STARTED, 
-  GET_LECTURE_DATA_SUCCESS, 
-  GET_LECTURE_DATA_FAILURE 
+import {
+  GET_LECTURE_DATA_STARTED,
+  GET_LECTURE_DATA_SUCCESS,
+  GET_LECTURE_DATA_FAILURE
 } from '../actions/types.js'
 
 export default (state = {}, action) => {
@@ -9,7 +9,7 @@ export default (state = {}, action) => {
     case GET_LECTURE_DATA_STARTED:
       return {
         ...state,
-        loading: true
+        lectureLoading: true
       };
     case GET_LECTURE_DATA_SUCCESS:
       return {

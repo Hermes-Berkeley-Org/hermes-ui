@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import DocumentTitle from 'react-document-title'
 
 import { ROLE_STUDENT, ROLE_INSTRUCTOR } from '../constants.js';
 import { getData } from '../actions/home.js';
@@ -11,26 +12,30 @@ import './HomePage.css';
 
 class HomePage extends Component {
   renderCourses(title, filter) {
-    if (this.props.loading) {
+    if (this.props.homeLoading) {
       return (
-        <div>
-          <h3>{title}</h3>
-          <Loading />
-        </div>
+        <DocumentTitle title="Home">
+          <div>
+            <h3>{title}</h3>
+            <Loading />
+          </div>
+        </DocumentTitle>
       );
     }
     if (this.props.homeResponse) {
       const validStudentActiveClasses = this.props.homeResponse.courses.filter(filter);
       if (validStudentActiveClasses.length > 0) {
         return (
-          <div>
-            <h3>{title}</h3>
-            <div className='card-list'>
-              {validStudentActiveClasses.map((participation) =>
-                <CourseCard key={participation.course.id} course={participation.course}></CourseCard>
-              )}
+          <DocumentTitle title="Home">
+            <div>
+              <h3>{title}</h3>
+              <div className='card-list'>
+                {validStudentActiveClasses.map((participation) =>
+                  <CourseCard key={participation.course.id} course={participation.course}></CourseCard>
+                )}
+              </div>
             </div>
-          </div>
+          </DocumentTitle>
         );
       }
     }

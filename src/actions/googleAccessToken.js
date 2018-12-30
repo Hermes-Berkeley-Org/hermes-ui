@@ -12,7 +12,6 @@ export const authenticate = () => dispatch => {
   }
 
   const { expirationTime, accessToken } = decrypt(encryptedTokens);
-  console.log('GOOGLE ACCESS TOKEN', accessToken)
   if (new Date().getTime() >= expirationTime) {
     dispatch({
       type: GET_GOOGLE_ACCESS_TOKEN_FAILURE
