@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-import ReactLoading from 'react-loading';
+import Loading from './Loading';
 import GooglePrivate from './Google/GooglePrivate'
 import { getRole } from '../actions/user.js'
+
 
 import { ROLE_INSTRUCTOR } from '../constants.js'
 
@@ -11,7 +12,7 @@ class InstructorAuthenticated extends Component {
 
   render() {
     if (this.props.instructorLoading) {
-      return (<ReactLoading height={'20%'} width={'20%'} />);
+      return (<Loading />);
     } else if (this.props.roleData.role === ROLE_INSTRUCTOR) {
       console.log('INSTRUCTOR');
       return (

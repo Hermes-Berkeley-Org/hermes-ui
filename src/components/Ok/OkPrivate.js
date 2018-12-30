@@ -3,14 +3,15 @@ import { authenticate, sendFailure } from '../../actions/okAccessToken.js'
 import { connect } from 'react-redux';
 import OkLogin from './OkLogin'
 import PropTypes from 'prop-types'
-import ReactLoading from 'react-loading';
+
+import Loading from '../Loading'
 
 
 class OkPrivate extends Component {
 
   render() {
     if (this.props.okLoading) {
-      return (<ReactLoading height={'20%'} width={'20%'} />);
+      return (<Loading />);
     } else if (this.props.isAuthenticated) {
       return (
         <div>

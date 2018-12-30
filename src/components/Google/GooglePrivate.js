@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react';
-import ReactLoading from 'react-loading';
 import { connect } from 'react-redux';
 
 import { authenticate } from '../../actions/googleAccessToken.js';
 import GoogleLogin from './GoogleLogin';
+import Loading from '../Loading'
 
 class GooglePrivate extends Component {
   render() {
     if (this.props.googleLoading) {
-      return (<ReactLoading height={'20%'} width={'20%'} />);
+      return (<Loading />);
     } else if (this.props.isGoogleAuthenticated) {
       return (
         <div>
