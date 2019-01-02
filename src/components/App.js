@@ -36,13 +36,13 @@ class App extends Component {
               </InstructorAuthenticated>
             </OkPrivate>
           )}/>
-          <Route exact path="/course/:courseId/lecture/:lectureIndex/video/:videoIndex" render={({ location, match }) => (
+          <Route exact path="/course/:courseId/lecture/:lectureUrlName/video/:videoIndex" render={({ location, match }) => (
             <OkPrivate nextUrl={location.pathname}>
               <InstructorAuthenticated nextUrl={location.pathname}>
                 <Video
-                  key={`${match.params.courseId}-${match.params.lectureIndex}-${match.params.videoIndex}`}
+                  key={`${match.params.courseId}-${match.params.lectureUrlName}-${match.params.videoIndex}`}
                   courseId={Number.parseInt(match.params.courseId, 10)}
-                  lectureIndex={Number.parseInt(match.params.lectureIndex, 10)}
+                  lectureUrlName={match.params.lectureUrlName}
                   videoIndex={Number.parseInt(match.params.videoIndex, 10)}
                 />
               </InstructorAuthenticated>

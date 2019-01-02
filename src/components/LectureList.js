@@ -8,9 +8,9 @@ class LectureList extends Component {
   render() {
     return (
       <ul className="lecture-list">
-        {this.props.lectures.map((lecture, lectureIndex) => (
-          <li key={lectureIndex} className="lecture-item">
-            <Lecture courseId={this.props.courseId} lectureIndex={lectureIndex} lecture={lecture} />
+        {this.props.lectures.map((lecture, i) => (
+          <li key={i} className="lecture-item">
+            <Lecture courseId={this.props.courseId} lectureUrlName={lecture['lecture_url_name']} lecture={lecture} />
           </li>
         ))}
       </ul>

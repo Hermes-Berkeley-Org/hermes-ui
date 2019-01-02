@@ -18,6 +18,7 @@ export default (state = {}, action) => {
         transcript: action.payload.transcript
       };
     case GET_TRANSCRIPT_FAILURE:
+      console.log(action.payload)
       return {
         ...state,
         transcriptLoading: false,
