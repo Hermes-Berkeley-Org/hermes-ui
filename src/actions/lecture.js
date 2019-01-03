@@ -3,12 +3,12 @@ import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
 
-export const getLectureData = (encryptedTokens, courseId, lectureIndex) => dispatch => {
+export const getLectureData = (encryptedTokens, courseId, lectureUrlName) => dispatch => {
   const { accessToken } = decrypt(encryptedTokens)
   dispatch({
     type: GET_LECTURE_DATA_STARTED
   });
-  axios.get(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureIndex}`,
+  axios.get(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}`,
     {
       headers: {
         'Authorization': `Bearer ${accessToken}`

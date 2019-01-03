@@ -58,14 +58,14 @@ class Video extends Component {
                   }
 
                   {!this.props.lectureData || this.props.videoIndex === 0 ? null : (
-                    <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureIndex}/video/${this.props.videoIndex - 1}`}>
+                    <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${this.props.videoIndex - 1}`}>
                       Previous Video
                     </Link>
                     )
                   }
 
                   {!this.props.lectureData || this.props.videoIndex === this.props.lectureData['video_titles'].length - 1 ? null : (
-                    <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureIndex}/video/${this.props.videoIndex + 1}`}>
+                    <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${this.props.videoIndex + 1}`}>
                       Next Video
                     </Link>
                     )
@@ -100,7 +100,7 @@ class Video extends Component {
     this.props.getLectureData(
       localStorage.getItem('okToken'),
       this.props.courseId,
-      this.props.lectureIndex
+      this.props.lectureUrlName
     );
     this.reloadVideoData()
   }
@@ -109,13 +109,13 @@ class Video extends Component {
     this.props.getVideoData(
       localStorage.getItem('okToken'),
       this.props.courseId,
-      this.props.lectureIndex,
+      this.props.lectureUrlName,
       this.props.videoIndex
     );
     this.props.getTranscript(
       localStorage.getItem('okToken'),
       this.props.courseId,
-      this.props.lectureIndex,
+      this.props.lectureUrlName,
       this.props.videoIndex
     );
   }
