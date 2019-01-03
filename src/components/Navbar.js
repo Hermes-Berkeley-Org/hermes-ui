@@ -5,7 +5,16 @@ import { Link } from 'react-router-dom';
 import hermesLogo from '../img/hermes-white.png';
 import './Navbar.css';
 
-export default class Navbar extends Component {
+import { logout } from '../actions/okAccessToken.js'
+import { connect } from 'react-redux';
+
+class Navbar extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
   render() {
     return (
       <div className='navbar'>
@@ -16,11 +25,31 @@ export default class Navbar extends Component {
           <div className='flex-space'></div>
           <div className='navbar-actions'>
             <ul>
-              <li><Link to='/home'>Login</Link></li>
+              <li>
+              {
+                !this.props.isAuthenticated ?
+                <Link to="/login">Login</Link> :
+                <Link to="/" onClick={this.handleLogout}>Logout</Link>
+              }
+              </li>
             </ul>
           </div>
         </div>
       </div>
     );
   }
+
+  handleLogout() {
+    this.props.logout()
+  }
 }
+
+const mapStateToProps = state => ({
+  ...state.okAuthReducer
+})
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
