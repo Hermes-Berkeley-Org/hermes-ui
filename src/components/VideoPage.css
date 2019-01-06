@@ -1,0 +1,59 @@
+.container-video {
+
+}
+
+.container-video-sections {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: 0 -1.5em -1.5em 0;
+}
+
+.video-content {
+  margin: 0 1.5em 1.5em 0;
+  flex: 100 1 auto;
+  width: 308px;
+}
+
+.video-questions {
+  margin: 0 1.5em 1.5em 0;
+  flex: 1 1 auto;
+  width: 308px;
+}
+
+.video-content iframe {
+  width: 100%;
+  height: 20em;
+}
+
+.video-transcript {
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  max-height: 20em;
+  overflow-y: auto;
+}
+
+.video-transcript table {
+  border-collapse: collapse;
+  margin: -1px 0;
+  min-width: 100%;
+}
+
+.video-transcript td {
+  border-top: 1px dashed #EEE;
+  border-bottom: 1px dashed #EEE;
+  padding: 0.25em;
+  white-space: nowrap;
+}
+
+.video-transcript .video-transcript-timestamp {
+  width: 7em;
+  color: #AAA;
+  position: sticky;
+  left: 0;
+  background-color: #FFF;
+}
+
+.video-questions h3:first-child {
+  margin-top: 0;
+}
