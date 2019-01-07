@@ -33,12 +33,22 @@ class Video extends Component {
       }</div>
     }
     return (
-      <Layout>
+      <Layout wide>
         <DocumentTitle title={!this.props.courseData || !this.props.lectureData || !this.props.videoData ?
           'Video' :
           `${this.props.courseData.info['display_name']} | ${this.props.lectureData.name} | ${this.props.videoData.title}`
         }>
           <div className='container container-video'>
+            <div className='video-player'>
+              {this.props.videoLoading ?
+                <Loading /> :
+                (!this.props.videoData ?
+                  'Failed to load video' :
+                  <YouTube
+                    videoId={this.props.videoData['youtube_id']}
+                    opts={{ playerVars: { autoplay: 1 } }}
+                  />)}
+            </div>
             <div className='container-banner container-banner-complex'>
               <h2>{this.props.lectureData ? this.props.lectureData.name : 'Lecture'}</h2>
               <div className='container-banner-links'>
@@ -52,27 +62,15 @@ class Video extends Component {
               </div>
             </div>
             <div className='container-video-sections'>
-              <div className='video-content'>
-                <div>
-                  {this.props.videoLoading ?
-                    <Loading /> :
-                    (!this.props.videoData ?
-                      'Failed to load video' :
-                      <YouTube
-                        videoId={this.props.videoData['youtube_id']}
-                        opts={{ playerVars: { autoplay: 1 } }}
-                      />)}
-                </div>
-                <div>
-                  <h3>Transcript</h3>
-                  {this.props.transcriptLoading ?
-                    <Loading /> :
-                    (!this.props.transcript ?
-                      (this.props.transcriptNotFound ? 'No transcript is associated with this video' : 'Failed to load transcript') :
-                      <Transcript transcript={this.props.transcript} />)}
-                </div>
+              <div className='video-section-transcript'>
+                <h3>Transcript</h3>
+                {this.props.transcriptLoading ?
+                  <Loading /> :
+                  (!this.props.transcript ?
+                    (this.props.transcriptNotFound ? 'No transcript is associated with this video' : 'Failed to load transcript') :
+                    <Transcript transcript={this.props.transcript} />)}
               </div>
-              <div className='video-questions'>
+              <div className='video-section-questions'>
                 <h3>Questions</h3>
                 <div>
                   Questions

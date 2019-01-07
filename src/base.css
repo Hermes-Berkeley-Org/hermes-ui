@@ -71,9 +71,12 @@ form input[type='submit'] {
 }
 
 .container {
-  max-width: 972px;
   margin: 0 auto;
   padding: 0 1.5em;
+}
+
+.layout-width-normal .container {
+  max-width: 972px;
 }
 
 .layout-contents > .container {
@@ -83,8 +86,6 @@ form input[type='submit'] {
 
 .container-banner.container-banner-complex {
   margin: 1.5rem 0;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid #DDD;
 }
 
 .container-banner.container-banner-complex h2 {
