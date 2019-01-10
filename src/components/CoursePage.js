@@ -7,6 +7,8 @@ import AddLectureForm from './AddLectureForm.js';
 import Layout from './Layout.js';
 import LectureList from './LectureList.js';
 import Loading from './Loading.js';
+import NotFound from './NotFound.js'
+import InternalError from './InternalError.js'
 
 import './CoursePage.css';
 
@@ -14,14 +16,17 @@ import { ROLE_INSTRUCTOR } from '../constants.js'
 
 class CoursePage extends Component {
   render() {
-    if (!this.props.courseLoading && !this.props.courseData) {
-      return <div>Failed to load lectures</div>;
+    if (this.props.courseDataError) {
+      return <div>{
+        this.props.courseDataError.response.status === 404 ?
+        <NotFound/> : <InternalError/>
+      }</div>
     }
     return (
       <Layout>
         <DocumentTitle title={!this.props.courseData ? 'Course' : this.props.courseData.info['display_name']}>
         <div className='container container-course'>
-          <h2>{this.props.courseLoading ? 'Course' : this.props.courseData.info['display_name']}</h2>
+          <h2>{this.props.courseLoading ? '' : this.props.courseData.info['display_name']}</h2>
           <div className='container-course-sections'>
             <div className='course-lectures'>
               {this.props.courseLoading
@@ -45,6 +50,10 @@ class CoursePage extends Component {
   componentDidMount() {
     this.props.getCourseData(localStorage.getItem('okToken'), this.props.courseId)
   }
+}
+
+CoursePage.defaultProps = {
+    courseLoading: true
 }
 
 const mapStateToProps = state => ({

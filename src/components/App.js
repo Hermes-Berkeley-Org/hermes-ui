@@ -10,9 +10,10 @@ import OkAuthorized from './Ok/OkAuthorized'
 import GoogleAuthorized from './Google/GoogleAuthorized'
 import CoursePage from './CoursePage'
 import Video from './Video'
+import EditVideo from './EditVideo'
 import OkPrivate from './Ok/OkPrivate'
 import InstructorAuthenticated from './InstructorAuthenticated'
-
+import NotFound from './NotFound'
 
 class App extends Component {
 
@@ -38,7 +39,7 @@ class App extends Component {
           )}/>
           <Route exact path="/course/:courseId/lecture/:lectureUrlName/video/:videoIndex" render={({ location, match }) => (
             <OkPrivate nextUrl={location.pathname}>
-              <InstructorAuthenticated nextUrl={location.pathname}>
+              <InstructorAuthenticated nextUrl={location.pathname} allowNonInstructors={true}>
                 <Video
                   key={`${match.params.courseId}-${match.params.lectureUrlName}-${match.params.videoIndex}`}
                   courseId={Number.parseInt(match.params.courseId, 10)}
@@ -48,7 +49,20 @@ class App extends Component {
               </InstructorAuthenticated>
             </OkPrivate>
           )}/>
+          <Route exact path="/course/:courseId/lecture/:lectureUrlName/video/:videoIndex/edit" render={({ location, match }) => (
+            <OkPrivate nextUrl={location.pathname}>
+              <InstructorAuthenticated nextUrl={location.pathname} allowNonInstructors={false}>
+                <EditVideo
+                  key={`${match.params.courseId}-${match.params.lectureUrlName}-${match.params.videoIndex}`}
+                  courseId={Number.parseInt(match.params.courseId, 10)}
+                  lectureUrlName={match.params.lectureUrlName}
+                  videoIndex={Number.parseInt(match.params.videoIndex, 10)}
+                />
+              </InstructorAuthenticated>
+            </OkPrivate>
+          )}/>
           <Route exact path="/debug" component={Debug}/>
+          <Route component={NotFound} />
         </Switch>
       </DocumentTitle>
     );

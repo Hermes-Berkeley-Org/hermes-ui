@@ -21,7 +21,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         videoLoading: false,
-        actionPayloadError: action.payload.error
+        videoDataError: action.payload.error
       };
     default:
       return state;

@@ -21,7 +21,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         courseLoading: false,
-        actionPayloadError: action.payload.error
+        courseDataError: action.payload.error
       };
     default:
       return state;

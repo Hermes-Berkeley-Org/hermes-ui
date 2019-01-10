@@ -1,4 +1,4 @@
-import { GET_ROLE_STARTED, GET_ROLE_SUCCESS, GET_ROLE_FAILURE } from '../actions/types.js'
+import { GET_ROLE_STARTED, GET_ROLE_SUCCESS, GET_ROLE_FAILURE, GET_ROLE_NO_COURSE_FOUND } from '../actions/types.js'
 
 export default (state = {}, action) => {
  switch (action.type) {
@@ -18,6 +18,12 @@ export default (state = {}, action) => {
             ...state,
             instructorLoading: false,
             roleDataError: action.payload.error
+        })
+    case GET_ROLE_NO_COURSE_FOUND:
+        return Object.assign({}, state, {
+            ...state,
+            instructorLoading: false,
+            courseNotFound: true
         })
     default:
         return state

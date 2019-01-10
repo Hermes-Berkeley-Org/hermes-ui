@@ -11,13 +11,13 @@ export default (state = {}, action) => {
         return Object.assign({}, state, {
             ...state,
             homeLoading: false,
-            homeResponse: action.payload
+            homeData: action.payload
         })
     case GET_HOME_DATA_FAILURE:
         return Object.assign({}, state, {
             ...state,
             homeLoading: false,
-            actionPayloadError: action.payload.error
+            homeDataError: action.payload.error
         })
     default:
         return state
