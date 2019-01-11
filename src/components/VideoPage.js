@@ -40,9 +40,9 @@ class Video extends Component {
         }>
           <div className='container container-video'>
             <div className='container-banner container-banner-complex'>
-              <h2>{this.props.lectureData ? this.props.lectureData.name : 'Lecture'}</h2>
+              <h2>{this.props.videoData ? this.props.videoData.title : 'Video'}</h2>
               <div className='container-banner-links'>
-                <Link to={`/course/${this.props.courseId}`}>Return to {!this.props.courseData ? 'Course' : this.props.courseData.info['display_name']}</Link>
+                <Link to={`/course/${this.props.courseId}`}><span className='fas fa-arrow-left' /> <span className='font-semibold'>{this.props.courseData ? this.props.courseData.info['display_name'] : 'Course'}</span>{this.props.lectureData ? ` ${this.props.lectureData.name}` : ''}</Link>
                 {!this.props.lectureData || this.props.videoIndex === 0 ? null : (
                   <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${this.props.videoIndex - 1}`}>Previous Video</Link>
                 )}

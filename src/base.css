@@ -31,6 +31,18 @@ a {
   color: inherit;
 }
 
+.font-regular {
+  font-weight: 400;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
 form label {
   display: block;
   font-weight: 600;
@@ -92,7 +104,7 @@ form input[type='submit'] {
   margin-bottom: 0.5rem;
 }
 
-.container-banner-links * {
+.container-banner-links > * {
   margin: 0 1rem 0 0;
   text-decoration: none;
 }
