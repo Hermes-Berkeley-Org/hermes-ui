@@ -14,9 +14,9 @@ class OkPrivate extends Component {
       return (<Loading />);
     } else if (this.props.isAuthenticated) {
       return (
-        <div>
+        <React.Fragment>
             {this.props.children}
-        </div>
+        </React.Fragment>
       );
     } else {
       return <OkLogin nextUrl={this.props.nextUrl}/>

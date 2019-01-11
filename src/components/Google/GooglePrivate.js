@@ -12,9 +12,9 @@ class GooglePrivate extends Component {
       return (<Loading />);
     } else if (this.props.isGoogleAuthenticated) {
       return (
-        <div>
+        <React.Fragment>
             {this.props.children}
-        </div>
+        </React.Fragment>
       );
     } else {
       return <GoogleLogin nextUrl={this.props.nextUrl}/>
