@@ -32,7 +32,7 @@ class HomePage extends Component {
               <h3>{title}</h3>
               <div className='card-list'>
                 {validStudentActiveClasses.map((participation) =>
-                  <CourseCard key={participation.course.id} course={participation.course}></CourseCard>
+                  <CourseCard hermesActive={participation['hermes_active']} key={participation.course.id} course={participation.course}></CourseCard>
                 )}
               </div>
             </div>
