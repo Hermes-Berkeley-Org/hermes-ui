@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title'
 
-import { getCourseData, createLecture } from '../actions/course.js';
+import { getCourseData, createLecture, deleteLecture } from '../actions/course.js';
 import AddLectureForm from './AddLectureForm.js';
 import Layout from './Layout.js';
 import LectureList from './LectureList.js';
@@ -31,7 +31,11 @@ class CoursePage extends Component {
             <div className='course-lectures'>
               {this.props.courseLoading
                 ? <Loading />
-                : <LectureList courseId={this.props.courseId} lectures={!this.props.courseData ? [] : this.props.courseData.lectures} />
+                : <LectureList
+                      courseId={this.props.courseId}
+                      lectures={!this.props.courseData ? [] : this.props.courseData.lectures}
+                      deleteLecture={(lectureUrlName) => this.props.deleteLecture(this.props.courseId, lectureUrlName)}
+                  />
               }
             </div>
             {this.props.role !== ROLE_INSTRUCTOR ? null :
@@ -50,6 +54,7 @@ class CoursePage extends Component {
   componentDidMount() {
     this.props.getCourseData(localStorage.getItem('okToken'), this.props.courseId)
   }
+  
 }
 
 CoursePage.defaultProps = {
@@ -62,7 +67,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getCourseData: (...args) => dispatch(getCourseData(...args)),
-  createLecture: (...args) => dispatch(createLecture(...args))
+  createLecture: (...args) => dispatch(createLecture(...args)),
+  deleteLecture: (...args) => dispatch(deleteLecture(...args))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoursePage);

@@ -26,6 +26,7 @@ export default class Lecture extends Component {
           <div className="lecture-details-toggle fas fa-chevron-right" />
           <h3 className="lecture-title"><Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/0`}>{this.props.lecture.name}</Link></h3>
           <div className="lecture-date">{this.props.lecture.date}</div>
+          <div className="fas fa-times" onClick={() => this.props.deleteLecture(this.props.lectureUrlName)}/>
         </div>
         <ol className="lecture-video-list">
           {this.props.lecture.video_titles.map((title, videoIndex) => (
