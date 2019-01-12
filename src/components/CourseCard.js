@@ -4,11 +4,20 @@ import { Link } from 'react-router-dom';
 import './CourseCard.css';
 
 export default class CourseCard extends Component {
+
   render() {
-    return (
-      <Link to={`/course/${this.props.course['id']}`} className='card card-course'>
-        <div className='card-title'>{this.props.course['display_name']}</div>
-      </Link>
-    );
+    if (this.props.hermesActive) {
+      return (
+        <Link to={`/course/${this.props.course['id']}`} className='card card-course'>
+          <div className='card-title'>{this.props.course['display_name']}</div>
+        </Link>
+      )
+    } else {
+      return (
+        <a onClick={() => this.props.createCourse(this.props.course['id'])} className='card card-course'>
+          <div className='card-title'>{this.props.course['display_name']}</div>
+        </a>
+      )
+    }
   }
 };
