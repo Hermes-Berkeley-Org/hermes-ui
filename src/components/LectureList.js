@@ -11,6 +11,7 @@ class LectureList extends Component {
         {this.props.lectures.map((lecture, i) => (
           <li key={i} className="lecture-item">
             <Lecture
+              role={this.props.role}
               courseId={this.props.courseId}
               lectureUrlName={lecture['lecture_url_name']}
               lecture={lecture}

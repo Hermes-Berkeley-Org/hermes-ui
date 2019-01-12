@@ -32,6 +32,7 @@ class CoursePage extends Component {
               {this.props.courseLoading
                 ? <Loading />
                 : <LectureList
+                      role={this.props.role}
                       courseId={this.props.courseId}
                       lectures={!this.props.courseData ? [] : this.props.courseData.lectures}
                       deleteLecture={(lectureUrlName) => this.props.deleteLecture(this.props.courseId, lectureUrlName)}
@@ -54,7 +55,7 @@ class CoursePage extends Component {
   componentDidMount() {
     this.props.getCourseData(localStorage.getItem('okToken'), this.props.courseId)
   }
-  
+
 }
 
 CoursePage.defaultProps = {
