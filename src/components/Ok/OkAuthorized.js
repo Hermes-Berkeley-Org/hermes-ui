@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InternalError from '../InternalError'
+import Loading from '../Loading'
 
 import { encrypt } from '../../utils/security.js'
 
@@ -21,7 +22,7 @@ class OkAuthorized extends Component {
     if (this.state.okFailed) {
       return <InternalError/>
     }
-    return <div/>
+    return <Loading/>
   }
 
   componentDidMount() {
@@ -29,6 +30,7 @@ class OkAuthorized extends Component {
     const urlParams = queryString.parse(this.props.location.search);
     if (urlParams.error) {
       // access denied
+      // User hits 'Cancel' on OK Authorization
       window.location = '/'
     } else {
       const code = urlParams.code;

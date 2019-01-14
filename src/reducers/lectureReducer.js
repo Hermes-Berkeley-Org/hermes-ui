@@ -9,13 +9,15 @@ export default (state = {}, action) => {
     case GET_LECTURE_DATA_STARTED:
       return {
         ...state,
-        lectureLoading: true
+        lectureLoading: true,
+        lectureDataError: null
       };
     case GET_LECTURE_DATA_SUCCESS:
       return {
         ...state,
         lectureLoading: false,
-        lectureData: action.payload
+        lectureData: action.payload,
+        lectureDataError: null
       };
     case GET_LECTURE_DATA_FAILURE:
       return {

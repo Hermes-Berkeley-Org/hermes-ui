@@ -9,13 +9,15 @@ export default (state = {}, action) => {
     case GET_TRANSCRIPT_STARTED:
       return {
         ...state,
-        transcriptLoading: true
+        transcriptLoading: true,
+        transcriptDataError: null
       };
     case GET_TRANSCRIPT_SUCCESS:
       return {
         ...state,
         transcriptLoading: false,
-        transcript: action.payload.transcript
+        transcript: action.payload.transcript,
+        transcriptDataError: null
       };
     case GET_TRANSCRIPT_FAILURE:
       console.log(action.payload)
@@ -24,7 +26,7 @@ export default (state = {}, action) => {
         transcriptLoading: false,
         transcript: null,
         transcriptNotFound: action.payload.error.response.status === 404,
-        actionPayloadError: action.payload.error
+        transcriptDataError: action.payload.error
       };
     default:
       return state;

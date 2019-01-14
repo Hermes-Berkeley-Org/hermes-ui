@@ -9,13 +9,15 @@ export default (state = {}, action) => {
     case GET_VIDEO_DATA_STARTED:
       return {
         ...state,
-        videoLoading: true
+        videoLoading: true,
+        videoDataError: null
       };
     case GET_VIDEO_DATA_SUCCESS:
       return {
         ...state,
         videoLoading: false,
-        videoData: action.payload
+        videoData: action.payload,
+        videoDataError: null
       };
     case GET_VIDEO_DATA_FAILURE:
       return {

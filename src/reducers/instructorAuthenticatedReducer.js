@@ -5,25 +5,31 @@ export default (state = {}, action) => {
     case GET_ROLE_STARTED:
         return Object.assign({}, state, {
             ...state,
-            instructorLoading: true
+            instructorLoading: true,
+            courseNotFound: false,
+            roleDataError: null
         })
     case GET_ROLE_SUCCESS:
         return Object.assign({}, state, {
             ...state,
             instructorLoading: false,
-            roleData: action.payload
+            courseNotFound: false,
+            roleData: action.payload,
+            roleDataError: null
         })
     case GET_ROLE_FAILURE:
         return Object.assign({}, state, {
             ...state,
             instructorLoading: false,
+            courseNotFound: false,
             roleDataError: action.payload.error
         })
     case GET_ROLE_NO_COURSE_FOUND:
         return Object.assign({}, state, {
             ...state,
             instructorLoading: false,
-            courseNotFound: true
+            courseNotFound: true,
+            roleDataError: null
         })
     default:
         return state
