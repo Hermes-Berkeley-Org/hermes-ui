@@ -14,7 +14,7 @@ export default class CourseCard extends Component {
       )
     } else {
       return (
-        <a onClick={() => this.props.createCourse(this.props.course['id'])} className='card card-course'>
+        <a onClick={() => this.props.openCreateCourseModal(this.props.course)} className='card card-course'>
           <div className='card-title'>{this.props.course['display_name']}</div>
         </a>
       )
