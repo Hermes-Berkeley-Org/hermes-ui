@@ -32,7 +32,7 @@ class App extends Component {
           <Route exact path="/googleAuthorized" component={GoogleAuthorized}/>
           <Route exact path="/course/:courseId" render={({ location, match }) => (
             <OkPrivate nextUrl={location.pathname}>
-              <InstructorAuthenticated nextUrl={location.pathname}>
+              <InstructorAuthenticated nextUrl={location.pathname} allowNonInstructors={true}>
                 <CoursePage courseId={Number.parseInt(match.params.courseId, 10)}/>
               </InstructorAuthenticated>
             </OkPrivate>
