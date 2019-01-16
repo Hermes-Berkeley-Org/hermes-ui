@@ -4,11 +4,12 @@ import DocumentTitle from 'react-document-title'
 import Modal from 'react-modal'
 
 import { ROLE_STUDENT, ROLE_INSTRUCTOR } from '../constants.js';
-import { getData } from '../actions/home.js';
+import { getData, createCourse } from '../actions/home.js';
 import Layout from './Layout.js';
 import Loading from './Loading.js';
 import CourseCard from './CourseCard.js';
 import InternalError from './InternalError'
+import CreateCourseForm from './CreateCourseForm'
 
 import './HomePage.css';
 
@@ -65,17 +66,37 @@ class HomePage extends Component {
     }
     return (
       <Layout>
-        <div className='container'>
-          <h2>Courses</h2>
-          {this.renderCourses('Student', (course) => course.role === ROLE_STUDENT)}
-          {this.renderCourses('Staff', (course) => course.role === ROLE_INSTRUCTOR)}
-        </div>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeCreateCourseModal}
-        >
-          Create this course: {JSON.stringify(this.state.courseToBeCreated)}
-        </Modal>
+        {this.props.createCourseLoading ?
+          <Loading/> :
+          <div className='container'>
+            <h2>Courses</h2>
+            {this.renderCourses('Student', (course) => course.role === ROLE_STUDENT)}
+            {this.renderCourses('Staff', (course) => course.role === ROLE_INSTRUCTOR)}
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeCreateCourseModal}
+              style={
+                {
+                  content : {
+                    top                   : '50%',
+                    left                  : '50%',
+                    right                 : 'auto',
+                    bottom                : 'auto',
+                    marginRight           : '-50%',
+                    transform             : 'translate(-50%, -50%)'
+                  }
+                }
+              }
+            >
+              <CreateCourseForm
+                course={this.state.courseToBeCreated}
+                createCourse={this.props.createCourse}
+                closeCreateCourseModal={this.closeCreateCourseModal}
+              />
+            </Modal>
+          </div>
+        }
+
       </Layout>
     );
   }
@@ -106,7 +127,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getHomeData: (accessToken) => dispatch(getData(accessToken))
+  getHomeData: (accessToken) => dispatch(getData(accessToken)),
+  createCourse: (courseId, courseInfo) => dispatch(createCourse(courseId, courseInfo))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
