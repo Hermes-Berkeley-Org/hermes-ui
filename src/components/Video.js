@@ -13,6 +13,8 @@ import { getTranscript } from '../actions/transcript.js';
 import Layout from './Layout';
 import Transcript from './Transcript'
 import Loading from './Loading.js';
+import NotFound from './NotFound.js'
+import InternalError from './InternalError.js'
 
 class Video extends Component {
 
@@ -23,7 +25,13 @@ class Video extends Component {
 
   render() {
     // TODO: https://stackoverflow.com/questions/19014250/rerender-view-on-browser-resize-with-react
-    console.log(this.props)
+    const error = this.props.courseDataError || this.props.lectureDataError || this.props.videoDataError;
+    if (error) {
+      return <div>{
+        error.response.status === 404 ?
+        <NotFound/> : <InternalError/>
+      }</div>
+    }
     return (
       <Layout>
         <DocumentTitle title={!this.props.courseData || !this.props.lectureData || !this.props.videoData ? "Video" :

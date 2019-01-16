@@ -7,6 +7,7 @@ import { getData } from '../actions/home.js';
 import Layout from './Layout.js';
 import Loading from './Loading.js';
 import CourseCard from './CourseCard.js';
+import InternalError from './InternalError'
 
 import './HomePage.css';
 
@@ -22,8 +23,8 @@ class HomePage extends Component {
         </DocumentTitle>
       );
     }
-    if (this.props.homeResponse) {
-      const validStudentActiveClasses = this.props.homeResponse.courses.filter(filter);
+    if (this.props.homeData) {
+      const validStudentActiveClasses = this.props.homeData.courses.filter(filter);
       if (validStudentActiveClasses.length > 0) {
         return (
           <DocumentTitle title="Home">
@@ -42,6 +43,9 @@ class HomePage extends Component {
   }
 
   render() {
+    if (this.props.homeDataError) {
+      return <InternalError/>
+    }
     return (
       <Layout>
         <div className='container'>

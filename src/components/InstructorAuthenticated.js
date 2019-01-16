@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import Loading from './Loading';
+import NotFound from './NotFound'
+import Forbidden from './Forbidden'
+import InternalError from './InternalError'
 import GooglePrivate from './Google/GooglePrivate'
 import { getRole } from '../actions/user.js'
 
@@ -11,7 +14,13 @@ import { ROLE_INSTRUCTOR } from '../constants.js'
 class InstructorAuthenticated extends Component {
 
   render() {
-    if (this.props.instructorLoading) {
+    if (!this.props.instructorLoading && !this.props.roleData) {
+      if (this.props.courseNotFound) {
+        return <NotFound/>
+      } else if (this.props.roleDataError) {
+        return <InternalError/>
+      }
+    } if (this.props.instructorLoading) {
       return (<Loading />);
     } else if (this.props.roleData.role === ROLE_INSTRUCTOR) {
       console.log('INSTRUCTOR');
@@ -24,11 +33,16 @@ class InstructorAuthenticated extends Component {
       );
     } else {
       console.log(this.props.roleData.role);
-      return (
-        <div>
-          {React.cloneElement(this.props.children, { role: this.props.roleData.role })}
-        </div>
-      )
+      if (this.props.allowNonInstructors) {
+        return (
+          <div>
+            {React.cloneElement(this.props.children, { role: this.props.roleData.role })}
+          </div>
+        )
+      } else {
+        return <Forbidden/>
+      }
+
     }
   }
 

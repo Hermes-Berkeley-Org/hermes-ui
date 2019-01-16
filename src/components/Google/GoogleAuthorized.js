@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Loading from '../Loading'
+
 import { encrypt } from '../../utils/security.js';
 
 const queryString = require('query-string');
@@ -10,7 +12,7 @@ const utf8 = require('utf8');
 class GoogleAuthorized extends Component {
 
   render() {
-    return <div/>;
+    return <Loading/>;
   }
 
   componentDidMount() {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ROLE_INSTRUCTOR } from '../constants.js'
+
 import './Lecture.css';
 
 export default class Lecture extends Component {
@@ -26,6 +28,10 @@ export default class Lecture extends Component {
           <div className="lecture-details-toggle fas fa-chevron-right" />
           <h3 className="lecture-title"><Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/0`}>{this.props.lecture.name}</Link></h3>
           <div className="lecture-date">{this.props.lecture.date}</div>
+          {this.props.role === ROLE_INSTRUCTOR ?
+              <div className="fas fa-times" onClick={() => this.props.deleteLecture(this.props.lectureUrlName)}/> :
+              null
+          }
         </div>
         <ol className="lecture-video-list">
           {this.props.lecture.video_titles.map((title, videoIndex) => (

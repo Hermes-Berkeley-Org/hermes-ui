@@ -9,19 +9,21 @@ export default (state = {}, action) => {
     case GET_COURSE_DATA_STARTED:
       return {
         ...state,
-        courseLoading: true
+        courseLoading: true,
+        courseDataError: null
       };
     case GET_COURSE_DATA_SUCCESS:
       return {
         ...state,
         courseLoading: false,
-        courseData: action.payload
+        courseData: action.payload,
+        courseDataError: null
       };
     case GET_COURSE_DATA_FAILURE:
       return {
         ...state,
         courseLoading: false,
-        actionPayloadError: action.payload.error
+        courseDataError: action.payload.error
       };
     default:
       return state;
