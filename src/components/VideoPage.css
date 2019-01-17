@@ -49,7 +49,7 @@
   justify-content: center;
   text-decoration: none;
   font-size: 1.25em;
-  padding: 0 0.25em;
+  padding: 0 0.25rem;
   transition: background-color ease 0.2s;
 }
 
