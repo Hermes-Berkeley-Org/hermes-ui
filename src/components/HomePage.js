@@ -11,6 +11,8 @@ import CourseCard from './CourseCard.js';
 import InternalError from './InternalError'
 import CreateCourseForm from './CreateCourseForm'
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import './HomePage.css';
 
 class HomePage extends Component {
@@ -26,7 +28,7 @@ class HomePage extends Component {
   }
 
   renderCourses(title, filter) {
-    if (this.props.homeLoading) {
+    if (this.props.homeLoading || this.props.createCourseLoading) {
       return (
         <DocumentTitle title="Home">
           <div>
@@ -66,37 +68,33 @@ class HomePage extends Component {
     }
     return (
       <Layout>
-        {this.props.createCourseLoading ?
-          <Loading/> :
-          <div className='container'>
-            <h2>Courses</h2>
-            {this.renderCourses('Student', (course) => course.role === ROLE_STUDENT)}
-            {this.renderCourses('Staff', (course) => course.role === ROLE_INSTRUCTOR)}
-            <Modal
-              isOpen={this.state.modalIsOpen}
-              onRequestClose={this.closeCreateCourseModal}
-              style={
-                {
-                  content : {
-                    top                   : '50%',
-                    left                  : '50%',
-                    right                 : 'auto',
-                    bottom                : 'auto',
-                    marginRight           : '-50%',
-                    transform             : 'translate(-50%, -50%)'
-                  }
+        <div className='container'>
+          <h2>Courses</h2>
+          {this.renderCourses('Student', (course) => course.role === ROLE_STUDENT)}
+          {this.renderCourses('Staff', (course) => course.role === ROLE_INSTRUCTOR)}
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeCreateCourseModal}
+            style={
+              {
+                content : {
+                  top                   : '50%',
+                  left                  : '50%',
+                  right                 : 'auto',
+                  bottom                : 'auto',
+                  marginRight           : '-50%',
+                  transform             : 'translate(-50%, -50%)'
                 }
               }
-            >
-              <CreateCourseForm
-                course={this.state.courseToBeCreated}
-                createCourse={this.props.createCourse}
-                closeCreateCourseModal={this.closeCreateCourseModal}
-              />
-            </Modal>
-          </div>
-        }
-
+            }
+          >
+            <CreateCourseForm
+              course={this.state.courseToBeCreated}
+              createCourse={this.props.createCourse}
+              closeCreateCourseModal={this.closeCreateCourseModal}
+            />
+          </Modal>
+        </div>
       </Layout>
     );
   }
