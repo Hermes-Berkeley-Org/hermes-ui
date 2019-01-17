@@ -57,14 +57,23 @@ class CoursePage extends Component {
                 : <LectureList
                       courseId={this.props.courseId}
                       lectures={!this.props.courseData ? [] : this.props.courseData.lectures}
-                      deleteLecture={(lectureUrlName) => this.props.deleteLecture(this.props.courseId, lectureUrlName)}
+                      deleteLecture={(lectureUrlName) => this.props.deleteLecture(
+                          this.props.courseId,
+                          lectureUrlName,
+                          this.props.courseData
+                        )
+                      }
                   />
               }
             </div>
             {this.props.role !== ROLE_INSTRUCTOR ? null :
               <div className='course-lecture-creation'>
                 <h3>Create a lecture</h3>
-                <AddLectureForm courseId={this.props.courseId} createLecture={this.props.createLecture} />
+                <AddLectureForm
+                  courseId={this.props.courseId}
+                  course={this.props.courseData}
+                  createLecture={this.props.createLecture}
+                />
               </div>
             }
           </div>

@@ -27,6 +27,7 @@ class AddLectureForm extends Component {
       title: this.state.playlistTitle,
       date: this.state.playlistDate,
       link: this.state.playlistLink,
+      course: this.props.course
     });
   }
 
