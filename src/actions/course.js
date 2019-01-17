@@ -2,6 +2,7 @@ import { GET_COURSE_DATA_STARTED, GET_COURSE_DATA_SUCCESS, GET_COURSE_DATA_FAILU
 import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
+const queryString = require('query-string')
 
 export const getCourseData = (encryptedTokens, courseId) => dispatch => {
   const { accessToken } = decrypt(encryptedTokens)
@@ -26,7 +27,7 @@ export const getCourseData = (encryptedTokens, courseId) => dispatch => {
     });
 }
 
-export const createLecture = (courseId, { title, date, link }) => dispatch => {
+export const createLecture = (courseId, { title, date, link, course }) => dispatch => {
   const okEncryptedTokens = localStorage.getItem('okToken');
   const googleEncryptedTokens = localStorage.getItem('googleToken');
   const okAccessToken = decrypt(okEncryptedTokens).accessToken;
@@ -37,6 +38,9 @@ export const createLecture = (courseId, { title, date, link }) => dispatch => {
   data.set('date', date);
   data.set('link', link);
   data.set('youtube_access_token', googleAccessToken);
+  data.set('piazza_active', course.info['piazza_active'])
+  data.set('piazza_course_id', course.info['piazza_course_id'])
+  data.set('piazza_master_post_id', course.info['piazza_master_post_id'])
 
   axios.post(
     `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/create_lecture`,
@@ -54,13 +58,20 @@ export const createLecture = (courseId, { title, date, link }) => dispatch => {
     });
 }
 
-export const deleteLecture = (courseId, lectureUrlName) => dispatch => {
+export const deleteLecture = (courseId, lectureUrlName, course) => dispatch => {
   const okEncryptedTokens = localStorage.getItem('okToken');
   const okAccessToken = decrypt(okEncryptedTokens).accessToken;
 
-  // TODO: with Piazza integration, check if Piazza is active
+  const urlParams = {
+    'piazza_active': course.info['piazza_active']
+  }
+  if (course.info['piazza_active'] === 'active') {
+    urlParams['piazza_course_id'] = course.info['piazza_course_id']
+    urlParams['piazza_master_post_id'] = course.info['piazza_master_post_id']
+  }
+
   axios.delete(
-    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}?piazza_active=inactive`,
+    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}?${queryString.stringify(urlParams)}`,
     {
       headers: {
         'Authorization': `Bearer ${okAccessToken}`
