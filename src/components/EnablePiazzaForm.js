@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip'
 
-class CreateCourseForm extends Component {
+class EnablePiazzaForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      displayName: this.props.course['display_name'],
       piazzaCourseUrl: ''
     };
   }
@@ -24,31 +22,17 @@ class CreateCourseForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.createCourse(this.props.course.id, {
-      displayName: this.state.displayName,
-      piazzaCourseUrl: this.state.piazzaCourseUrl,
-      ...this.props.course
-    });
-    this.props.closeCreateCourseModal()
+    this.props.createPiazzaBot(this.props.course.info['course_ok_id'], this.state.piazzaCourseUrl);
+    this.props.closePiazzaModal()
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
-      <div onClick={this.props.closeCreateCourseModal} className="fas fa-times"></div>
-      <h2>Create {this.state.displayName || 'course'}</h2>
+      <div onClick={this.props.closePiazzaModal} className="fas fa-times"></div>
+      <h2>Enable Piazza</h2>
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <div className='form-group'>
-          <label htmlFor="display-name">Choose a name for the class:</label>
-          <input
-            type='text'
-            className="form-control"
-            id='display-name'
-            name='displayName'
-            value={this.state.displayName}
-            onChange={this.handleInputChange.bind(this)}
-          />
-        </div>
         <div className='form-group'>
           <label htmlFor="piazza-course-id">
             Piazza Course URL &nbsp;
@@ -75,4 +59,4 @@ class CreateCourseForm extends Component {
 
 }
 
-export default CreateCourseForm;
+export default EnablePiazzaForm;
