@@ -1,0 +1,120 @@
+.container-video {
+  position: absolute;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  top: 3em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-banner {
+  flex: none;
+}
+
+.container-banner > h2:first-child {
+  margin-top: 0;
+}
+
+.video-player-section {
+  position: relative;
+  flex: none;
+  height: 40%;
+}
+
+.video-player-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-color: #000;
+  display: flex;
+}
+
+.video-player-side-prev,
+.video-player-side-next {
+  flex: 1 0 auto;
+  width: 1.5em;
+}
+
+.video-player-side-prev a,
+.video-player-side-next a {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.25em;
+  padding: 0 0.25rem;
+  transition: background-color ease 0.2s;
+}
+
+.video-player-side-prev a:hover,
+.video-player-side-next a:hover {
+  background-color: #333;
+}
+
+.video-player-side-prev {
+  border-right: 1px solid #333;
+}
+
+.video-player-side-next {
+  border-left: 1px solid #333;
+}
+
+.video-player {
+  flex: 0 1 auto;
+  width: 972px;
+  height: 100%;
+}
+
+.video-player iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.video-bottom-section {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+.video-transcript-section {
+  flex: 1 1 auto;
+  padding: 1.5em 0;
+  overflow-y: auto;
+}
+
+.video-transcript {
+
+}
+
+.video-transcript table {
+  border-collapse: collapse;
+  margin: -1px 0;
+  min-width: 100%;
+}
+
+.video-transcript td {
+  border-top: 1px dashed #EEE;
+  border-bottom: 1px dashed #EEE;
+  padding: 0.25em;
+  white-space: nowrap;
+}
+
+.video-transcript .video-transcript-timestamp {
+  width: 7em;
+  color: #AAA;
+  position: sticky;
+  left: 0;
+  background-color: #FFF;
+}
+
+.video-questions-section {
+  flex: 1 1 auto;
+  padding: 1.5em 0;
+  overflow-y: auto;
+}

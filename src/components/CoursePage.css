@@ -6,13 +6,13 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  margin: 0 -1em -1em 0;
+  margin: 0 -1.5em -1.5em 0;
 }
 
 .course-lectures {
-  margin: 0 1em 1em 0;
+  margin: 0 1.5em 1.5em 0;
   flex: 100 1 auto;
-  width: 316px;
+  width: 308px;
 }
 
 .course-lecture-creation {
@@ -20,10 +20,10 @@
   position: -webkit-sticky;
   top: 4em;
   box-sizing: border-box;
-  margin: 0 1em 1em 0;
+  margin: 0 1.5em 1.5em 0;
   padding: 0 1em 1em 1em;
   flex: 1 1 auto;
-  width: 316px;
+  width: 308px;
   border: 1px solid #DDD;
   border-radius: 4px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);

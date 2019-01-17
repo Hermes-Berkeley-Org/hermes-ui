@@ -19,7 +19,7 @@ h2 {
 
 h3 {
   font-size: 1.25em;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
 }
 
 h4 {
@@ -29,6 +29,18 @@ h4 {
 
 a {
   color: inherit;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 form label {
@@ -51,6 +63,7 @@ form input {
 
 form input[type='submit'] {
   margin-top: 1em;
+  margin-bottom: 0;
   background-color: #1AC9A7;
   font-weight: 600;
   color: #FFF;
@@ -70,12 +83,32 @@ form input[type='submit'] {
 }
 
 .container {
-  max-width: 980px;
   margin: 0 auto;
   padding: 0 1.5em;
 }
 
+.layout-width-normal .container {
+  max-width: 972px;
+}
+
 .layout-contents > .container {
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.container-banner.container-banner-complex {
+  margin: 1.5rem 0;
+}
+
+.container-banner.container-banner-complex h2 {
+  margin-bottom: 0.5rem;
+}
+
+.container-banner-links > * {
+  margin: 0 1rem 0 0;
+  text-decoration: none;
+}
+
+.container-banner-links a:hover {
+  color: #18BC9C;
 }

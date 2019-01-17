@@ -23,26 +23,23 @@ class InstructorAuthenticated extends Component {
     } if (this.props.instructorLoading) {
       return (<Loading />);
     } else if (this.props.roleData.role === ROLE_INSTRUCTOR) {
-      console.log('INSTRUCTOR');
       return (
         <GooglePrivate nextUrl={this.props.nextUrl}>
-          <div>
+          <React.Fragment>
             {React.cloneElement(this.props.children, { role: this.props.roleData.role })}
-          </div>
+          </React.Fragment>
         </GooglePrivate>
       );
     } else {
-      console.log(this.props.roleData.role);
       if (this.props.allowNonInstructors) {
         return (
-          <div>
+          <React.Fragment>
             {React.cloneElement(this.props.children, { role: this.props.roleData.role })}
-          </div>
+          </React.Fragment>
         )
       } else {
         return <Forbidden/>
       }
-
     }
   }
 
