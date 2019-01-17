@@ -46,7 +46,7 @@ class Video extends Component {
               </div>
             </div>
             <div className='video-player-section'>
-              <div className='video-player-backdrop'>
+              <div className='video-player-container'>
                 <div className='video-player-side-prev'>
                   {!this.props.lectureData || this.props.videoIndex === 0 ? null : (
                     <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${this.props.videoIndex - 1}`}><span className='fa fa-chevron-left' /></Link>
@@ -69,12 +69,16 @@ class Video extends Component {
                 </div>
               </div>
             </div>
-            <div className='video-section-transcript'>
-              {this.props.transcriptLoading ?
-                <Loading /> :
-                (!this.props.transcript ?
-                  (this.props.transcriptNotFound ? 'No transcript is associated with this video' : 'Failed to load transcript') :
-                  <Transcript transcript={this.props.transcript} />)}
+            <div className='video-bottom-section'>
+              <div className='video-transcript-section'>
+                {this.props.transcriptLoading ?
+                  <Loading /> :
+                  (!this.props.transcript ?
+                    (this.props.transcriptNotFound ? 'No transcript is associated with this video' : 'Failed to load transcript') :
+                    <Transcript transcript={this.props.transcript} />)}
+              </div>
+              <div className='video-questions-section'>
+              </div>
             </div>
           </div>
         </DocumentTitle>

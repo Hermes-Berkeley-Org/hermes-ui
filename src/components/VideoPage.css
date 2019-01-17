@@ -24,7 +24,7 @@
   height: 40%;
 }
 
-.video-player-backdrop {
+.video-player-container {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -77,7 +77,12 @@
   height: 100%;
 }
 
-.video-section-transcript {
+.video-bottom-section {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+.video-transcript-section {
   flex: 1 1 auto;
   padding: 1.5em 0;
   overflow-y: auto;
@@ -106,4 +111,10 @@
   position: sticky;
   left: 0;
   background-color: #FFF;
+}
+
+.video-questions-section {
+  flex: 1 1 auto;
+  padding: 1.5em 0;
+  overflow-y: auto;
 }
