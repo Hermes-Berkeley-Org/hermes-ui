@@ -51,7 +51,7 @@ export const createCourse = (courseId, courseInfo) => dispatch => {
         }
       }).then(function (response) {
         if (courseInfo.piazzaCourseUrl) {
-          createPiazzaBot(courseId, courseInfo.piazzaCourseUrl)(dispatch)
+          createPiazzaBot(courseId, courseInfo.piazzaCourseUrl, null)(dispatch)
         }
         getData(localStorage.getItem('okToken'))(dispatch)
         dispatch({

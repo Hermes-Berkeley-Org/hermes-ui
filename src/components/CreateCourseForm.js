@@ -8,7 +8,7 @@ class CreateCourseForm extends Component {
     super(props);
     this.state = {
       displayName: this.props.course['display_name'],
-      piazzaCourseUrl: ''
+      piazzaCourseId: ''
     };
   }
 
@@ -26,7 +26,7 @@ class CreateCourseForm extends Component {
     event.preventDefault();
     this.props.createCourse(this.props.course.id, {
       displayName: this.state.displayName,
-      piazzaCourseUrl: this.state.piazzaCourseUrl,
+      piazzaCourseId: this.state.piazzaCourseId,
       ...this.props.course
     });
     this.props.closeCreateCourseModal()
@@ -51,19 +51,18 @@ class CreateCourseForm extends Component {
         </div>
         <div className='form-group'>
           <label htmlFor="piazza-course-id">
-            Piazza Course URL &nbsp;
+            Piazza Course ID &nbsp;
             <div data-tip data-for='piazza-help' className="fas fa-question-circle"/>
             <ReactTooltip id='piazza-help'>
-              <p>Navigate to the course on Piazza and paste the link here.</p>
-              <p>If you do not wish to enable Piazza for the course, leave this field blank.</p>
+              <p>Navigate to the course on Piazza and paste the alphanumeric ID (piazza.com/class/&lt;course_id&gt;) here.</p>
             </ReactTooltip>
           </label>
           <input
             type='text'
             className="form-control"
             id='piazza-course-id'
-            name='piazzaCourseUrl'
-            value={this.state.piazzaCourseUrl}
+            name='piazzaCourseId'
+            value={this.state.piazzaCourseId}
             onChange={this.handleInputChange.bind(this)}
           />
         </div>
