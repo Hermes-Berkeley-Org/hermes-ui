@@ -14,6 +14,7 @@ import Transcript from './Transcript'
 import Loading from './Loading.js';
 import NotFound from './NotFound.js'
 import InternalError from './InternalError.js'
+import PiazzaQuestionForm from './PiazzaQuestionForm.js'
 
 import './VideoPage.css';
 
@@ -78,6 +79,10 @@ class Video extends Component {
                     <Transcript transcript={this.props.transcript} />)}
               </div>
               <div className='video-questions-section'>
+                <PiazzaQuestionForm
+                  course={this.props.courseData}
+                  lecture={this.props.lectureData}
+                />
               </div>
             </div>
           </div>
