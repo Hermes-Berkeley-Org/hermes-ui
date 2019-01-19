@@ -45,6 +45,7 @@ class App extends Component {
                   courseId={Number.parseInt(match.params.courseId, 10)}
                   lectureUrlName={match.params.lectureUrlName}
                   videoIndex={Number.parseInt(match.params.videoIndex, 10)}
+                  location={location}
                 />
               </InstructorAuthenticated>
             </OkPrivate>
