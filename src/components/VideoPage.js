@@ -18,11 +18,18 @@ import PiazzaQuestionForm from './PiazzaQuestionForm.js'
 
 import './VideoPage.css';
 
+const queryString = require('query-string')
+
 class Video extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      player: null
+    }
+
     this.reloadVideoData = this.reloadVideoData.bind(this);
+    this.onPlayerReady = this.onPlayerReady.bind(this);
   }
 
   render() {
@@ -41,7 +48,6 @@ class Video extends Component {
         }>
           <div className='container container-video'>
             <div className='container-banner container-banner-complex'>
-              <h2>{this.props.videoData ? this.props.videoData.title : 'Video'}</h2>
               <div className='container-banner-links'>
                 <Link to={`/course/${this.props.courseId}`}><span className='fas fa-arrow-left' /> <span className='font-semibold'>{this.props.courseData ? this.props.courseData.info['display_name'] : 'Course'}</span>{this.props.lectureData ? ` ${this.props.lectureData.name}` : ''}</Link>
               </div>
@@ -61,6 +67,7 @@ class Video extends Component {
                       <YouTube
                         videoId={this.props.videoData['youtube_id']}
                         opts={{ playerVars: { autoplay: 1 } }}
+                        onReady={this.onPlayerReady}
                       />)}
                 </div>
                 <div className='video-player-side-next'>
@@ -78,17 +85,32 @@ class Video extends Component {
                     (this.props.transcriptNotFound ? 'No transcript is associated with this video' : 'Failed to load transcript') :
                     <Transcript transcript={this.props.transcript} />)}
               </div>
-              <div className='video-questions-section'>
-                <PiazzaQuestionForm
-                  course={this.props.courseData}
-                  lecture={this.props.lectureData}
-                />
-              </div>
+              {!this.props.courseData || this.props.courseData.info['piazza_active'] !== 'active' ?
+                null :
+                <div className='video-questions-section'>
+                  <PiazzaQuestionForm
+                    course={this.props.courseData}
+                    lecture={this.props.lectureData}
+                    video={this.props.videoData}
+                    player={this.state.player}
+                  />
+                </div>
+              }
             </div>
           </div>
         </DocumentTitle>
       </Layout>
     );
+  }
+
+  onPlayerReady(event) {
+    this.setState({
+      player: event.target
+    })
+    const search = queryString.parse(this.props.location.search)
+    if (search.seconds) {
+      this.state.player.seekTo(Number.parseInt(search.seconds, 10));
+    }
   }
 
   componentDidMount() {
