@@ -30,33 +30,29 @@ class HomePage extends Component {
   renderCourses(title, filter) {
     if (this.props.homeLoading || this.props.createCourseLoading) {
       return (
-        <DocumentTitle title="Home">
-          <div>
-            <h3>{title}</h3>
-            <Loading />
-          </div>
-        </DocumentTitle>
+        <div>
+          <h3>{title}</h3>
+          <Loading />
+        </div>
       );
     }
     if (this.props.homeData) {
       const validStudentActiveClasses = this.props.homeData.courses.filter(filter);
       if (validStudentActiveClasses.length > 0) {
         return (
-          <DocumentTitle title="Home">
-            <div>
-              <h3>{title}</h3>
-              <div className='card-list'>
-                {validStudentActiveClasses.map((participation) =>
-                  <CourseCard
-                    hermesActive={participation['hermes_active']}
-                    key={participation.course.id}
-                    course={participation.course}
-                    openCreateCourseModal={this.openCreateCourseModal}
-                  ></CourseCard>
-                )}
-              </div>
+          <div>
+            <h3>{title}</h3>
+            <div className='card-list'>
+              {validStudentActiveClasses.map((participation) =>
+                <CourseCard
+                  hermesActive={participation['hermes_active']}
+                  key={participation.course.id}
+                  course={participation.course}
+                  openCreateCourseModal={this.openCreateCourseModal}
+                ></CourseCard>
+              )}
             </div>
-          </DocumentTitle>
+          </div>
         );
       }
     }
@@ -68,33 +64,35 @@ class HomePage extends Component {
     }
     return (
       <Layout>
-        <div className='container'>
-          <h2>Courses</h2>
-          {this.renderCourses('Student', (course) => course.role === ROLE_STUDENT)}
-          {this.renderCourses('Staff', (course) => course.role === ROLE_INSTRUCTOR)}
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeCreateCourseModal}
-            style={
-              {
-                content : {
-                  top                   : '50%',
-                  left                  : '50%',
-                  right                 : 'auto',
-                  bottom                : 'auto',
-                  marginRight           : '-50%',
-                  transform             : 'translate(-50%, -50%)'
+        <DocumentTitle title="Home">
+          <div className='container'>
+            <h2>Courses</h2>
+            {this.renderCourses('Student', (course) => course.role === ROLE_STUDENT)}
+            {this.renderCourses('Staff', (course) => course.role === ROLE_INSTRUCTOR)}
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeCreateCourseModal}
+              style={
+                {
+                  content : {
+                    top                   : '50%',
+                    left                  : '50%',
+                    right                 : 'auto',
+                    bottom                : 'auto',
+                    marginRight           : '-50%',
+                    transform             : 'translate(-50%, -50%)'
+                  }
                 }
               }
-            }
-          >
-            <CreateCourseForm
-              course={this.state.courseToBeCreated}
-              createCourse={this.props.createCourse}
-              closeCreateCourseModal={this.closeCreateCourseModal}
-            />
-          </Modal>
-        </div>
+            >
+              <CreateCourseForm
+                course={this.state.courseToBeCreated}
+                createCourse={this.props.createCourse}
+                closeCreateCourseModal={this.closeCreateCourseModal}
+              />
+            </Modal>
+          </div>
+        </DocumentTitle>
       </Layout>
     );
   }
