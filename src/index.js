@@ -20,7 +20,7 @@ Modal.setAppElement('#root')
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={configureStore()}>
-        <App />
+      <App />
     </Provider>
   </BrowserRouter>,
   document.getElementById('root')

@@ -11,8 +11,6 @@ import CourseCard from './CourseCard.js';
 import InternalError from './InternalError'
 import CreateCourseForm from './CreateCourseForm'
 
-import { ToastContainer, toast } from 'react-toastify';
-
 import './HomePage.css';
 
 class HomePage extends Component {
@@ -60,7 +58,7 @@ class HomePage extends Component {
 
   render() {
     if (this.props.homeDataError) {
-      return <InternalError/>
+      return <InternalError />
     }
     return (
       <Layout>
@@ -74,13 +72,13 @@ class HomePage extends Component {
               onRequestClose={this.closeCreateCourseModal}
               style={
                 {
-                  content : {
-                    top                   : '50%',
-                    left                  : '50%',
-                    right                 : 'auto',
-                    bottom                : 'auto',
-                    marginRight           : '-50%',
-                    transform             : 'translate(-50%, -50%)'
+                  content: {
+                    top: '50%',
+                    left: '50%',
+                    right: 'auto',
+                    bottom: 'auto',
+                    marginRight: '-50%',
+                    transform: 'translate(-50%, -50%)'
                   }
                 }
               }
@@ -103,7 +101,8 @@ class HomePage extends Component {
 
   openCreateCourseModal(course) {
     this.setState(
-      {...this.state,
+      {
+        ...this.state,
         modalIsOpen: true,
         courseToBeCreated: course
       }
@@ -111,10 +110,8 @@ class HomePage extends Component {
   }
 
   closeCreateCourseModal() {
-    this.setState({...this.state, modalIsOpen: false});
+    this.setState({ ...this.state, modalIsOpen: false });
   }
-
-
 
 }
 

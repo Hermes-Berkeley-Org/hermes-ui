@@ -33,35 +33,35 @@ export default (state = {}, action) => {
       };
     case ENABLE_PIAZZA_STARTED:
       return Object.assign({}, state, {
-          ...state,
-          piazzaLoading: true
+        ...state,
+        piazzaLoading: true
       })
     case ENABLE_PIAZZA_SUCCESS:
       return Object.assign({}, state, {
-          ...state,
-          piazzaLoading: false
+        ...state,
+        piazzaLoading: false
       })
     case ENABLE_PIAZZA_FAILURE:
       return Object.assign({}, state, {
-          ...state,
-          piazzaLoading: false,
-          piazzaError: action.payload.error
+        ...state,
+        piazzaLoading: false,
+        piazzaError: action.payload.error
       })
     case DISABLE_PIAZZA_STARTED:
       return Object.assign({}, state, {
-          ...state,
-          piazzaLoading: true
+        ...state,
+        piazzaLoading: true
       })
     case DISABLE_PIAZZA_SUCCESS:
       return Object.assign({}, state, {
-          ...state,
-          piazzaLoading: false
+        ...state,
+        piazzaLoading: false
       })
     case DISABLE_PIAZZA_FAILURE:
       return Object.assign({}, state, {
-          ...state,
-          piazzaLoading: false,
-          piazzaError: action.payload.error
+        ...state,
+        piazzaLoading: false,
+        piazzaError: action.payload.error
       })
     default:
       return state;

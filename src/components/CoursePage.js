@@ -35,80 +35,80 @@ class CoursePage extends Component {
     if (this.props.courseDataError) {
       return <div>{
         this.props.courseDataError.response.status === 404 ?
-        <NotFound/> : <InternalError/>
+          <NotFound /> : <InternalError />
       }</div>
     }
     return (
       <Layout>
         <DocumentTitle title={!this.props.courseData ? 'Course' : this.props.courseData.info['display_name']}>
-        <div className='container container-course'>
-          <h2>
-            {this.props.courseLoading || this.props.piazzaLoading ? '' : this.props.courseData.info['display_name']}
-          </h2>
-          {this.props.courseLoading || this.props.piazzaLoading ? null :
-            this.props.courseData.info['piazza_active'] === 'active' ?
-            <a onClick={this.openPiazzaModal}><i className="ai ai-piazza"></i> Disable piazza</a> :
-            <a onClick={this.openPiazzaModal}><i className="ai ai-piazza"></i> Enable piazza</a>
-          }
-          <div className='container-course-sections'>
-            <div className='course-lectures'>
-              {this.props.courseLoading || this.props.piazzaLoading
-                ? <Loading />
-                : <LectureList
-                      role={this.props.role}
-                      courseId={this.props.courseId}
-                      lectures={!this.props.courseData ? [] : this.props.courseData.lectures}
-                      deleteLecture={(lectureUrlName) => this.props.deleteLecture(
-                          this.props.courseId,
-                          lectureUrlName,
-                          this.props.courseData
-                        )
-                      }
-                  />
-              }
-            </div>
-            {this.props.role !== ROLE_INSTRUCTOR ? null :
-              <div className='course-lecture-creation'>
-                <h3>Create a lecture</h3>
-                <AddLectureForm
-                  courseId={this.props.courseId}
-                  course={this.props.courseData}
-                  createLecture={this.props.createLecture}
-                />
-              </div>
-            }
-          </div>
-          <Modal
-            isOpen={this.state.piazzaModalIsOpen}
-            onRequestClose={this.closePiazzaModal}
-            style={
-              {
-                content : {
-                  top                   : '50%',
-                  left                  : '50%',
-                  right                 : 'auto',
-                  bottom                : 'auto',
-                  marginRight           : '-50%',
-                  transform             : 'translate(-50%, -50%)'
-                }
-              }
-            }
-          >
+          <div className='container container-course'>
+            <h2>
+              {this.props.courseLoading || this.props.piazzaLoading ? '' : this.props.courseData.info['display_name']}
+            </h2>
             {this.props.courseLoading || this.props.piazzaLoading ? null :
               this.props.courseData.info['piazza_active'] === 'active' ?
-              <DisablePiazzaForm
-                disablePiazzaBot={this.props.disablePiazzaBot}
-                closePiazzaModal={this.closePiazzaModal}
-                course={this.props.courseData}
-              /> :
-              <EnablePiazzaForm
-                createPiazzaBot={this.props.createPiazzaBot}
-                closePiazzaModal={this.closePiazzaModal}
-                course={this.props.courseData}
-              />
+                <a onClick={this.openPiazzaModal}><i className="ai ai-piazza"></i> Disable piazza</a> :
+                <a onClick={this.openPiazzaModal}><i className="ai ai-piazza"></i> Enable piazza</a>
             }
-          </Modal>
-        </div>
+            <div className='container-course-sections'>
+              <div className='course-lectures'>
+                {this.props.courseLoading || this.props.piazzaLoading
+                  ? <Loading />
+                  : <LectureList
+                    role={this.props.role}
+                    courseId={this.props.courseId}
+                    lectures={!this.props.courseData ? [] : this.props.courseData.lectures}
+                    deleteLecture={(lectureUrlName) => this.props.deleteLecture(
+                      this.props.courseId,
+                      lectureUrlName,
+                      this.props.courseData
+                    )
+                    }
+                  />
+                }
+              </div>
+              {this.props.role !== ROLE_INSTRUCTOR ? null :
+                <div className='course-lecture-creation'>
+                  <h3>Create a lecture</h3>
+                  <AddLectureForm
+                    courseId={this.props.courseId}
+                    course={this.props.courseData}
+                    createLecture={this.props.createLecture}
+                  />
+                </div>
+              }
+            </div>
+            <Modal
+              isOpen={this.state.piazzaModalIsOpen}
+              onRequestClose={this.closePiazzaModal}
+              style={
+                {
+                  content: {
+                    top: '50%',
+                    left: '50%',
+                    right: 'auto',
+                    bottom: 'auto',
+                    marginRight: '-50%',
+                    transform: 'translate(-50%, -50%)'
+                  }
+                }
+              }
+            >
+              {this.props.courseLoading || this.props.piazzaLoading ? null :
+                this.props.courseData.info['piazza_active'] === 'active' ?
+                  <DisablePiazzaForm
+                    disablePiazzaBot={this.props.disablePiazzaBot}
+                    closePiazzaModal={this.closePiazzaModal}
+                    course={this.props.courseData}
+                  /> :
+                  <EnablePiazzaForm
+                    createPiazzaBot={this.props.createPiazzaBot}
+                    closePiazzaModal={this.closePiazzaModal}
+                    course={this.props.courseData}
+                  />
+              }
+            </Modal>
+          </div>
 
         </DocumentTitle>
       </Layout>
@@ -121,20 +121,21 @@ class CoursePage extends Component {
 
   openPiazzaModal() {
     this.setState(
-      {...this.state,
+      {
+        ...this.state,
         piazzaModalIsOpen: true
       }
     );
   }
 
   closePiazzaModal() {
-    this.setState({...this.state, piazzaModalIsOpen: false});
+    this.setState({ ...this.state, piazzaModalIsOpen: false });
   }
 
 }
 
 CoursePage.defaultProps = {
-    courseLoading: true
+  courseLoading: true
 }
 
 const mapStateToProps = state => ({

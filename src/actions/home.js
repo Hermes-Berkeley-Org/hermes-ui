@@ -41,25 +41,25 @@ export const createCourse = (courseId, courseInfo) => dispatch => {
   data.set('offering', courseInfo.offering);
 
   axios.post(
-      `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/create_course`,
-      data,
-      {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'multipart/form-data',
-        }
-      }).then(function (response) {
-        if (courseInfo.piazzaCourseUrl) {
-          createPiazzaBot(courseId, courseInfo.piazzaCourseUrl, null)(dispatch)
-        }
-        getData(localStorage.getItem('okToken'))(dispatch)
-        dispatch({
-          type: CREATE_COURSE_SUCCESS
-        })
-      }).catch(function (error) {
-        dispatch({
-          type: CREATE_COURSE_FAILURE,
-          payload: { error }
-        })
-  });
+    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/create_course`,
+    data,
+    {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'multipart/form-data',
+      }
+    }).then(function (response) {
+      if (courseInfo.piazzaCourseUrl) {
+        createPiazzaBot(courseId, courseInfo.piazzaCourseUrl, null)(dispatch)
+      }
+      getData(localStorage.getItem('okToken'))(dispatch)
+      dispatch({
+        type: CREATE_COURSE_SUCCESS
+      })
+    }).catch(function (error) {
+      dispatch({
+        type: CREATE_COURSE_FAILURE,
+        payload: { error }
+      })
+    });
 }
