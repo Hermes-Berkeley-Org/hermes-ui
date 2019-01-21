@@ -5,6 +5,7 @@ import {
 } from './types.js'
 
 import { getCourseData } from './course.js'
+import toast from './toast.js'
 
 import { decrypt } from '../utils/security.js'
 
@@ -36,6 +37,7 @@ export const createPiazzaBot = (courseId, piazzaCourseId, piazzaMasterPostId) =>
     dispatch({
       type: CREATE_PIAZZA_BOT_SUCCESS
     })
+    toast.success('Piazza bot successfully created for your course')
   }).catch(function (error) {
     dispatch({
       type: CREATE_PIAZZA_BOT_FAILURE,
@@ -44,6 +46,7 @@ export const createPiazzaBot = (courseId, piazzaCourseId, piazzaMasterPostId) =>
         error
       }
     })
+    toast.error('Failed to create Piazza bot, please visit the course page to enable Piazza')
   })
 
 }
@@ -73,6 +76,7 @@ export const disablePiazzaBot = (courseId, piazzaMasterPostId, piazzaCourseId) =
     dispatch({
       type: DISABLE_PIAZZA_BOT_SUCCESS
     })
+    toast.success('Successfully disabled Piazza for your course')
   }).catch(function (error) {
     dispatch({
       type: DISABLE_PIAZZA_BOT_FAILURE,
@@ -81,6 +85,7 @@ export const disablePiazzaBot = (courseId, piazzaMasterPostId, piazzaCourseId) =
         error
       }
     })
+    toast.success('Failed to disable Piazza for your course, please refresh the page and try again')
   })
 
 }
@@ -117,11 +122,13 @@ export const askPiazzaQuestion = (courseId,
       dispatch({
         type: ASK_PIAZZA_QUESTION_SUCCESS
       })
+      toast.success('Posted to Piazza!')
     }).catch(function (error) {
       dispatch({
         type: ASK_PIAZZA_QUESTION_FAILURE,
         payload: { error }
       })
+      toast.failure('Failed to post question to Piazza, please refresh the page and try again')
     })
 
 }

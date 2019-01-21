@@ -11,8 +11,6 @@ import CourseCard from './CourseCard.js';
 import InternalError from './InternalError'
 import CreateCourseForm from './CreateCourseForm'
 
-import { ToastContainer, toast } from 'react-toastify';
-
 import './HomePage.css';
 
 class HomePage extends Component {

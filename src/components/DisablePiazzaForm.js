@@ -19,7 +19,7 @@ class DisablePiazzaForm extends Component {
       <h2>Disable Piazza</h2>
       <form onSubmit={this.handleSubmit.bind(this)}>
         <p>Are you sure you want to disable Piazza integration for your course?</p>
-        <div class="row">
+        <div className="row">
           <input type='submit' className='btn btn-default' value='Disable' />
         </div>
       </form>

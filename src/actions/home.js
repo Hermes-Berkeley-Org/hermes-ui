@@ -3,6 +3,8 @@ import {
     CREATE_COURSE_STARTED, CREATE_COURSE_SUCCESS, CREATE_COURSE_FAILURE,
   } from './types.js'
 
+import toast from './toast.js';
+
 import { createPiazzaBot } from './piazza.js'
 
 import { decrypt } from '../utils/security.js'
@@ -57,10 +59,12 @@ export const createCourse = (courseId, courseInfo) => dispatch => {
         dispatch({
           type: CREATE_COURSE_SUCCESS
         })
+        toast.success(`Course ${courseInfo.displayName} successfully created`)
       }).catch(function (error) {
         dispatch({
           type: CREATE_COURSE_FAILURE,
           payload: { error }
         })
+        toast.error('An error occured on our end, please refresh the page and try again');
   });
 }

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Navbar from './Navbar.js';
 import Footer from './Footer.js';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Layout extends Component {
   render() {
@@ -12,6 +14,7 @@ class Layout extends Component {
         <div className='layout-contents'>
           {this.props.children}
         </div>
+        <ToastContainer/>
         <Footer />
       </div>
     );
