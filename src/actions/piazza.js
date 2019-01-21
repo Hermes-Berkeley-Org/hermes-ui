@@ -2,9 +2,12 @@ import {
   CREATE_PIAZZA_BOT_STARTED, CREATE_PIAZZA_BOT_SUCCESS, CREATE_PIAZZA_BOT_FAILURE,
   DISABLE_PIAZZA_BOT_STARTED, DISABLE_PIAZZA_BOT_SUCCESS, DISABLE_PIAZZA_BOT_FAILURE,
   ASK_PIAZZA_QUESTION_STARTED, ASK_PIAZZA_QUESTION_SUCCESS, ASK_PIAZZA_QUESTION_FAILURE
-} from './types.js';
-import { getCourseData } from './course.js';
-import { decrypt } from '../utils/security.js';
+} from './types.js'
+
+import { getCourseData } from './course.js'
+import toast from '../utils/toast.js'
+
+import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
 
@@ -34,6 +37,7 @@ export const createPiazzaBot = (courseId, piazzaCourseId, piazzaMasterPostId) =>
     dispatch({
       type: CREATE_PIAZZA_BOT_SUCCESS
     })
+    toast.success('Piazza bot successfully created for your course')
   }).catch(function (error) {
     dispatch({
       type: CREATE_PIAZZA_BOT_FAILURE,
@@ -42,6 +46,7 @@ export const createPiazzaBot = (courseId, piazzaCourseId, piazzaMasterPostId) =>
         error
       }
     })
+    toast.error('Failed to create Piazza bot, please visit the course page to enable Piazza')
   })
 
 }
@@ -71,6 +76,7 @@ export const disablePiazzaBot = (courseId, piazzaMasterPostId, piazzaCourseId) =
     dispatch({
       type: DISABLE_PIAZZA_BOT_SUCCESS
     })
+    toast.success('Successfully disabled Piazza for your course')
   }).catch(function (error) {
     dispatch({
       type: DISABLE_PIAZZA_BOT_FAILURE,
@@ -79,6 +85,7 @@ export const disablePiazzaBot = (courseId, piazzaMasterPostId, piazzaCourseId) =
         error
       }
     })
+    toast.success('Failed to disable Piazza for your course, please refresh the page and try again')
   })
 
 }
@@ -115,11 +122,19 @@ export const askPiazzaQuestion = (courseId,
       dispatch({
         type: ASK_PIAZZA_QUESTION_SUCCESS
       })
+<<<<<<< HEAD
+=======
+      toast.success('Posted to Piazza!')
+>>>>>>> notifications
     }).catch(function (error) {
       dispatch({
         type: ASK_PIAZZA_QUESTION_FAILURE,
         payload: { error }
       })
+<<<<<<< HEAD
+=======
+      toast.failure('Failed to post question to Piazza, please refresh the page and try again')
+>>>>>>> notifications
     })
 
 }

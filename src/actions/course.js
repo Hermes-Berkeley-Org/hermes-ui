@@ -1,6 +1,8 @@
 import { GET_COURSE_DATA_STARTED, GET_COURSE_DATA_SUCCESS, GET_COURSE_DATA_FAILURE } from './types.js'
 import { decrypt } from '../utils/security.js'
 
+import toast from '../utils/toast.js';
+
 const axios = require('axios');
 const queryString = require('query-string')
 
@@ -42,6 +44,10 @@ export const createLecture = (courseId, { title, date, link, course }) => dispat
   data.set('piazza_course_id', course.info['piazza_course_id'])
   data.set('piazza_master_post_id', course.info['piazza_master_post_id'])
 
+  dispatch({
+    type: GET_COURSE_DATA_STARTED
+  });
+
   axios.post(
     `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/create_lecture`,
     data,
@@ -52,9 +58,13 @@ export const createLecture = (courseId, { title, date, link, course }) => dispat
       }
     }).then(function (response) {
       getCourseData(okEncryptedTokens, courseId)(dispatch);
+      toast.success('Successfully created your lecture!')
     }).catch(function (error) {
-      // TODO: Display the error better
-      alert(error);
+      if (error.response.status === 400) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error('Failed to create your lecture, please refresh the page and try again')
+      }
     });
 }
 
@@ -78,9 +88,9 @@ export const deleteLecture = (courseId, lectureUrlName, course) => dispatch => {
       }
     }).then(function (response) {
       getCourseData(okEncryptedTokens, courseId)(dispatch);
+      toast.success('Successfully deleted your lecture')
     }).catch(function (error) {
-      // TODO: Display the error better
-      alert(error);
+      toast.error('Failed to delete your lecture, please refresh the page and try again')
     });
 
 }
