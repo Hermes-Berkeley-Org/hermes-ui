@@ -120,16 +120,11 @@ class CoursePage extends Component {
   }
 
   openPiazzaModal() {
-    this.setState(
-      {
-        ...this.state,
-        piazzaModalIsOpen: true
-      }
-    );
+    this.setState({ piazzaModalIsOpen: true });
   }
 
   closePiazzaModal() {
-    this.setState({ ...this.state, piazzaModalIsOpen: false });
+    this.setState({ piazzaModalIsOpen: false });
   }
 
 }
