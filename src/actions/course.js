@@ -1,7 +1,7 @@
 import { GET_COURSE_DATA_STARTED, GET_COURSE_DATA_SUCCESS, GET_COURSE_DATA_FAILURE } from './types.js'
 import { decrypt } from '../utils/security.js'
 
-import toast from './toast';
+import toast from '../utils/toast.js';
 
 const axios = require('axios');
 const queryString = require('query-string')

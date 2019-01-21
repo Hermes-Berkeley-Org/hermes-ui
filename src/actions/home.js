@@ -3,7 +3,7 @@ import {
     CREATE_COURSE_STARTED, CREATE_COURSE_SUCCESS, CREATE_COURSE_FAILURE,
   } from './types.js'
 
-import toast from './toast.js';
+import toast from '../utils/toast.js';
 
 import { createPiazzaBot } from './piazza.js'
 

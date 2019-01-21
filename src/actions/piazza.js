@@ -5,7 +5,7 @@ import {
 } from './types.js'
 
 import { getCourseData } from './course.js'
-import toast from './toast.js'
+import toast from '../utils/toast.js'
 
 import { decrypt } from '../utils/security.js'
 
