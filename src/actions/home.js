@@ -1,11 +1,10 @@
 import {
-    GET_HOME_DATA_STARTED, GET_HOME_DATA_SUCCESS, GET_HOME_DATA_FAILURE,
-    CREATE_COURSE_STARTED, CREATE_COURSE_SUCCESS, CREATE_COURSE_FAILURE,
-  } from './types.js'
+  GET_HOME_DATA_STARTED, GET_HOME_DATA_SUCCESS, GET_HOME_DATA_FAILURE,
+  CREATE_COURSE_STARTED, CREATE_COURSE_SUCCESS, CREATE_COURSE_FAILURE,
+} from './types.js';
+import { createPiazzaBot } from './piazza.js';
+import { decrypt } from '../utils/security.js';
 
-import { createPiazzaBot } from './piazza.js'
-
-import { decrypt } from '../utils/security.js'
 const axios = require('axios');
 
 export const getData = (encryptedTokens) => dispatch => {

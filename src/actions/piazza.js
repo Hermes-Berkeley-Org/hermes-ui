@@ -1,11 +1,9 @@
 import {
   CREATE_PIAZZA_BOT_STARTED, CREATE_PIAZZA_BOT_SUCCESS, CREATE_PIAZZA_BOT_FAILURE,
   DISABLE_PIAZZA_BOT_STARTED, DISABLE_PIAZZA_BOT_SUCCESS, DISABLE_PIAZZA_BOT_FAILURE
-} from './types.js'
-
-import { getCourseData } from './course.js'
-
-import { decrypt } from '../utils/security.js'
+} from './types.js';
+import { getCourseData } from './course.js';
+import { decrypt } from '../utils/security.js';
 
 const axios = require('axios');
 
