@@ -1,0 +1,23 @@
+.container-not-found {
+  position: absolute;
+  top: 3em;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: auto;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.container-not-found a {
+  text-decoration: none;
+}
+
+.container-not-found a:hover {
+  color: #18BC9C;
+}
