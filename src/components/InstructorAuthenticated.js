@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import Loading from './Loading';
-import NotFound from './NotFound'
-import Forbidden from './Forbidden'
-import InternalError from './InternalError'
+import NotFound from './errors/NotFound'
+import Forbidden from './errors/Forbidden'
+import InternalError from './errors/InternalError'
 import GooglePrivate from './Google/GooglePrivate'
 import { getRole } from '../actions/user.js'
 

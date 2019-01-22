@@ -12,8 +12,8 @@ import AddLectureForm from './AddLectureForm.js';
 import Layout from './Layout.js';
 import LectureList from './LectureList.js';
 import Loading from './Loading.js';
-import NotFound from './NotFound.js'
-import InternalError from './InternalError.js'
+import NotFound from './errors/NotFound.js'
+import InternalError from './errors/InternalError.js'
 
 import './CoursePage.css';
 

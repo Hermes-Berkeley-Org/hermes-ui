@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import Layout from './Layout.js';
+import Layout from '../Layout.js';
 
-import './InternalError.css';
+import './Forbidden.css';
 
-export default class InternalError extends Component {
+export default class Forbidden extends Component {
   render() {
     return (
       <Layout>
-        <div className='container container-not-found'>
+        <div className='container container-forbidden'>
           <div>
-            <h1>🛸 We're out of service</h1>
-            <p>Please retry your request in a few minutes</p>
+            <h1>🔒 You don't seem to have access to this page</h1>
             <p><Link to='/'><span className='fa fa-arrow-left' /> Follow here to go back to home page</Link></p>
           </div>
         </div>
