@@ -122,19 +122,13 @@ export const askPiazzaQuestion = (courseId,
       dispatch({
         type: ASK_PIAZZA_QUESTION_SUCCESS
       })
-<<<<<<< HEAD
-=======
       toast.success('Posted to Piazza!')
->>>>>>> notifications
     }).catch(function (error) {
       dispatch({
         type: ASK_PIAZZA_QUESTION_FAILURE,
         payload: { error }
       })
-<<<<<<< HEAD
-=======
       toast.failure('Failed to post question to Piazza, please refresh the page and try again')
->>>>>>> notifications
     })
 
 }

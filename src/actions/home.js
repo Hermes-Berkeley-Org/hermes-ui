@@ -42,7 +42,6 @@ export const createCourse = (courseId, courseInfo) => dispatch => {
   data.set('offering', courseInfo.offering);
 
   axios.post(
-<<<<<<< HEAD
     `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/create_course`,
     data,
     {
@@ -58,35 +57,12 @@ export const createCourse = (courseId, courseInfo) => dispatch => {
       dispatch({
         type: CREATE_COURSE_SUCCESS
       })
+      toast.success(`Course ${courseInfo.displayName} successfully created`)
     }).catch(function (error) {
       dispatch({
         type: CREATE_COURSE_FAILURE,
         payload: { error }
       })
-    });
-=======
-      `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/create_course`,
-      data,
-      {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'multipart/form-data',
-        }
-      }).then(function (response) {
-        if (courseInfo.piazzaCourseUrl) {
-          createPiazzaBot(courseId, courseInfo.piazzaCourseUrl, null)(dispatch)
-        }
-        getData(localStorage.getItem('okToken'))(dispatch)
-        dispatch({
-          type: CREATE_COURSE_SUCCESS
-        })
-        toast.success(`Course ${courseInfo.displayName} successfully created`)
-      }).catch(function (error) {
-        dispatch({
-          type: CREATE_COURSE_FAILURE,
-          payload: { error }
-        })
-        toast.error('An error occured on our end, please refresh the page and try again');
+      toast.error('An error occured on our end, please refresh the page and try again');
   });
->>>>>>> notifications
 }
