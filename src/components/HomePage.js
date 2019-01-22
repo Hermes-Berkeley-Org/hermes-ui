@@ -8,7 +8,7 @@ import { getData, createCourse } from '../actions/home.js';
 import Layout from './Layout.js';
 import Loading from './Loading.js';
 import CourseCard from './CourseCard.js';
-import InternalError from './InternalError'
+import InternalError from './errors/InternalError'
 import CreateCourseForm from './CreateCourseForm'
 
 import './HomePage.css';

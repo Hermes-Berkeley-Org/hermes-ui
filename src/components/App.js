@@ -13,7 +13,7 @@ import Video from './VideoPage'
 import EditVideo from './EditVideo'
 import OkPrivate from './Ok/OkPrivate'
 import InstructorAuthenticated from './InstructorAuthenticated'
-import NotFound from './NotFound'
+import NotFound from './errors/NotFound'
 
 class App extends Component {
 

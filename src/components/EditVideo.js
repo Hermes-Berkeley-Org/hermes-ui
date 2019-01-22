@@ -11,8 +11,8 @@ import { getTranscript } from '../actions/transcript.js';
 
 import Layout from './Layout';
 import Loading from './Loading.js';
-import NotFound from './NotFound.js'
-import InternalError from './InternalError.js'
+import NotFound from './errors/NotFound.js'
+import InternalError from './errors/InternalError.js'
 
 class EditVideo extends Component {
 

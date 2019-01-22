@@ -1,30 +1,33 @@
 .container-public {
   position: absolute;
-  top: 50%;
+  top: 3em;
   right: 0;
+  bottom: 0;
   left: 0;
-  transform: translateY(-50%);
-  margin-top: 0 !important;
+  height: auto;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
 }
 
 .container-public h1 {
   font-size: 3em;
   color: #18BC9C;
-  margin: 1rem 0;
   text-transform: uppercase;
 }
 
 .container-public h2 {
   font-size: 2em;
   color: #1AC9A7;
-  margin: 1rem 0;
 }
 
 .container-public hr {
   border: none;
   height: 20px;
-  margin: 0.5rem 0;
+  margin: -0.5rem auto;
 }
 
 .container-public hr::before {

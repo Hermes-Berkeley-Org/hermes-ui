@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InternalError from '../InternalError'
+import InternalError from '../errors/InternalError'
 import Loading from '../Loading'
 
 import { encrypt } from '../../utils/security.js'
