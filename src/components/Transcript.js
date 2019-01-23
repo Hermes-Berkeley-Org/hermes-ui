@@ -55,14 +55,14 @@ class Transcript extends Component {
   componentDidMount() {
     setInterval(() => {
       this.findClosestTranscriptRow(this.state.currentTranscriptIndex);
-    }, 15000) // 5 seconds, the typical size of the transcript box
+    }, 15000) // 15 seconds, the typical size of the transcript box
   }
 
   findClosestTranscriptRow(startIndex) {
     for (let i = startIndex; i < this.transcriptTimes.length; i++) {
       if (this.transcriptTimes[i] > this.props.player.getCurrentTime()) {
         this.setState({
-          currentTranscriptIndex: i
+          currentTranscriptIndex: i - 1 // Offset for scroll timing delay
         })
         break;
       }
