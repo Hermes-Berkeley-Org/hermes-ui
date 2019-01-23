@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title'
+import Modal from 'react-modal'
 
 import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
@@ -14,6 +15,8 @@ import Layout from './Layout';
 import Loading from './Loading.js';
 import NotFound from './errors/NotFound.js'
 import InternalError from './errors/InternalError.js'
+import CreateVitaminForm from './CreateVitaminForm'
+import CreateResourceForm from './CreateResourceForm'
 
 import './VideoPage.css';
 
@@ -21,11 +24,24 @@ class EditVideo extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      vitaminModalIsOpen: false,
+      resourceModalIsOpen: false,
+      vitaminSelected: null,
+      resourceSelected: null,
+      player: null
+    }
+
+    this.onPlayerReady = this.onPlayerReady.bind(this);
+
+    this.openVitaminModal = this.openVitaminModal.bind(this);
+    this.closeVitaminModal = this.closeVitaminModal.bind(this);
+    this.openResourceModal = this.openResourceModal.bind(this);
+    this.closeResourceModal = this.closeResourceModal.bind(this);
     this.reloadVideoData = this.reloadVideoData.bind(this);
   }
 
   render() {
-    console.log(this.props)
     const error = this.props.courseDataError || this.props.lectureDataError || this.props.videoDataError;
     if (error) {
       return <div>{
@@ -59,7 +75,6 @@ class EditVideo extends Component {
                       'Failed to load video' :
                       <YouTube
                         videoId={this.props.videoData['youtube_id']}
-                        opts={{ playerVars: { autoplay: 1 } }}
                         onReady={this.onPlayerReady}
                       />)}
                 </div>
@@ -71,14 +86,75 @@ class EditVideo extends Component {
               </div>
             </div>
             <div className='video-bottom-section'>
-              {this.props.editDataLoading ? <Loading /> :
-                (this.props.editDataError ? 'Failed to load transcript' : JSON.stringify(this.props.editData))
+              {this.props.editDataLoading || !this.state.player ? <Loading /> :
+                (this.props.editDataError ? 'Failed to load vitamins/resources' :
+                  <div>
+                    <div>{JSON.stringify(this.props.editData)}</div>
+                    <button onClick={this.openVitaminModal}>Create vitamin</button>
+                    <button onClick={this.openResourceModal}>Create resource</button>
+                  </div>
+                )
               }
             </div>
+            <Modal
+              isOpen={this.state.vitaminModalIsOpen}
+              onRequestClose={this.closeVitaminModal}
+              style={
+                {
+                  content: {
+                    top: '50%',
+                    left: '50%',
+                    right: 'auto',
+                    bottom: 'auto',
+                    marginRight: '-50%',
+                    transform: 'translate(-50%, -50%)'
+                  }
+                }
+              }
+            >
+              <CreateVitaminForm
+                courseId={this.props.courseId}
+                lectureUrlName={this.props.lectureUrlName}
+                videoIndex={this.props.videoIndex}
+                vitamin={this.state.vitaminSelected}
+                closeVitaminModal={this.closeVitaminModal}
+                player={this.state.player}
+              />
+            </Modal>
+            <Modal
+              isOpen={this.state.resourceModalIsOpen}
+              onRequestClose={this.closeResourceModal}
+              style={
+                {
+                  content: {
+                    top: '50%',
+                    left: '50%',
+                    right: 'auto',
+                    bottom: 'auto',
+                    marginRight: '-50%',
+                    transform: 'translate(-50%, -50%)'
+                  }
+                }
+              }
+            >
+              <CreateResourceForm
+                courseId={this.props.courseId}
+                lectureUrlName={this.props.lectureUrlName}
+                videoIndex={this.props.videoIndex}
+                resource={this.state.resourceSelected}
+                closeResourceModal={this.closeResourceModal}
+              />
+            </Modal>
           </div>
         </DocumentTitle>
       </Layout>
     );
+  }
+
+  onPlayerReady(event) {
+    this.setState({
+      player: event.target
+    })
   }
 
   componentDidMount() {
@@ -112,13 +188,36 @@ class EditVideo extends Component {
     );
   }
 
+  openVitaminModal() {
+    this.setState({
+      vitaminModalIsOpen: true
+    })
+  }
+
+  closeVitaminModal() {
+    this.setState({
+      vitaminModalIsOpen: false
+    })
+  }
+
+  openResourceModal() {
+    this.setState({
+      resourceModalIsOpen: true
+    })
+  }
+
+  closeResourceModal() {
+    this.setState({
+      resourceModalIsOpen: false
+    })
+  }
+
 }
 
 const mapStateToProps = state => ({
   ...state.courseReducer,
   ...state.videoReducer,
   ...state.lectureReducer,
-  ...state.transcriptReducer,
   ...state.editVideoReducer
 });
 
