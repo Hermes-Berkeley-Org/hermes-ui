@@ -85,7 +85,7 @@ export const disablePiazzaBot = (courseId, piazzaMasterPostId, piazzaCourseId) =
         error
       }
     })
-    toast.success('Failed to disable Piazza for your course, please refresh the page and try again')
+    toast.error('Failed to disable Piazza for your course, please refresh the page and try again')
   })
 
 }

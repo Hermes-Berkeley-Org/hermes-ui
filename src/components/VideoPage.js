@@ -9,6 +9,7 @@ import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
 import { getTranscript } from '../actions/transcript.js';
 import { getVitaminsAndResources } from '../actions/editVideo.js'
+import { jumpVideo } from '../actions/youtube.js'
 
 import Layout from './Layout';
 import Transcript from './Transcript'
@@ -32,6 +33,7 @@ class Video extends Component {
 
     this.reloadVideoData = this.reloadVideoData.bind(this);
     this.onPlayerReady = this.onPlayerReady.bind(this);
+    this.onStateChange = this.onStateChange.bind(this);
   }
 
   render() {
@@ -70,6 +72,7 @@ class Video extends Component {
                         videoId={this.props.videoData['youtube_id']}
                         opts={{ playerVars: { autoplay: 1 } }}
                         onReady={this.onPlayerReady}
+                        onStateChange={this.onStateChange}
                       />)}
                 </div>
                 <div className='video-player-side-next'>
@@ -81,11 +84,14 @@ class Video extends Component {
             </div>
             <div className='video-bottom-section'>
               <div className='video-transcript-section'>
-                {this.props.transcriptLoading ?
+                {this.props.transcriptLoading || !this.state.player ?
                   <Loading /> :
                   (!this.props.transcript ?
                     (this.props.transcriptNotFound ? 'No transcript is associated with this video' : 'Failed to load transcript') :
-                    <Transcript transcript={this.props.transcript} />)}
+                    <Transcript
+                      transcript={this.props.transcript}
+                      player={this.state.player}
+                    />)}
               </div>
               {!this.props.courseData || this.props.courseData.info['piazza_active'] !== 'active' ?
                 null :
@@ -121,6 +127,14 @@ class Video extends Component {
     const search = queryString.parse(this.props.location.search)
     if (search.seconds) {
       this.state.player.seekTo(Number.parseInt(search.seconds, 10));
+    }
+  }
+
+  onStateChange(event) {
+    if (event.data === YouTube.PlayerState.BUFFERING && this.state.player) {
+      this.props.jumpVideo(
+        Math.floor(this.state.player.getCurrentTime())
+      );
     }
   }
 
@@ -166,7 +180,8 @@ const mapDispatchToProps = dispatch => ({
   getVideoData: (...args) => dispatch(getVideoData(...args)),
   getLectureData: (...args) => dispatch(getLectureData(...args)),
   getTranscript: (...args) => dispatch(getTranscript(...args)),
-  getVitaminsAndResources: (...args) => dispatch(getVitaminsAndResources(...args))
+  getVitaminsAndResources: (...args) => dispatch(getVitaminsAndResources(...args)),
+  jumpVideo:  (...args) => dispatch(jumpVideo(...args))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Video);
