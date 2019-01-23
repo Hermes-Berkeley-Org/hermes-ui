@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import YouTube from 'react-youtube';
 
 import { connect } from 'react-redux';
 import { resumeVideo } from '../actions/youtube.js'
@@ -54,7 +55,7 @@ class Transcript extends Component {
   componentDidMount() {
     setInterval(() => {
       this.findClosestTranscriptRow(this.state.currentTranscriptIndex);
-    }, 1000) // 15 seconds, the typical size of the transcript box
+    }, 15000) // 5 seconds, the typical size of the transcript box
   }
 
   findClosestTranscriptRow(startIndex) {
@@ -73,8 +74,9 @@ class Transcript extends Component {
       this.findClosestTranscriptRow(0);
       this.props.resumeVideo();
     }
-    // console.log('Trying to scroll to', this.state.currentTranscriptIndex, 'down', this.transcriptRows[this.state.currentTranscriptIndex].offsetTop)
-    this.transcriptRows[this.state.currentTranscriptIndex].style.background = '#000';
+    if (this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED) {
+      this.transcriptRows[this.state.currentTranscriptIndex].scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 }
 
