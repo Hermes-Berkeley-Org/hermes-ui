@@ -8,11 +8,14 @@ import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
 import { getTranscript } from '../actions/transcript.js';
+import { getEditData } from '../actions/editVideo.js'
 
 import Layout from './Layout';
 import Loading from './Loading.js';
 import NotFound from './errors/NotFound.js'
 import InternalError from './errors/InternalError.js'
+
+import './VideoPage.css';
 
 class EditVideo extends Component {
 
@@ -22,8 +25,7 @@ class EditVideo extends Component {
   }
 
   render() {
-    // TODO: https://stackoverflow.com/questions/19014250/rerender-view-on-browser-resize-with-react
-
+    console.log(this.props)
     const error = this.props.courseDataError || this.props.lectureDataError || this.props.videoDataError;
     if (error) {
       return <div>{
@@ -31,43 +33,48 @@ class EditVideo extends Component {
         <NotFound/> : <InternalError/>
       }</div>
     }
-    // return <div>Sup</div>
     return (
       <Layout>
-        <DocumentTitle title={!this.props.courseData || !this.props.lectureData || !this.props.videoData ? "Video" :
-              `Edit ${this.props.courseData.info['display_name']} | ${this.props.lectureData.name} | ${this.props.videoData.title}`
+        <DocumentTitle title={!this.props.courseData || !this.props.lectureData || !this.props.videoData ?
+          'Video' :
+          `${this.props.courseData.info['display_name']} | ${this.props.lectureData.name} | ${this.props.videoData.title}`
         }>
-
-          <div>
-            {this.props.videoLoading ? <Loading /> :
-              (!this.props.videoData ? 'Failed to load video' :
-                <YouTube
-                  videoId={this.props.videoData['youtube_id']}
-                  opts={{
-                    height: JSON.stringify(window.innerHeight * 0.6),
-                    width: JSON.stringify(window.innerWidth * 0.7),
-                    playerVars: {
-                      autoplay: 1
-                    }
-                  }}
-                />
-              )
-            }
-
-            {!this.props.lectureData || this.props.videoIndex === 0 ? null : (
-              <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${this.props.videoIndex - 1}`}>
-                Previous Video
-              </Link>
-              )
-            }
-
-            {!this.props.lectureData || this.props.videoIndex === this.props.lectureData['video_titles'].length - 1 ? null : (
-              <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${this.props.videoIndex + 1}`}>
-                Next Video
-              </Link>
-              )
-            }
-
+          <div className='container container-video'>
+            <div className='container-banner container-banner-complex'>
+              <div className='container-banner-links'>
+                <Link to={`/course/${this.props.courseId}`}><span className='fas fa-arrow-left' /> <span className='font-semibold'>{this.props.courseData ? this.props.courseData.info['display_name'] : 'Course'}</span>{this.props.lectureData ? ` ${this.props.lectureData.name}` : ''}</Link>
+              </div>
+            </div>
+            <div className='video-player-section'>
+              <div className='video-player-container'>
+                <div className='video-player-side-prev'>
+                  {!this.props.lectureData || this.props.videoIndex === 0 ? null : (
+                    <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${this.props.videoIndex - 1}/edit`}><span className='fa fa-chevron-left' /></Link>
+                  )}
+                </div>
+                <div className='video-player'>
+                  {this.props.videoLoading ?
+                    null :
+                    (!this.props.videoData ?
+                      'Failed to load video' :
+                      <YouTube
+                        videoId={this.props.videoData['youtube_id']}
+                        opts={{ playerVars: { autoplay: 1 } }}
+                        onReady={this.onPlayerReady}
+                      />)}
+                </div>
+                <div className='video-player-side-next'>
+                  {!this.props.lectureData || this.props.videoIndex === this.props.lectureData['video_titles'].length - 1 ? null : (
+                    <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${this.props.videoIndex + 1}/edit`}><span className='fa fa-chevron-right' /></Link>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className='video-bottom-section'>
+              {this.props.editDataLoading ? <Loading /> :
+                (this.props.editDataError ? 'Failed to load transcript' : JSON.stringify(this.props.editData))
+              }
+            </div>
           </div>
         </DocumentTitle>
       </Layout>
@@ -98,6 +105,11 @@ class EditVideo extends Component {
       this.props.lectureUrlName,
       this.props.videoIndex
     );
+    this.props.getEditData(
+      this.props.courseId,
+      this.props.lectureUrlName,
+      this.props.videoIndex
+    );
   }
 
 }
@@ -106,14 +118,16 @@ const mapStateToProps = state => ({
   ...state.courseReducer,
   ...state.videoReducer,
   ...state.lectureReducer,
-  ...state.transcriptReducer
+  ...state.transcriptReducer,
+  ...state.editVideoReducer
 });
 
 const mapDispatchToProps = dispatch => ({
   getCourseData: (...args) => dispatch(getCourseData(...args)),
   getVideoData: (...args) => dispatch(getVideoData(...args)),
   getLectureData: (...args) => dispatch(getLectureData(...args)),
-  getTranscript: (...args) => dispatch(getTranscript(...args))
+  getTranscript: (...args) => dispatch(getTranscript(...args)),
+  getEditData: (...args) => dispatch(getEditData(...args))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditVideo);

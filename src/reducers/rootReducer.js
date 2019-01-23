@@ -8,6 +8,7 @@ import videoReducer from './videoReducer'
 import instructorAuthenticatedReducer from './instructorAuthenticatedReducer'
 import transcriptReducer from './transcriptReducer'
 import piazzaReducer from './piazzaReducer'
+import editVideoReducer from './editVideoReducer'
 
 export default combineReducers({
   okAuthReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   googleAuthReducer,
   instructorAuthenticatedReducer,
   transcriptReducer,
-  piazzaReducer
+  piazzaReducer,
+  editVideoReducer
 });
