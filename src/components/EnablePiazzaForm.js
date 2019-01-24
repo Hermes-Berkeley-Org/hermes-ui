@@ -7,7 +7,7 @@ class EnablePiazzaForm extends Component {
     super(props);
     this.state = {
       piazzaCourseId: '',
-      setUpNewPiazza: false
+      setUpNewPiazza: this.props.course.info['piazza_master_post_id']
     };
   }
 

@@ -8,7 +8,6 @@ import Modal from 'react-modal'
 import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
-import { getTranscript } from '../actions/transcript.js';
 import { getEditData } from '../actions/editVideo.js'
 
 import Layout from './Layout';
@@ -175,12 +174,6 @@ class EditVideo extends Component {
       this.props.lectureUrlName,
       this.props.videoIndex
     );
-    this.props.getTranscript(
-      localStorage.getItem('okToken'),
-      this.props.courseId,
-      this.props.lectureUrlName,
-      this.props.videoIndex
-    );
     this.props.getEditData(
       this.props.courseId,
       this.props.lectureUrlName,
@@ -189,6 +182,7 @@ class EditVideo extends Component {
   }
 
   openVitaminModal() {
+    this.state.player.pauseVideo();
     this.setState({
       vitaminModalIsOpen: true
     })
@@ -201,6 +195,7 @@ class EditVideo extends Component {
   }
 
   openResourceModal() {
+    this.state.player.pauseVideo();
     this.setState({
       resourceModalIsOpen: true
     })
@@ -225,7 +220,6 @@ const mapDispatchToProps = dispatch => ({
   getCourseData: (...args) => dispatch(getCourseData(...args)),
   getVideoData: (...args) => dispatch(getVideoData(...args)),
   getLectureData: (...args) => dispatch(getLectureData(...args)),
-  getTranscript: (...args) => dispatch(getTranscript(...args)),
   getEditData: (...args) => dispatch(getEditData(...args))
 });
 

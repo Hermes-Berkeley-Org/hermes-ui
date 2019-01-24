@@ -42,7 +42,8 @@ class CreateResourceForm extends Component {
         this.props.lectureUrlName,
         this.props.videoIndex,
         {
-
+            title: this.state.title,
+            link: this.state.link
         }
       );
     }
