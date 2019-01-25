@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 
 import { connect } from 'react-redux';
-import { resumeVideo } from '../actions/youtube.js'
+import { videoResumed } from '../actions/youtube.js'
 
 class Transcript extends Component {
 
@@ -18,7 +18,7 @@ class Transcript extends Component {
     }
 
     this.transcriptTable = null;
-    this.transcriptRows = this.props.transcript.map((transcriptElement) => null);
+    this.transcriptRows = this.props.transcript.map(() => null);
 
     this.setTranscriptTableRef = element => {
       this.transcriptTable = element;
@@ -59,8 +59,9 @@ class Transcript extends Component {
   }
 
   findClosestTranscriptRow(startIndex) {
+    const currentTime = this.props.player.getCurrentTime()
     for (let i = startIndex; i < this.transcriptTimes.length; i++) {
-      if (this.transcriptTimes[i] > this.props.player.getCurrentTime()) {
+      if (this.transcriptTimes[i] > currentTime) {
         this.setState({
           currentTranscriptIndex: i - 1 // Offset for scroll timing delay
         })
@@ -72,7 +73,7 @@ class Transcript extends Component {
   componentDidUpdate() {
     if (this.props.jumpedTo) {
       this.findClosestTranscriptRow(0);
-      this.props.resumeVideo();
+      this.props.videoResumed();
     }
     if (this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED) {
       this.transcriptRows[this.state.currentTranscriptIndex].scrollIntoView({ behavior: "smooth", block: "start" });
@@ -85,7 +86,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  resumeVideo: (...args) => dispatch(resumeVideo(...args))
+  videoResumed: (...args) => dispatch(videoResumed(...args))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Transcript);

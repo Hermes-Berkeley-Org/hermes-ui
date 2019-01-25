@@ -2,14 +2,14 @@ import {
     VIDEO_JUMPED, VIDEO_RESUMED
 } from './types.js'
 
-export const jumpVideo = (seconds) => dispatch => {
+export const videoJumped = (seconds) => dispatch => {
   dispatch({
     type: VIDEO_JUMPED,
     payload: { seconds }
   })
 }
 
-export const resumeVideo = () => dispatch => {
+export const videoResumed = () => dispatch => {
   dispatch({
     type: VIDEO_RESUMED
   })

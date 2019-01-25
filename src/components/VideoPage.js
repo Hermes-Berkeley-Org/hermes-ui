@@ -9,7 +9,7 @@ import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
 import { getTranscript } from '../actions/transcript.js';
 import { getVitaminsAndResources } from '../actions/editVideo.js'
-import { jumpVideo } from '../actions/youtube.js'
+import { videoJumped } from '../actions/youtube.js'
 
 import Layout from './Layout';
 import Transcript from './Transcript'
@@ -132,7 +132,7 @@ class Video extends Component {
 
   onStateChange(event) {
     if (event.data === YouTube.PlayerState.BUFFERING && this.state.player) {
-      this.props.jumpVideo(
+      this.props.videoJumped(
         Math.floor(this.state.player.getCurrentTime())
       );
     }
@@ -181,7 +181,7 @@ const mapDispatchToProps = dispatch => ({
   getLectureData: (...args) => dispatch(getLectureData(...args)),
   getTranscript: (...args) => dispatch(getTranscript(...args)),
   getVitaminsAndResources: (...args) => dispatch(getVitaminsAndResources(...args)),
-  jumpVideo:  (...args) => dispatch(jumpVideo(...args))
+  videoJumped:  (...args) => dispatch(videoJumped(...args))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Video);
