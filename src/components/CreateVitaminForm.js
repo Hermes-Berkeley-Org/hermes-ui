@@ -43,7 +43,8 @@ class CreateVitaminForm extends Component {
       toast.error('Please select the correct answer');
       return;
     }
-    const numOptions = this.state.choices.filter((choice) => choice !== '').length;
+    const choices = this.state.choices.filter((choice) => choice !== '');
+    const numOptions = choices.length;
     if (numOptions <= 1) {
       toast.error('Please enter more than one option');
       return;
@@ -65,7 +66,7 @@ class CreateVitaminForm extends Component {
           question: this.state.questionTitle,
           skippable: this.state.skippable,
           answer: this.state.choices[Number.parseInt(this.state.answerIndex, 10)],
-          choices: this.state.choices
+          choices: choices
         }
       )
     } else {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal'
+import YouTube from 'react-youtube';
 
 import Vitamin from './Vitamin'
 
@@ -7,7 +8,6 @@ class VitaminContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeVitamin: null,
       vitaminModalIsOpen: false
     }
 
@@ -33,16 +33,28 @@ class VitaminContainer extends Component {
           }
         }
       >
-        <Vitamin vitamin={this.state.activeVitamin} />
+        <Vitamin vitamin={this.props.vitamins[0]} />
       </Modal>
     );
   }
 
   componentDidMount() {
+    const vitamins = this.props.vitamins;
+    const player = this.props.player;
+    if (vitamins) {
+      setInterval(() => {
+        if (player.getPlayerState() === YouTube.PlayerState.PLAYING &&
+              vitamins.length > 0 && vitamins[0].seconds === Math.round(player.getCurrentTime())
+          ) {
+          this.openVitaminModal();
+          vitamins.shift();
+        }
+      }, 1000)
+    }
   }
 
   openVitaminModal() {
-    this.state.player.pauseVideo();
+    this.props.player.pauseVideo();
     this.setState({
       vitaminModalIsOpen: true
     })
@@ -50,9 +62,9 @@ class VitaminContainer extends Component {
 
   closeVitaminModal() {
     this.setState({
-      vitaminModalIsOpen: false,
-      activeVitamin: null
+      vitaminModalIsOpen: false
     })
+    this.props.player.playVideo();
   }
 }
 
