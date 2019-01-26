@@ -38,7 +38,7 @@ export const createVitamin = (courseId, lectureUrlName, videoIndex, vitaminData)
 
   axios.post(
     `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/create_vitamin`,
-    vitaminData,
+    { vitamin: vitaminData},
     {
       headers: {
         'Authorization': `Bearer ${okAccessToken}`,
@@ -57,14 +57,6 @@ export const createVitamin = (courseId, lectureUrlName, videoIndex, vitaminData)
 }
 
 export const editVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex, vitaminData) => dispatch => {
-
-};
-
-export const deleteVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex) => dispatch => {
-
-};
-
-export const createResource = (courseId, lectureUrlName, videoIndex, resourceData) => dispatch => {
   const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
 
   dispatch({
@@ -72,12 +64,68 @@ export const createResource = (courseId, lectureUrlName, videoIndex, resourceDat
   });
 
   axios.post(
+    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/edit_vitamin/${vitaminIndex}`,
+    { vitamin: vitaminData},
+    {
+      headers: {
+        'Authorization': `Bearer ${okAccessToken}`,
+        'Content-Type': 'application/json',
+      }
+    }).then(function (response) {
+      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      toast.success('Successfully edited your vitamin!')
+    }).catch(function (error) {
+      if (error.response.status === 400) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error('Failed to edit your vitamin, please refresh the page and try again')
+      }
+    });
+};
+
+export const deleteVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex) => dispatch => {
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
+
+  dispatch({
+    type: GET_EDIT_DATA_STARTED
+  });
+
+  axios.delete(
+    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/delete_vitamin/${vitaminIndex}`,
+    {
+      headers: {
+        'Authorization': `Bearer ${okAccessToken}`,
+      }
+    }).then(function (response) {
+      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      toast.success('Successfully deleted your vitamin')
+    }).catch(function (error) {
+      if (error.response.status === 400) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error('Failed to delete your vitamin, please refresh the page and try again')
+      }
+    });
+};
+
+export const createResource = (courseId, lectureUrlName, videoIndex, { title, link }) => dispatch => {
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
+
+  dispatch({
+    type: GET_EDIT_DATA_STARTED
+  });
+
+  const resourceData = new FormData();
+  resourceData.set('title', title);
+  resourceData.set('link', link);
+
+  axios.post(
     `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/create_resource`,
     resourceData,
     {
       headers: {
         'Authorization': `Bearer ${okAccessToken}`,
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
       }
     }).then(function (response) {
       getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
@@ -91,10 +139,58 @@ export const createResource = (courseId, lectureUrlName, videoIndex, resourceDat
     });
 }
 
-export const editResource = (courseId, lectureUrlName, videoIndex, resourceIndex, resourceData) => dispatch => {
+export const editResource = (courseId, lectureUrlName, videoIndex, resourceIndex, { title, link }) => dispatch => {
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
 
+  dispatch({
+    type: GET_EDIT_DATA_STARTED
+  });
+
+  const resourceData = new FormData();
+  resourceData.set('title', title);
+  resourceData.set('link', link);
+
+  axios.post(
+    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/edit_resource/${resourceIndex}`,
+    resourceData,
+    {
+      headers: {
+        'Authorization': `Bearer ${okAccessToken}`,
+        'Content-Type': 'application/json',
+      }
+    }).then(function (response) {
+      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      toast.success('Successfully edited your resource!')
+    }).catch(function (error) {
+      if (error.response.status === 400) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error('Failed to edit your resource, please refresh the page and try again')
+      }
+    });
 };
 
 export const deleteResource = (courseId, lectureUrlName, videoIndex, resourceIndex) => dispatch => {
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
 
+  dispatch({
+    type: GET_EDIT_DATA_STARTED
+  });
+
+  axios.delete(
+    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/delete_resource/${resourceIndex}`,
+    {
+      headers: {
+        'Authorization': `Bearer ${okAccessToken}`,
+      }
+    }).then(function (response) {
+      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      toast.success('Successfully deleted your resource')
+    }).catch(function (error) {
+      if (error.response.status === 400) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error('Failed to delete your resource, please refresh the page and try again')
+      }
+    });
 };

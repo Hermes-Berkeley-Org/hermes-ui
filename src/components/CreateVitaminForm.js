@@ -3,16 +3,17 @@ import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip'
 
 import { createVitamin, editVitamin } from '../actions/editVideo.js'
+import toast from '../utils/toast.js'
 
 class CreateVitaminForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      questionTitle: '',
-      choices: ['', '', '', ''],
-      answerIndex: '',
-      skippable: false
+      questionTitle: !this.props.vitamin ? '' : this.props.vitamin['question'],
+      choices: !this.props.vitamin ? ['', '', '', ''] : this.props.vitamin['choices'],
+      answerIndex: !this.props.vitamin ? '' : this.props.vitamin['choices'].indexOf(this.props.vitamin['answer']),
+      skippable: !this.props.vitamin ? false : this.props.vitamin['skippable']
     }
   }
 
@@ -34,17 +35,39 @@ class CreateVitaminForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    if (!this.state.questionTitle) {
+      toast.error('Please enter a question title');
+      return;
+    }
+    if (!this.state.answerIndex) {
+      toast.error('Please select the correct answer');
+      return;
+    }
+    const numOptions = this.state.choices.filter((choice) => choice !== '').length;
+    if (numOptions <= 1) {
+      toast.error('Please enter more than one option');
+      return;
+    }
+    for (let i = 0; i < numOptions; i++) {
+      if (!this.state.choices[i]) {
+        toast.error('Please enter all options consecutively.')
+        return;
+      }
+    }
     if (this.props.vitamin) {
-      // this.props.editVitamin(
-      //   this.props.courseId,
-      //   this.props.lectureUrlName,
-      //   this.props.videoIndex,
-      //   this.props.vitamin['vitamin_index'],
-      //   {
-      //
-      //   }
-      // )
-      alert('Not implemented')
+      this.props.editVitamin(
+        this.props.courseId,
+        this.props.lectureUrlName,
+        this.props.videoIndex,
+        this.props.vitamin['vitamin_index'],
+        {
+          ...this.props.vitamin,
+          question: this.state.questionTitle,
+          skippable: this.state.skippable,
+          answer: this.state.choices[Number.parseInt(this.state.answerIndex, 10)],
+          choices: this.state.choices
+        }
+      )
     } else {
       this.props.createVitamin(
         this.props.courseId,
@@ -60,6 +83,7 @@ class CreateVitaminForm extends Component {
       );
     }
     this.props.closeVitaminModal()
+
   }
 
   render() {
@@ -84,7 +108,6 @@ class CreateVitaminForm extends Component {
                   type="radio"
                   key={`choice-${index}-radio`}
                   id={`choice-${index}-radio`}
-                  value={index}
                   name="answerIndex"
                   className="form-control"
                   onChange={this.handleInputChange.bind(this)}
@@ -111,7 +134,7 @@ class CreateVitaminForm extends Component {
               onChange={this.handleInputChange.bind(this)}
             />
           </label>
-          <input type='submit' className='btn btn-default' value='Create' />
+          <input type='submit' className='btn btn-default' value={this.props.vitamin ? 'Edit' : 'Create'} />
         </form>
       </div>
     );

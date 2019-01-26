@@ -8,7 +8,11 @@ import Modal from 'react-modal'
 import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
-import { getEditData } from '../actions/editVideo.js'
+import {
+    getEditData,
+    deleteVitamin, editVitamin,
+    deleteResource, editResource
+} from '../actions/editVideo.js'
 
 import Layout from './Layout';
 import Loading from './Loading.js';
@@ -38,6 +42,12 @@ class EditVideo extends Component {
     this.openResourceModal = this.openResourceModal.bind(this);
     this.closeResourceModal = this.closeResourceModal.bind(this);
     this.reloadVideoData = this.reloadVideoData.bind(this);
+
+    this.editVitamin = this.editVitamin.bind(this);
+    this.editResource = this.editResource.bind(this);
+
+    this.deleteVitamin = this.deleteVitamin.bind(this);
+    this.deleteResource = this.deleteResource.bind(this);
   }
 
   render() {
@@ -88,7 +98,30 @@ class EditVideo extends Component {
               {this.props.editDataLoading || !this.state.player ? <Loading /> :
                 (this.props.editDataError ? 'Failed to load vitamins/resources' :
                   <div>
-                    <div>{JSON.stringify(this.props.editData)}</div>
+                    <ol>
+                      Vitamins
+                      {this.props.editData.vitamins.map((vitamin, index) => (
+                          <li key={`vitamin-${index}`}>
+                            {vitamin.timestamp}: {vitamin.question}
+                            <div className="fa fa-edit" onClick={() => this.editVitamin(vitamin)}></div>
+                            <div className="fas fa-times" onClick={() => this.deleteVitamin(vitamin['vitamin_index'])}></div>
+                          </li>
+                        )
+                      )
+                      }
+                    </ol>
+                    <ol>
+                      Resources
+                      {this.props.editData.resources.map((resource, index) => (
+                          <li key={`resource-${index}`}>
+                            {resource.title || resource.link}
+                            <div className="fas fa-edit" onClick={() => this.editResource(resource)}></div>
+                            <div className="fas fa-times" onClick={() => this.deleteResource(resource['resource_index'])}></div>
+                          </li>
+                        )
+                      )
+                      }
+                    </ol>
                     <button onClick={this.openVitaminModal}>Create vitamin</button>
                     <button onClick={this.openResourceModal}>Create resource</button>
                   </div>
@@ -190,7 +223,8 @@ class EditVideo extends Component {
 
   closeVitaminModal() {
     this.setState({
-      vitaminModalIsOpen: false
+      vitaminModalIsOpen: false,
+      vitaminSelected: null
     })
   }
 
@@ -203,8 +237,45 @@ class EditVideo extends Component {
 
   closeResourceModal() {
     this.setState({
-      resourceModalIsOpen: false
+      resourceModalIsOpen: false,
+      resourceSelected: null
     })
+  }
+
+  editVitamin(vitamin) {
+    if (this.props.editData) {
+      this.setState({
+        vitaminSelected: vitamin
+      })
+    }
+    this.openVitaminModal();
+  }
+
+  deleteVitamin(vitaminIndex) {
+    this.props.deleteVitamin(
+      this.props.courseId,
+      this.props.lectureUrlName,
+      this.props.videoIndex,
+      vitaminIndex
+    )
+  }
+
+  editResource(resource) {
+    if (this.props.editData) {
+      this.setState({
+        resourceSelected: resource
+      })
+    }
+    this.openResourceModal();
+  }
+
+  deleteResource(resourceIndex) {
+    this.props.deleteResource(
+      this.props.courseId,
+      this.props.lectureUrlName,
+      this.props.videoIndex,
+      resourceIndex
+    )
   }
 
 }
@@ -220,7 +291,11 @@ const mapDispatchToProps = dispatch => ({
   getCourseData: (...args) => dispatch(getCourseData(...args)),
   getVideoData: (...args) => dispatch(getVideoData(...args)),
   getLectureData: (...args) => dispatch(getLectureData(...args)),
-  getEditData: (...args) => dispatch(getEditData(...args))
+  getEditData: (...args) => dispatch(getEditData(...args)),
+  editVitamin: (...args) => dispatch(editVitamin(...args)),
+  deleteVitamin: (...args) => dispatch(deleteVitamin(...args)),
+  editResource: (...args) => dispatch(editResource(...args)),
+  deleteResource: (...args) => dispatch(deleteResource(...args))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditVideo);

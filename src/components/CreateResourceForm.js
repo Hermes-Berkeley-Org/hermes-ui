@@ -9,8 +9,8 @@ class CreateResourceForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      link: ''
+      title: !this.props.resource ? '' : this.props.resource['title'],
+      link: !this.props.resource ? '' : this.props.resource['link']
     };
   }
 
@@ -33,11 +33,13 @@ class CreateResourceForm extends Component {
         this.props.videoIndex,
         this.props.resource['resource_index'],
         {
-
+            ...this.props.resource,
+            title: this.state.title,
+            link: this.state.link
         }
       )
     } else {
-      this.props.editResource(
+      this.props.createResource(
         this.props.courseId,
         this.props.lectureUrlName,
         this.props.videoIndex,
@@ -84,7 +86,7 @@ class CreateResourceForm extends Component {
               onChange={this.handleInputChange.bind(this)}
             />
           </div>
-          <input type='submit' className='btn btn-default' value='Create' />
+          <input type='submit' className='btn btn-default' value={this.props.resource ? 'Edit' : 'Create'} />
         </form>
       </div>
     );
