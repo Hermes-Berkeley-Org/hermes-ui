@@ -117,7 +117,7 @@ class CoursePage extends Component {
   }
 
   componentDidMount() {
-    this.props.getCourseData(localStorage.getItem('okToken'), this.props.courseId)
+    this.props.getCourseData(this.props.courseId)
   }
 
   openPiazzaModal() {

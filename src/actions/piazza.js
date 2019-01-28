@@ -33,7 +33,7 @@ export const createPiazzaBot = (courseId, piazzaCourseId, piazzaMasterPostId) =>
       }
     }
   ).then(function (response) {
-    getCourseData(localStorage.getItem('okToken'), courseId)(dispatch)
+    getCourseData(courseId)(dispatch)
     dispatch({
       type: CREATE_PIAZZA_BOT_SUCCESS
     })
@@ -72,7 +72,7 @@ export const disablePiazzaBot = (courseId, piazzaMasterPostId, piazzaCourseId) =
       }
     }
   ).then(function (response) {
-    getCourseData(localStorage.getItem('okToken'), courseId)(dispatch)
+    getCourseData(courseId)(dispatch)
     dispatch({
       type: DISABLE_PIAZZA_BOT_SUCCESS
     })

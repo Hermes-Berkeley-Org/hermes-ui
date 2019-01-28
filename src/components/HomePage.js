@@ -96,7 +96,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    this.props.getHomeData(localStorage.getItem('okToken'))
+    this.props.getHomeData();
   }
 
   openCreateCourseModal(course) {
@@ -120,8 +120,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getHomeData: (accessToken) => dispatch(getData(accessToken)),
-  createCourse: (courseId, courseInfo) => dispatch(createCourse(courseId, courseInfo))
+  getHomeData: (...args) => dispatch(getData(...args)),
+  createCourse: (...args) => dispatch(createCourse(...args))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

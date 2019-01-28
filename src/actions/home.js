@@ -8,15 +8,15 @@ import toast from '../utils/toast.js';
 
 const axios = require('axios');
 
-export const getData = (encryptedTokens) => dispatch => {
-  const { accessToken } = decrypt(encryptedTokens)
+export const getData = () => dispatch => {
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
   dispatch({
     type: GET_HOME_DATA_STARTED
   })
   axios.get(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/home/`,
     {
       headers: {
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${okAccessToken}`
       }
     }).then(function (response) {
       dispatch({

@@ -3,15 +3,15 @@ import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
 
-export const getRole = (encryptedTokens, courseId) => dispatch => {
-  const { accessToken } = decrypt(encryptedTokens)
+export const getRole = (courseId) => dispatch => {
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
   dispatch({
     type: GET_ROLE_STARTED
   })
   axios(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/user_data`,
     {
       headers: {
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${okAccessToken}`
       }
     }).then(function (response) {
       let courseFound = false;

@@ -26,7 +26,7 @@ class OkPrivate extends Component {
   componentWillMount() {
     const encryptedToken = localStorage.getItem('okToken')
     if (encryptedToken) {
-        this.props.okAuthenticate(encryptedToken)
+        this.props.okAuthenticate()
     } else {
         this.props.okSendFailure()
     }
@@ -48,8 +48,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  okAuthenticate: (token) => dispatch(authenticate(token)),
-  okSendFailure: () => dispatch(sendFailure())
+  okAuthenticate: (...args) => dispatch(authenticate(...args)),
+  okSendFailure: (...args) => dispatch(sendFailure(...args))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OkPrivate);

@@ -125,10 +125,8 @@ class Video extends Component {
   }
 
   componentDidMount() {
-    this.props.getCourseData(
-      localStorage.getItem('okToken'), this.props.courseId);
+    this.props.getCourseData(this.props.courseId);
     this.props.getLectureData(
-      localStorage.getItem('okToken'),
       this.props.courseId,
       this.props.lectureUrlName
     );
@@ -137,13 +135,11 @@ class Video extends Component {
 
   reloadVideoData() {
     this.props.getVideoData(
-      localStorage.getItem('okToken'),
       this.props.courseId,
       this.props.lectureUrlName,
       this.props.videoIndex
     );
     this.props.getTranscript(
-      localStorage.getItem('okToken'),
       this.props.courseId,
       this.props.lectureUrlName,
       this.props.videoIndex

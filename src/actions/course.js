@@ -6,15 +6,15 @@ import toast from '../utils/toast.js';
 const axios = require('axios');
 const queryString = require('query-string')
 
-export const getCourseData = (encryptedTokens, courseId) => dispatch => {
-  const { accessToken } = decrypt(encryptedTokens)
+export const getCourseData = (courseId) => dispatch => {
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
   dispatch({
     type: GET_COURSE_DATA_STARTED
   });
   axios.get(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}`,
     {
       headers: {
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${okAccessToken}`
       }
     }).then(function (response) {
       dispatch({
@@ -30,10 +30,8 @@ export const getCourseData = (encryptedTokens, courseId) => dispatch => {
 }
 
 export const createLecture = (courseId, { title, date, link, course }) => dispatch => {
-  const okEncryptedTokens = localStorage.getItem('okToken');
-  const googleEncryptedTokens = localStorage.getItem('googleToken');
-  const okAccessToken = decrypt(okEncryptedTokens).accessToken;
-  const googleAccessToken = decrypt(googleEncryptedTokens).accessToken;
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
+  const googleAccessToken = decrypt(localStorage.getItem('googleToken')).accessToken;
 
   const data = new FormData();
   data.set('title', title);
@@ -57,7 +55,7 @@ export const createLecture = (courseId, { title, date, link, course }) => dispat
         'Content-Type': 'multipart/form-data',
       }
     }).then(function (response) {
-      getCourseData(okEncryptedTokens, courseId)(dispatch);
+      getCourseData(courseId)(dispatch);
       toast.success('Successfully created your lecture!')
     }).catch(function (error) {
       if (error.response.status === 400) {
@@ -69,8 +67,7 @@ export const createLecture = (courseId, { title, date, link, course }) => dispat
 }
 
 export const deleteLecture = (courseId, lectureUrlName, course, lecture) => dispatch => {
-  const okEncryptedTokens = localStorage.getItem('okToken');
-  const okAccessToken = decrypt(okEncryptedTokens).accessToken;
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
 
   const urlParams = {
     'piazza_active': course.info['piazza_active']
@@ -88,7 +85,7 @@ export const deleteLecture = (courseId, lectureUrlName, course, lecture) => disp
         'Authorization': `Bearer ${okAccessToken}`
       }
     }).then(function (response) {
-      getCourseData(okEncryptedTokens, courseId)(dispatch);
+      getCourseData(courseId)(dispatch);
       toast.success('Successfully deleted your lecture')
     }).catch(function (error) {
       toast.error('Failed to delete your lecture, please refresh the page and try again')

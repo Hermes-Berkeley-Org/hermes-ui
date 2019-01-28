@@ -17,8 +17,8 @@ export const logout = () => dispatch => {
   })
 }
 
-export const authenticate = (encryptedTokens) => dispatch => {
-  const { accessToken, refreshToken } = decrypt(encryptedTokens)
+export const authenticate = () => dispatch => {
+  const { accessToken, refreshToken } = decrypt(localStorage.getItem('okToken'))
   dispatch({
     type: GET_OK_ACCESS_TOKEN_STARTED
   })

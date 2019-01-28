@@ -44,8 +44,7 @@ class InstructorAuthenticated extends Component {
   }
 
   componentWillMount() {
-    const encryptedTokens = localStorage.getItem('okToken')
-    this.props.getRole(encryptedTokens, this.props.children.props.courseId)
+    this.props.getRole(this.props.children.props.courseId);
   }
 }
 
