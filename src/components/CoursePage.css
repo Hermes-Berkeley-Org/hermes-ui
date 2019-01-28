@@ -13,17 +13,22 @@
   margin: 0 1.5em 1.5em 0;
   flex: 100 1 auto;
   width: 308px;
+  border-top: 1px solid #DDD;
 }
 
-.course-lecture-creation {
+.course-lecture-actions {
+  flex: 1 1 auto;
+  width: 308px;
+  margin: 0 1.5em 1.5em 0;
   position: sticky;
   position: -webkit-sticky;
   top: 4em;
+}
+
+.course-lecture-creation {
   box-sizing: border-box;
-  margin: 0 1.5em 1.5em 0;
   padding: 0 1em 1em 1em;
-  flex: 1 1 auto;
-  width: 308px;
+  margin-bottom: 1.5em;
   border: 1px solid #DDD;
   border-radius: 4px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
