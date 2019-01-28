@@ -21,7 +21,7 @@ class InstructorAuthenticated extends Component {
         return <InternalError/>
       }
     } if (this.props.instructorLoading) {
-      return (<Loading />);
+      return (<Loading center />);
     } else if (this.props.roleData.role === ROLE_INSTRUCTOR) {
       return (
         <GooglePrivate nextUrl={this.props.nextUrl}>

@@ -9,7 +9,7 @@ import Loading from '../Loading'
 class GooglePrivate extends Component {
   render() {
     if (this.props.googleLoading) {
-      return (<Loading />);
+      return (<Loading center />);
     } else if (this.props.isGoogleAuthenticated) {
       return (
         <React.Fragment>

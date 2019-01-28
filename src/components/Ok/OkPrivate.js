@@ -11,7 +11,7 @@ class OkPrivate extends Component {
 
   render() {
     if (this.props.okLoading) {
-      return (<Loading />);
+      return (<Loading center />);
     } else if (this.props.isAuthenticated) {
       return (
         <React.Fragment>
