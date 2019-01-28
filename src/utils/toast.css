@@ -1,0 +1,21 @@
+.toast {
+  backgroundColor: #FFF;
+  color: #000;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  padding: 0.5em;
+}
+
+.toast-body {
+  padding: 0.5em 1em;
+}
+
+.toast-progress {
+  background: #18BC9C;
+  height: 3px;
+}
+
+.toast-progress-error {
+  background: #BC1838;
+}
