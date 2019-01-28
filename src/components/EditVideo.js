@@ -9,7 +9,7 @@ import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
 import {
-    getEditData,
+    getVitaminsAndResources,
     deleteVitamin, editVitamin,
     deleteResource, editResource
 } from '../actions/editVideo.js'
@@ -207,7 +207,7 @@ class EditVideo extends Component {
       this.props.lectureUrlName,
       this.props.videoIndex
     );
-    this.props.getEditData(
+    this.props.getVitaminsAndResources(
       this.props.courseId,
       this.props.lectureUrlName,
       this.props.videoIndex
@@ -291,7 +291,7 @@ const mapDispatchToProps = dispatch => ({
   getCourseData: (...args) => dispatch(getCourseData(...args)),
   getVideoData: (...args) => dispatch(getVideoData(...args)),
   getLectureData: (...args) => dispatch(getLectureData(...args)),
-  getEditData: (...args) => dispatch(getEditData(...args)),
+  getVitaminsAndResources: (...args) => dispatch(getVitaminsAndResources(...args)),
   editVitamin: (...args) => dispatch(editVitamin(...args)),
   deleteVitamin: (...args) => dispatch(deleteVitamin(...args)),
   editResource: (...args) => dispatch(editResource(...args)),

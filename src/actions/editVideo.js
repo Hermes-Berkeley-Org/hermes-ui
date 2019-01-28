@@ -5,7 +5,7 @@ import toast from '../utils/toast.js';
 
 const axios = require('axios');
 
-export const getEditData = (courseId, lectureUrlName, videoIndex) => dispatch => {
+export const getVitaminsAndResources = (courseId, lectureUrlName, videoIndex) => dispatch => {
   const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
   dispatch({
     type: GET_EDIT_DATA_STARTED
@@ -44,7 +44,7 @@ export const createVitamin = (courseId, lectureUrlName, videoIndex, vitaminData)
         'Content-Type': 'application/json',
       }
     }).then(function (response) {
-      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully created your vitamin!')
     }).catch(function (error) {
       if (error.response.status === 400) {
@@ -71,7 +71,7 @@ export const editVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex, 
         'Content-Type': 'application/json',
       }
     }).then(function (response) {
-      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully edited your vitamin!')
     }).catch(function (error) {
       if (error.response.status === 400) {
@@ -115,7 +115,7 @@ export const deleteVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex
         'Authorization': `Bearer ${okAccessToken}`,
       }
     }).then(function (response) {
-      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully deleted your vitamin')
     }).catch(function (error) {
       if (error.response.status === 400) {
@@ -146,7 +146,7 @@ export const createResource = (courseId, lectureUrlName, videoIndex, { title, li
         'Content-Type': 'multipart/form-data',
       }
     }).then(function (response) {
-      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully created your resource!')
     }).catch(function (error) {
       if (error.response.status === 400) {
@@ -177,7 +177,7 @@ export const editResource = (courseId, lectureUrlName, videoIndex, resourceIndex
         'Content-Type': 'application/json',
       }
     }).then(function (response) {
-      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully edited your resource!')
     }).catch(function (error) {
       if (error.response.status === 400) {
@@ -202,7 +202,7 @@ export const deleteResource = (courseId, lectureUrlName, videoIndex, resourceInd
         'Authorization': `Bearer ${okAccessToken}`,
       }
     }).then(function (response) {
-      getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
+      getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully deleted your resource')
     }).catch(function (error) {
       toast.error('Failed to delete your resource, please refresh the page and try again')

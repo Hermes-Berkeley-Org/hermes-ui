@@ -8,7 +8,7 @@ import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
 import { getTranscript } from '../actions/transcript.js';
-import { getEditData } from '../actions/editVideo.js'
+import { getVitaminsAndResources } from '../actions/editVideo.js'
 
 import Layout from './Layout';
 import Transcript from './Transcript'
@@ -146,7 +146,7 @@ class Video extends Component {
       this.props.lectureUrlName,
       this.props.videoIndex
     );
-    this.props.getEditData(
+    this.props.getVitaminsAndResources(
       this.props.courseId,
       this.props.lectureUrlName,
       this.props.videoIndex
@@ -168,7 +168,7 @@ const mapDispatchToProps = dispatch => ({
   getVideoData: (...args) => dispatch(getVideoData(...args)),
   getLectureData: (...args) => dispatch(getLectureData(...args)),
   getTranscript: (...args) => dispatch(getTranscript(...args)),
-  getEditData: (...args) => dispatch(getEditData(...args))
+  getVitaminsAndResources: (...args) => dispatch(getVitaminsAndResources(...args))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Video);
