@@ -121,6 +121,11 @@ form input[type='submit'] {
   color: #18BC9C;
 }
 
+.btn {
+  flex: none;
+  background: #FFF;
+}
+
 .btn-link {
   border: 1px solid #DDD;
   padding: 0.5rem 1rem;
