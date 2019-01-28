@@ -37,6 +37,10 @@ export default class Lecture extends Component {
           {this.props.lecture.video_titles.map((title, videoIndex) => (
             <li key={videoIndex} className="lecture-video-item">
               <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${videoIndex}`}>{title}</Link>
+              {this.props.role === ROLE_INSTRUCTOR ?
+                  <Link to={`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${videoIndex}/edit`}><div className="fas fa-edit"></div></Link> :
+                  null
+              }
             </li>
           ))}
         </ol>

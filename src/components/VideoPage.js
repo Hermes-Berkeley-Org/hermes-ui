@@ -8,6 +8,7 @@ import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
 import { getTranscript } from '../actions/transcript.js';
+import { getEditData } from '../actions/editVideo.js'
 
 import Layout from './Layout';
 import Transcript from './Transcript'
@@ -15,6 +16,7 @@ import Loading from './Loading.js';
 import NotFound from './errors/NotFound.js'
 import InternalError from './errors/InternalError.js'
 import PiazzaQuestionForm from './PiazzaQuestionForm.js'
+import VitaminContainer from './VitaminContainer.js'
 
 import './VideoPage.css';
 
@@ -97,6 +99,13 @@ class Video extends Component {
                 </div>
               }
             </div>
+            {!this.state.player || !this.props.editData ? null :
+              <VitaminContainer
+                player={this.state.player}
+                vitamins={this.props.editData.vitamins}
+                resources={this.props.editData.resources}
+              />
+            }
           </div>
         </DocumentTitle>
       </Layout>
@@ -137,6 +146,11 @@ class Video extends Component {
       this.props.lectureUrlName,
       this.props.videoIndex
     );
+    this.props.getEditData(
+      this.props.courseId,
+      this.props.lectureUrlName,
+      this.props.videoIndex
+    );
   }
 
 }
@@ -145,14 +159,16 @@ const mapStateToProps = state => ({
   ...state.courseReducer,
   ...state.videoReducer,
   ...state.lectureReducer,
-  ...state.transcriptReducer
+  ...state.transcriptReducer,
+  ...state.editVideoReducer
 });
 
 const mapDispatchToProps = dispatch => ({
   getCourseData: (...args) => dispatch(getCourseData(...args)),
   getVideoData: (...args) => dispatch(getVideoData(...args)),
   getLectureData: (...args) => dispatch(getLectureData(...args)),
-  getTranscript: (...args) => dispatch(getTranscript(...args))
+  getTranscript: (...args) => dispatch(getTranscript(...args)),
+  getEditData: (...args) => dispatch(getEditData(...args))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Video);
