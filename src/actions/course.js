@@ -66,7 +66,7 @@ export const createLecture = (courseId, { title, date, link, course }) => dispat
     });
 }
 
-export const deleteLecture = (courseId, lectureUrlName, course, lecture) => dispatch => {
+export const deleteLecture = (courseId, lecture, course) => dispatch => {
   const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
 
   const urlParams = {
@@ -79,7 +79,7 @@ export const deleteLecture = (courseId, lectureUrlName, course, lecture) => disp
   }
 
   axios.delete(
-    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}?${queryString.stringify(urlParams)}`,
+    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lecture['lecture_url_name']}?${queryString.stringify(urlParams)}`,
     {
       headers: {
         'Authorization': `Bearer ${okAccessToken}`

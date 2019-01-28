@@ -54,10 +54,10 @@ class CoursePage extends Component {
                       role={this.props.role}
                       courseId={this.props.courseId}
                       lectures={!this.props.courseData ? [] : this.props.courseData.lectures}
-                      deleteLecture={(lectureUrlName) => this.props.deleteLecture(
+                      deleteLecture={(lecture) => this.props.deleteLecture(
                         this.props.courseId,
-                        lectureUrlName,
-                        this.props.courseData
+                        lecture,
+                        this.props.courseData,
                       )} /> :
                     <h3>📭 No lectures</h3>}
               </div>
