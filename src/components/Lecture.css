@@ -38,8 +38,12 @@
   flex: none;
 }
 
+.lecture-action {
+  margin-left: 1em;
+}
+
 .lecture-video-list {
-  margin: 1em 0 1em 1em;
+  margin: 1em;
   padding: 0 0 0 1.5em;
 }
 
@@ -48,7 +52,12 @@
 }
 
 .lecture-video-item {
+  display: flex;
   margin: 0.25em 0;
+}
+
+.lecture-video-item :first-child {
+  flex: 1 0 auto;
 }
 
 .lecture-video-item a {
@@ -57,4 +66,8 @@
 
 .lecture-video-item a:hover {
   color: #18BC9C;
+}
+
+.lecture-video-item-action {
+  margin-left: 1em;
 }

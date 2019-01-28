@@ -43,12 +43,12 @@ class CoursePage extends Component {
         <DocumentTitle title={!this.props.courseData ? 'Course' : this.props.courseData.info['display_name']}>
           <div className='container container-course'>
             <h2>
-              {this.props.courseLoading || this.props.piazzaLoading ? '' : this.props.courseData.info['display_name']}
+              {this.props.courseLoading || this.props.piazzaLoading ? <Loading /> : this.props.courseData.info['display_name']}
             </h2>
             <div className='container-course-sections'>
               <div className='course-lectures'>
                 {this.props.courseLoading || this.props.piazzaLoading
-                  ? <Loading />
+                  ? null
                   : this.props.courseData.lectures.length > 0 ?
                     <LectureList
                       role={this.props.role}
