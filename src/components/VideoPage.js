@@ -135,6 +135,10 @@ class Video extends Component {
       this.props.videoJumped(
         Math.floor(this.state.player.getCurrentTime())
       );
+    } else if (event.data === YouTube.PlayerState.ENDED) {
+      if (this.props.videoIndex < this.props.lectureData['video_titles'].length - 1) {
+        this.props.history.push(`/course/${this.props.courseId}/lecture/${this.props.lectureUrlName}/video/${this.props.videoIndex + 1}`)
+      }
     }
   }
 

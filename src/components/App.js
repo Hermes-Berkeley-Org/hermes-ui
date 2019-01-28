@@ -37,7 +37,7 @@ class App extends Component {
               </InstructorAuthenticated>
             </OkPrivate>
           )}/>
-          <Route exact path="/course/:courseId/lecture/:lectureUrlName/video/:videoIndex" render={({ location, match }) => (
+          <Route exact path="/course/:courseId/lecture/:lectureUrlName/video/:videoIndex" render={({ location, match, history }) => (
             <OkPrivate nextUrl={location.pathname}>
               <InstructorAuthenticated nextUrl={location.pathname} allowNonInstructors={true}>
                 <Video
@@ -46,6 +46,7 @@ class App extends Component {
                   lectureUrlName={match.params.lectureUrlName}
                   videoIndex={Number.parseInt(match.params.videoIndex, 10)}
                   location={location}
+                  history={history}
                 />
               </InstructorAuthenticated>
             </OkPrivate>
