@@ -1,10 +1,11 @@
 .toast {
-  backgroundColor: #FFF;
+  background-color: #FFF;
   color: #000;
   border: 1px solid #DDD;
   border-radius: 4px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   padding: 0.5em;
+  font-family: inherit;
 }
 
 .toast-body {
