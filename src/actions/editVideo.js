@@ -118,11 +118,7 @@ export const deleteVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex
       getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully deleted your vitamin')
     }).catch(function (error) {
-      if (error.response.status === 400) {
-        toast.error(error.response.data.message)
-      } else {
-        toast.error('Failed to delete your vitamin, please refresh the page and try again')
-      }
+      toast.error('Failed to delete your vitamin, please refresh the page and try again')
     });
 };
 
@@ -149,11 +145,7 @@ export const createResource = (courseId, lectureUrlName, videoIndex, { title, li
       getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully created your resource!')
     }).catch(function (error) {
-      if (error.response.status === 400) {
-        toast.error(error.response.data.message)
-      } else {
-        toast.error('Failed to create your resource, please refresh the page and try again')
-      }
+      toast.error('Failed to create your resource, please refresh the page and try again')
     });
 }
 
@@ -180,11 +172,7 @@ export const editResource = (courseId, lectureUrlName, videoIndex, resourceIndex
       getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully edited your resource!')
     }).catch(function (error) {
-      if (error.response.status === 400) {
-        toast.error(error.response.data.message)
-      } else {
-        toast.error('Failed to edit your resource, please refresh the page and try again')
-      }
+      toast.error('Failed to edit your resource, please refresh the page and try again')
     });
 };
 

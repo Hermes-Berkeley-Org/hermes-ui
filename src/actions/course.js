@@ -68,7 +68,7 @@ export const createLecture = (courseId, { title, date, link, course }) => dispat
     });
 }
 
-export const deleteLecture = (courseId, lectureUrlName, course) => dispatch => {
+export const deleteLecture = (courseId, lectureUrlName, course, lecture) => dispatch => {
   const okEncryptedTokens = localStorage.getItem('okToken');
   const okAccessToken = decrypt(okEncryptedTokens).accessToken;
 
@@ -78,6 +78,7 @@ export const deleteLecture = (courseId, lectureUrlName, course) => dispatch => {
   if (course.info['piazza_active'] === 'active') {
     urlParams['piazza_course_id'] = course.info['piazza_course_id']
     urlParams['piazza_master_post_id'] = course.info['piazza_master_post_id']
+    urlParams['lecture_piazza_id'] = lecture['lecture_piazza_id']
   }
 
   axios.delete(

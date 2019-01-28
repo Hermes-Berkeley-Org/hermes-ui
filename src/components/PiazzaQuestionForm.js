@@ -30,12 +30,14 @@ class PiazzaQuestionForm extends Component {
     event.preventDefault();
     const seconds = Math.floor(this.props.player.getCurrentTime());
     this.props.askPiazzaQuestion(
-      this.props.course.info['course_ok_id'],
+      this.props.courseId,
+      this.props.lectureUrlName,
+      this.props.videoIndex,
       {
         question: this.state.question,
         videoTitle: this.props.video.title,
         videoUrl: `${window.location.href.split('?')[0]}?seconds=${seconds}`,
-        timestamp: seconds,
+        seconds: seconds,
         piazzaCourseId: this.props.course.info['piazza_course_id'],
         piazzaLecturePostId: this.props.lecture['lecture_piazza_id'],
         anonymous: this.state.anonymous

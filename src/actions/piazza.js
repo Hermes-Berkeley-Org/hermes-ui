@@ -90,8 +90,8 @@ export const disablePiazzaBot = (courseId, piazzaMasterPostId, piazzaCourseId) =
 
 }
 
-export const askPiazzaQuestion = (courseId,
-  { question, videoTitle, videoUrl, timestamp, piazzaCourseId,
+export const askPiazzaQuestion = (courseId, lectureUrlName, videoIndex,
+  { question, videoTitle, videoUrl, seconds, piazzaCourseId,
     piazzaLecturePostId, anonymous
   }) => dispatch => {
     const accessToken = decrypt(localStorage.getItem('okToken')).accessToken;
@@ -100,7 +100,7 @@ export const askPiazzaQuestion = (courseId,
     piazzaData.set('question', question);
     piazzaData.set('video_title', videoTitle)
     piazzaData.set('video_url', videoUrl)
-    piazzaData.set('timestamp', timestamp)
+    piazzaData.set('seconds', seconds)
     piazzaData.set('piazza_course_id', piazzaCourseId)
     piazzaData.set('piazza_lecture_post_id', piazzaLecturePostId)
     piazzaData.set('anonymous', anonymous ? 'anon' : 'nonanon')
@@ -110,7 +110,7 @@ export const askPiazzaQuestion = (courseId,
     })
 
     axios.post(
-      `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/question`,
+      `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/question`,
       piazzaData,
       {
         headers: {
@@ -128,7 +128,7 @@ export const askPiazzaQuestion = (courseId,
         type: ASK_PIAZZA_QUESTION_FAILURE,
         payload: { error }
       })
-      toast.failure('Failed to post question to Piazza, please refresh the page and try again')
+      toast.error('Failed to post question to Piazza, please refresh the page and try again')
     })
 
 }

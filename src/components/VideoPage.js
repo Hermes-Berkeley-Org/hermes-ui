@@ -91,6 +91,9 @@ class Video extends Component {
                 null :
                 <div className='video-questions-section'>
                   <PiazzaQuestionForm
+                    courseId={this.props.courseId}
+                    lectureUrlName={this.props.lectureUrlName}
+                    videoIndex={this.props.videoIndex}
                     course={this.props.courseData}
                     lecture={this.props.lectureData}
                     video={this.props.videoData}
