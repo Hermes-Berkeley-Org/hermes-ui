@@ -35,13 +35,13 @@ class HomePage extends Component {
       );
     }
     if (this.props.homeData) {
-      const validStudentActiveClasses = this.props.homeData.courses.filter(filter);
-      if (validStudentActiveClasses.length > 0) {
+      const filteredCourses = this.props.homeData.courses.filter(filter);
+      if (filteredCourses.length > 0) {
         return (
           <div>
             <h3>{title}</h3>
             <div className='card-list'>
-              {validStudentActiveClasses.map((participation) =>
+              {filteredCourses.map((participation) =>
                 <CourseCard
                   hermesActive={participation['hermes_active']}
                   key={participation.course.id}

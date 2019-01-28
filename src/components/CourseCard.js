@@ -16,6 +16,7 @@ export default class CourseCard extends Component {
       return (
         <a onClick={() => this.props.openCreateCourseModal(this.props.course)} className='card card-course'>
           <div className='card-title'>{this.props.course['display_name']}</div>
+          <div>Click to activate course on Hermes</div>
         </a>
       )
     }
