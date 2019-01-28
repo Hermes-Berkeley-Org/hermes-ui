@@ -4,7 +4,6 @@ import { decrypt } from '../utils/security.js'
 import toast from '../utils/toast.js';
 
 const axios = require('axios');
-const queryString = require('query-string')
 
 export const getEditData = (courseId, lectureUrlName, videoIndex) => dispatch => {
   const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
@@ -82,6 +81,25 @@ export const editVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex, 
       }
     });
 };
+
+export const answerVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex, answer) => dispatch => {
+  const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
+
+  axios.post(
+    `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/answer_vitamin/${vitaminIndex}`,
+    { answer },
+    {
+      headers: {
+        'Authorization': `Bearer ${okAccessToken}`,
+        'Content-Type': 'application/json',
+      }
+    }).then(function (response) {
+      toast.success('Submitted!')
+    }).catch(function (error) {
+      toast.error('Couldn\'t submit, please refresh the page')
+    });
+
+}
 
 export const deleteVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex) => dispatch => {
   const okAccessToken = decrypt(localStorage.getItem('okToken')).accessToken;
@@ -187,10 +205,6 @@ export const deleteResource = (courseId, lectureUrlName, videoIndex, resourceInd
       getEditData(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully deleted your resource')
     }).catch(function (error) {
-      if (error.response.status === 400) {
-        toast.error(error.response.data.message)
-      } else {
-        toast.error('Failed to delete your resource, please refresh the page and try again')
-      }
+      toast.error('Failed to delete your resource, please refresh the page and try again')
     });
 };

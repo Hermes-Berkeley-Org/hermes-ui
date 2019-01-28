@@ -33,13 +33,19 @@ class CreateVitaminForm extends Component {
     this.setState({ choices })
   }
 
+  handleAnswerChange(index, event) {
+    this.setState({
+      answerIndex: index
+    })
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     if (!this.state.questionTitle) {
       toast.error('Please enter a question title');
       return;
     }
-    if (!this.state.answerIndex) {
+    if (this.state.answerIndex === '') {
       toast.error('Please select the correct answer');
       return;
     }
@@ -79,7 +85,7 @@ class CreateVitaminForm extends Component {
             question: this.state.questionTitle,
             skippable: this.state.skippable,
             answer: this.state.choices[Number.parseInt(this.state.answerIndex, 10)],
-            choices: this.state.choices
+            choices: choices
         }
       );
     }
@@ -111,7 +117,7 @@ class CreateVitaminForm extends Component {
                   id={`choice-${index}-radio`}
                   name="answerIndex"
                   className="form-control"
-                  onChange={this.handleInputChange.bind(this)}
+                  onChange={this.handleAnswerChange.bind(this, index)}
                 />
                 <input
                   type="text"

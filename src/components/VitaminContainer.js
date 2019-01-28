@@ -8,7 +8,8 @@ class VitaminContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      vitaminModalIsOpen: false
+      vitaminModalIsOpen: false,
+      activeVitamin: null
     }
 
     this.openVitaminModal = this.openVitaminModal.bind(this);
@@ -19,7 +20,6 @@ class VitaminContainer extends Component {
     return (
       <Modal
         isOpen={this.state.vitaminModalIsOpen}
-        onRequestClose={this.closeVitaminModal}
         style={
           {
             content: {
@@ -33,7 +33,12 @@ class VitaminContainer extends Component {
           }
         }
       >
-        <Vitamin vitamin={this.props.vitamins[0]} />
+        {!this.state.activeVitamin ? null :
+            <Vitamin
+              vitamin={this.state.activeVitamin}
+              closeVitaminModal={this.closeVitaminModal}
+            />
+        }
       </Modal>
     );
   }
@@ -49,14 +54,15 @@ class VitaminContainer extends Component {
           this.openVitaminModal();
           vitamins.shift();
         }
-      }, 1000)
+      }, 500)
     }
   }
 
   openVitaminModal() {
     this.props.player.pauseVideo();
     this.setState({
-      vitaminModalIsOpen: true
+      vitaminModalIsOpen: true,
+      activeVitamin: this.props.vitamins[0]
     })
   }
 
