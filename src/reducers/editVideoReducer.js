@@ -7,24 +7,24 @@ export default (state = {}, action) => {
     case GET_EDIT_DATA_STARTED:
       return {
         ...state,
-        editDataLoading: true,
-        editDataError: null
+        vitaminsAndResourcesLoading: true,
+        vitaminsAndResourcesError: null
       };
     case GET_EDIT_DATA_SUCCESS:
       return {
         ...state,
-        editDataLoading: false,
-        editData: action.payload,
-        editDataError: null
+        vitaminsAndResourcesLoading: false,
+        vitaminsAndResources: action.payload,
+        vitaminsAndResourcesError: null
       };
     case GET_EDIT_DATA_FAILURE:
       console.log(action.payload)
       return {
         ...state,
-        editDataLoading: false,
-        editData: null,
-        editDataNotFound: action.payload.error.response.status === 404,
-        editDataError: action.payload.error
+        vitaminsAndResourcesLoading: false,
+        vitaminsAndResources: null,
+        vitaminsAndResourcesNotFound: action.payload.error.response.status === 404,
+        vitaminsAndResourcesError: action.payload.error
       };
     default:
       return state;

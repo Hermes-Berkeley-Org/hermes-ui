@@ -95,12 +95,12 @@ class EditVideo extends Component {
               </div>
             </div>
             <div className='video-bottom-section'>
-              {this.props.editDataLoading || !this.state.player ? <Loading /> :
-                (this.props.editDataError ? 'Failed to load vitamins/resources' :
+              {this.props.vitaminsAndResourcesLoading || !this.state.player ? <Loading /> :
+                (this.props.vitaminsAndResourcesError ? 'Failed to load vitamins/resources' :
                   <div>
                     <ol>
                       Vitamins
-                      {this.props.editData.vitamins.map((vitamin, index) => (
+                      {this.props.vitaminsAndResources.vitamins.map((vitamin, index) => (
                           <li key={`vitamin-${index}`}>
                             {vitamin.timestamp}: {vitamin.question}
                             <div className="fa fa-edit" onClick={() => this.editVitamin(vitamin)}></div>
@@ -112,7 +112,7 @@ class EditVideo extends Component {
                     </ol>
                     <ol>
                       Resources
-                      {this.props.editData.resources.map((resource, index) => (
+                      {this.props.vitaminsAndResources.resources.map((resource, index) => (
                           <li key={`resource-${index}`}>
                             {resource.title || resource.link}
                             <div className="fas fa-edit" onClick={() => this.editResource(resource)}></div>
@@ -243,7 +243,7 @@ class EditVideo extends Component {
   }
 
   editVitamin(vitamin) {
-    if (this.props.editData) {
+    if (this.props.vitaminsAndResources) {
       this.setState({
         vitaminSelected: vitamin
       })
@@ -261,7 +261,7 @@ class EditVideo extends Component {
   }
 
   editResource(resource) {
-    if (this.props.editData) {
+    if (this.props.vitaminsAndResources) {
       this.setState({
         resourceSelected: resource
       })

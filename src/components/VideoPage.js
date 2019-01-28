@@ -99,11 +99,11 @@ class Video extends Component {
                 </div>
               }
             </div>
-            {!this.state.player || !this.props.editData ? null :
+            {!this.state.player || !this.props.vitaminsAndResources ? null :
               <VitaminContainer
                 player={this.state.player}
-                vitamins={this.props.editData.vitamins}
-                resources={this.props.editData.resources}
+                vitamins={this.props.vitaminsAndResources.vitamins}
+                resources={this.props.vitaminsAndResources.resources}
               />
             }
           </div>
