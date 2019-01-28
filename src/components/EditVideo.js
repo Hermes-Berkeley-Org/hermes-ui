@@ -9,9 +9,9 @@ import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
 import {
-    getVitaminsAndResources,
-    deleteVitamin, editVitamin,
-    deleteResource, editResource
+  getVitaminsAndResources,
+  deleteVitamin, editVitamin,
+  deleteResource, editResource
 } from '../actions/editVideo.js'
 
 import Layout from './Layout';
@@ -55,15 +55,14 @@ class EditVideo extends Component {
     if (error) {
       return <div>{
         error.response.status === 404 ?
-        <NotFound/> : <InternalError/>
+          <NotFound /> : <InternalError />
       }</div>
     }
     return (
       <Layout>
         <DocumentTitle title={!this.props.courseData || !this.props.lectureData || !this.props.videoData ?
           'Video' :
-          `${this.props.courseData.info['display_name']} | ${this.props.lectureData.name} | ${this.props.videoData.title}`
-        }>
+          `${this.props.courseData.info['display_name']} | ${this.props.lectureData.name} | ${this.props.videoData.title}`}>
           <div className='container container-video'>
             <div className='container-banner container-banner-complex'>
               <div className='container-banner-links'>
@@ -95,87 +94,86 @@ class EditVideo extends Component {
               </div>
             </div>
             <div className='video-bottom-section'>
-              {this.props.vitaminsAndResourcesLoading || !this.state.player ? <Loading /> :
-                (this.props.vitaminsAndResourcesError ? 'Failed to load vitamins/resources' :
-                  <div>
-                    <ol>
-                      Vitamins
-                      {this.props.vitaminsAndResources.vitamins.map((vitamin, index) => (
-                          <li key={`vitamin-${index}`}>
-                            {vitamin.timestamp}: {vitamin.question}
-                            <div className="fa fa-edit" onClick={() => this.editVitamin(vitamin)}></div>
-                            <div className="fas fa-times" onClick={() => this.deleteVitamin(vitamin['vitamin_index'])}></div>
-                          </li>
-                        )
-                      )
-                      }
-                    </ol>
-                    <ol>
-                      Resources
-                      {this.props.vitaminsAndResources.resources.map((resource, index) => (
-                          <li key={`resource-${index}`}>
-                            {resource.title || resource.link}
-                            <div className="fas fa-edit" onClick={() => this.editResource(resource)}></div>
-                            <div className="fas fa-times" onClick={() => this.deleteResource(resource['resource_index'])}></div>
-                          </li>
-                        )
-                      )
-                      }
-                    </ol>
-                    <button onClick={this.openVitaminModal}>Create vitamin</button>
-                    <button onClick={this.openResourceModal}>Create resource</button>
-                  </div>
-                )
-              }
+              <div className='video-edit-comp-section'>
+                {this.props.vitaminsAndResourcesLoading || !this.state.player ? <Loading /> :
+                  (this.props.vitaminsAndResourcesError ? 'Failed to load vitamins' :
+                    <React.Fragment>
+                      <h3>Vitamins</h3>
+                      <div className='video-comp-list-container'>
+                        <ol className='video-comp-list'>
+                          {this.props.vitaminsAndResources.vitamins.map((vitamin, index) => (
+                            <li className='video-comp' key={`vitamin-${index}`}>
+                              <div className='video-comp-timestamp'>{vitamin.timestamp}</div>
+                              <div className='video-comp-text'>{vitamin.question}</div>
+                              <div className='video-comp-action'><span className="fa fa-edit" onClick={() => this.editVitamin(vitamin)} /></div>
+                              <div className='video-comp-action'><span className="fas fa-times" onClick={() => this.deleteVitamin(vitamin['vitamin_index'])} /></div>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                      <button type='button' className='btn btn-link' onClick={this.openVitaminModal}>Create vitamin</button>
+                    </React.Fragment>)}
+              </div>
+              <div className='video-edit-comp-section'>
+                {this.props.vitaminsAndResourcesLoading || !this.state.player ? <Loading /> :
+                  (this.props.vitaminsAndResourcesError ? 'Failed to load resources' :
+                    <React.Fragment>
+                      <h3>Resources</h3>
+                      <div className='video-comp-list-container'>
+                        <ol className='video-comp-list'>
+                          {this.props.vitaminsAndResources.resources.map((resource, index) => (
+                            <li className='video-comp' key={`resource-${index}`}>
+                              <div className='video-comp-text'>{resource.title}: {resource.link}</div>
+                              <div className='video-comp-action'><span className="fa fa-edit" onClick={() => this.editResource(resource)} /></div>
+                              <div className='video-comp-action'><span className="fas fa-times" onClick={() => this.deleteResource(resource['resource_index'])} /></div>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                      <button type='button' className='btn btn-link' onClick={this.openResourceModal}>Create resource</button>
+                    </React.Fragment>)}
+              </div>
             </div>
             <Modal
               isOpen={this.state.vitaminModalIsOpen}
               onRequestClose={this.closeVitaminModal}
-              style={
-                {
-                  content: {
-                    top: '50%',
-                    left: '50%',
-                    right: 'auto',
-                    bottom: 'auto',
-                    marginRight: '-50%',
-                    transform: 'translate(-50%, -50%)'
-                  }
+              style={{
+                content: {
+                  top: '50%',
+                  left: '50%',
+                  right: 'auto',
+                  bottom: 'auto',
+                  marginRight: '-50%',
+                  transform: 'translate(-50%, -50%)'
                 }
-              }
-            >
+              }}>
               <CreateVitaminForm
                 courseId={this.props.courseId}
                 lectureUrlName={this.props.lectureUrlName}
                 videoIndex={this.props.videoIndex}
                 vitamin={this.state.vitaminSelected}
                 closeVitaminModal={this.closeVitaminModal}
-                player={this.state.player}
-              />
+                player={this.state.player} />
             </Modal>
             <Modal
               isOpen={this.state.resourceModalIsOpen}
               onRequestClose={this.closeResourceModal}
-              style={
-                {
-                  content: {
-                    top: '50%',
-                    left: '50%',
-                    right: 'auto',
-                    bottom: 'auto',
-                    marginRight: '-50%',
-                    transform: 'translate(-50%, -50%)'
-                  }
+              style={{
+                content: {
+                  top: '50%',
+                  left: '50%',
+                  right: 'auto',
+                  bottom: 'auto',
+                  marginRight: '-50%',
+                  transform: 'translate(-50%, -50%)'
                 }
-              }
-            >
+              }}>
               <CreateResourceForm
                 courseId={this.props.courseId}
                 lectureUrlName={this.props.lectureUrlName}
                 videoIndex={this.props.videoIndex}
                 resource={this.state.resourceSelected}
-                closeResourceModal={this.closeResourceModal}
-              />
+                closeResourceModal={this.closeResourceModal} />
             </Modal>
           </div>
         </DocumentTitle>

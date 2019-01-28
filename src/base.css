@@ -31,6 +31,10 @@ h4 {
   margin: 1rem 0;
 }
 
+button {
+  font-size: inherit;
+}
+
 a {
   color: inherit;
 }
