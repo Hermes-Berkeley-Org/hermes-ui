@@ -11,7 +11,7 @@ class CreateVitaminForm extends Component {
     super(props);
     this.state = {
       questionTitle: !this.props.vitamin ? '' : this.props.vitamin['question'],
-      choices: !this.props.vitamin ? ['', '', '', ''] : this.props.vitamin['choices'],
+      choices: !this.props.vitamin ? ['', '', '', ''] : this.props.vitamin['choices'].concat(Array(4 - this.props.vitamin['choices'].length).fill('')),
       answerIndex: !this.props.vitamin ? '' : this.props.vitamin['choices'].indexOf(this.props.vitamin['answer']),
       skippable: !this.props.vitamin ? false : this.props.vitamin['skippable']
     }
@@ -117,6 +117,7 @@ class CreateVitaminForm extends Component {
                   id={`choice-${index}-radio`}
                   name="answerIndex"
                   className="form-control"
+                  checked={this.state.answerIndex === index}
                   onChange={this.handleAnswerChange.bind(this, index)}
                 />
                 <input
