@@ -35,7 +35,7 @@ class EnablePiazzaForm extends Component {
     console.log(this.props)
     return (
       <div>
-        <div onClick={this.props.closePiazzaModal} className="fas fa-times"></div>
+        <div onClick={this.props.closePiazzaModal} className="modal-close fas fa-times"></div>
         <h3>Enable Piazza</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {!this.props.course.info['piazza_master_post_id'] ? null :

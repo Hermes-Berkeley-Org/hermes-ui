@@ -108,7 +108,7 @@ class EditVideo extends Component {
                               <div className='video-comp-timestamp'>{vitamin.timestamp}</div>
                               <div className='video-comp-text'>{vitamin.question}</div>
                               <div className='video-comp-action'><span className="fa fa-edit" onClick={() => this.editVitamin(vitamin)} /></div>
-                              <div className='video-comp-action'><span className="fas fa-times" onClick={() => this.deleteVitamin(vitamin['vitamin_index'])} /></div>
+                              <div className='video-comp-action'><span className="modal-close fas fa-times" onClick={() => this.deleteVitamin(vitamin['vitamin_index'])} /></div>
                             </li>
                           ))}
                         </ol>
@@ -127,7 +127,7 @@ class EditVideo extends Component {
                             <li className='video-comp' key={`resource-${index}`}>
                               <div className='video-comp-text'>{resource.title}: {resource.link}</div>
                               <div className='video-comp-action'><span className="fa fa-edit" onClick={() => this.editResource(resource)} /></div>
-                              <div className='video-comp-action'><span className="fas fa-times" onClick={() => this.deleteResource(resource['resource_index'])} /></div>
+                              <div className='video-comp-action'><span className="modal-close fas fa-times" onClick={() => this.deleteResource(resource['resource_index'])} /></div>
                             </li>
                           ))}
                         </ol>

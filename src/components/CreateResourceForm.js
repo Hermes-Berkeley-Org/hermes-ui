@@ -55,7 +55,7 @@ class CreateResourceForm extends Component {
   render() {
     return (
       <div>
-        <div onClick={this.props.closeResourceModal} className="fas fa-times"></div>
+        <div onClick={this.props.closeResourceModal} className="modal-close fas fa-times"></div>
         <h3>Create {this.state.title || 'resource'}</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div className='form-group'>

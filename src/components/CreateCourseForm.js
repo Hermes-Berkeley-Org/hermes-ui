@@ -34,7 +34,7 @@ class CreateCourseForm extends Component {
   render() {
     return (
       <div>
-        <div onClick={this.props.closeCreateCourseModal} className="fas fa-times"></div>
+        <div onClick={this.props.closeCreateCourseModal} className="modal-close fas fa-times"></div>
         <h3>Create {this.state.displayName || 'course'}</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div className='form-group'>
