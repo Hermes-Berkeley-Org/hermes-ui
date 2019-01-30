@@ -37,7 +37,7 @@ class Vitamin extends Component {
   render() {
     return (
       <div>
-        <h2>{this.props.vitamin.question}</h2>
+        <h3>{this.props.vitamin.question}</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.vitamin.choices.map((choice, index) =>
               <div key={index} className="row">

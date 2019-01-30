@@ -35,7 +35,7 @@ class CreateCourseForm extends Component {
     return (
       <div>
         <div onClick={this.props.closeCreateCourseModal} className="fas fa-times"></div>
-        <h2>Create {this.state.displayName || 'course'}</h2>
+        <h3>Create {this.state.displayName || 'course'}</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div className='form-group'>
             <label htmlFor="display-name">Choose a name for the class:</label>

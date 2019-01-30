@@ -16,7 +16,7 @@ class DisablePiazzaForm extends Component {
     return (
       <div>
       <div onClick={this.props.closePiazzaModal} className="fas fa-times"></div>
-      <h2>Disable Piazza</h2>
+      <h3>Disable Piazza</h3>
       <form onSubmit={this.handleSubmit.bind(this)}>
         <p>Are you sure you want to disable Piazza integration for your course?</p>
         <div className="row">

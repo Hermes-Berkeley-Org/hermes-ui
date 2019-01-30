@@ -97,7 +97,7 @@ class CreateVitaminForm extends Component {
     return (
       <div>
         <div onClick={this.props.closeVitaminModal} className="fas fa-times"></div>
-        <h2>Create {this.state.questionTitle || 'vitamin'}</h2>
+        <h3>Create {this.state.questionTitle || 'vitamin'}</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <label htmlFor="question-title">Title
           <input
