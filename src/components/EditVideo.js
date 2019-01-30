@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title'
-import Modal from 'react-modal'
 
 import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
@@ -20,6 +19,7 @@ import NotFound from './errors/NotFound.js'
 import InternalError from './errors/InternalError.js'
 import CreateVitaminForm from './CreateVitaminForm'
 import CreateResourceForm from './CreateResourceForm'
+import Modal from './Modal.js';
 
 import toast from '../utils/toast.js'
 
@@ -139,16 +139,7 @@ class EditVideo extends Component {
             <Modal
               isOpen={this.state.vitaminModalIsOpen}
               onRequestClose={this.closeVitaminModal}
-              style={{
-                content: {
-                  top: '50%',
-                  left: '50%',
-                  right: 'auto',
-                  bottom: 'auto',
-                  marginRight: '-50%',
-                  transform: 'translate(-50%, -50%)'
-                }
-              }}>
+            >
               <CreateVitaminForm
                 courseId={this.props.courseId}
                 lectureUrlName={this.props.lectureUrlName}
@@ -160,16 +151,7 @@ class EditVideo extends Component {
             <Modal
               isOpen={this.state.resourceModalIsOpen}
               onRequestClose={this.closeResourceModal}
-              style={{
-                content: {
-                  top: '50%',
-                  left: '50%',
-                  right: 'auto',
-                  bottom: 'auto',
-                  marginRight: '-50%',
-                  transform: 'translate(-50%, -50%)'
-                }
-              }}>
+            >
               <CreateResourceForm
                 courseId={this.props.courseId}
                 lectureUrlName={this.props.lectureUrlName}

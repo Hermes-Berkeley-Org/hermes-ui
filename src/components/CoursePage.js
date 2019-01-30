@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title'
-import Modal from 'react-modal'
 
 import { getCourseData, createLecture, deleteLecture } from '../actions/course.js';
 import { createPiazzaBot, disablePiazzaBot } from '../actions/piazza.js'
@@ -14,6 +13,7 @@ import LectureList from './LectureList.js';
 import Loading from './Loading.js';
 import NotFound from './errors/NotFound.js'
 import InternalError from './errors/InternalError.js'
+import Modal from './Modal.js';
 
 import './CoursePage.css';
 
@@ -82,18 +82,6 @@ class CoursePage extends Component {
             <Modal
               isOpen={this.state.piazzaModalIsOpen}
               onRequestClose={this.closePiazzaModal}
-              style={
-                {
-                  content: {
-                    top: '50%',
-                    left: '50%',
-                    right: 'auto',
-                    bottom: 'auto',
-                    marginRight: '-50%',
-                    transform: 'translate(-50%, -50%)'
-                  }
-                }
-              }
             >
               {this.props.courseLoading || this.props.piazzaLoading ? null :
                 this.props.courseData.info['piazza_active'] === 'active' ?

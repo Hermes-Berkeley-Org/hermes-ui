@@ -1,0 +1,31 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.modal-overlay::before,
+.modal-overlay::after {
+  height: 6em;
+  content: '';
+  flex: 1 0 auto;
+}
+
+.modal {
+  box-sizing: border-box;
+  width: 308px;
+  padding: 1.5em;
+  background-color: #FFF;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}

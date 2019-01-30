@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal'
 import YouTube from 'react-youtube';
 import { connect } from 'react-redux';
 
 import Vitamin from './Vitamin'
+import Modal from './Modal.js';
 
 class VitaminContainer extends Component {
   constructor(props) {
@@ -19,21 +19,7 @@ class VitaminContainer extends Component {
 
   render() {
     return (
-      <Modal
-        isOpen={!!this.state.activeVitamin}
-        style={
-          {
-            content: {
-              top: '50%',
-              left: '50%',
-              right: 'auto',
-              bottom: 'auto',
-              marginRight: '-50%',
-              transform: 'translate(-50%, -50%)'
-            }
-          }
-        }
-      >
+      <Modal isOpen={!!this.state.activeVitamin}>
         {!this.state.activeVitamin ? null :
             <Vitamin
               vitamin={this.state.activeVitamin}

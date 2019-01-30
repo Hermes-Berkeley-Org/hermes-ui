@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DocumentTitle from 'react-document-title'
-import Modal from 'react-modal'
 
 import { ROLE_STUDENT, ROLE_INSTRUCTOR } from '../constants.js';
 import { getData, createCourse } from '../actions/home.js';
@@ -10,6 +9,7 @@ import Loading from './Loading.js';
 import CourseCard from './CourseCard.js';
 import InternalError from './errors/InternalError'
 import CreateCourseForm from './CreateCourseForm'
+import Modal from './Modal.js';
 
 import './HomePage.css';
 
@@ -70,18 +70,6 @@ class HomePage extends Component {
             <Modal
               isOpen={this.state.modalIsOpen}
               onRequestClose={this.closeCreateCourseModal}
-              style={
-                {
-                  content: {
-                    top: '50%',
-                    left: '50%',
-                    right: 'auto',
-                    bottom: 'auto',
-                    marginRight: '-50%',
-                    transform: 'translate(-50%, -50%)'
-                  }
-                }
-              }
             >
               <CreateCourseForm
                 course={this.state.courseToBeCreated}
