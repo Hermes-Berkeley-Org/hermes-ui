@@ -1,7 +1,8 @@
 import {
   CREATE_PIAZZA_BOT_STARTED, CREATE_PIAZZA_BOT_SUCCESS, CREATE_PIAZZA_BOT_FAILURE,
   DISABLE_PIAZZA_BOT_STARTED, DISABLE_PIAZZA_BOT_SUCCESS, DISABLE_PIAZZA_BOT_FAILURE,
-  ASK_PIAZZA_QUESTION_STARTED, ASK_PIAZZA_QUESTION_SUCCESS, ASK_PIAZZA_QUESTION_FAILURE
+  ASK_PIAZZA_QUESTION_STARTED, ASK_PIAZZA_QUESTION_SUCCESS, ASK_PIAZZA_QUESTION_FAILURE,
+  LOAD_QUESTIONS_STARTED, LOAD_QUESTIONS_SUCCESS, LOAD_QUESTIONS_FAILED
 } from './types.js'
 
 import { getCourseData } from './course.js'
@@ -10,6 +11,7 @@ import toast from '../utils/toast.js'
 import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
+const queryString = require('query-string')
 
 export const createPiazzaBot = (courseId, piazzaCourseId, piazzaMasterPostId) => dispatch => {
   const accessToken = decrypt(localStorage.getItem('okToken')).accessToken;
@@ -130,5 +132,39 @@ export const askPiazzaQuestion = (courseId, lectureUrlName, videoIndex,
       })
       toast.error('Failed to post question to Piazza, please refresh the page and try again')
     })
-
 }
+
+export const loadQuestions = (courseId, lectureUrlName, videoIndex, startSecond, lecturePostId, piazzaCourseId) => dispatch => {
+    const accessToken = decrypt(localStorage.getItem('okToken')).accessToken;
+
+    dispatch({
+      type: LOAD_QUESTIONS_STARTED
+    })
+
+    const urlParams = {
+      'start_second': Math.round(startSecond),
+      'end_second': Math.round(startSecond) + 30,
+      'lecture_post_id': lecturePostId,
+      'piazza_course_id': piazzaCourseId
+    }
+
+    axios.get(
+      `${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/questions?${queryString.stringify(urlParams)}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      }
+    ).then(function (response) {
+      dispatch({
+        type: LOAD_QUESTIONS_SUCCESS,
+        payload: response.data
+      })
+    }).catch(function (error) {
+      dispatch({
+        type: LOAD_QUESTIONS_FAILED,
+        payload: { error }
+      })
+    })
+
+};

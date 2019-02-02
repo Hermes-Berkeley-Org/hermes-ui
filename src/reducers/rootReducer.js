@@ -10,6 +10,7 @@ import transcriptReducer from './transcriptReducer'
 import piazzaReducer from './piazzaReducer'
 import editVideoReducer from './editVideoReducer'
 import youtubeReducer from './youtubeReducer'
+import piazzaQuestionReducer from './piazzaQuestionReducer'
 
 export default combineReducers({
   okAuthReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
   transcriptReducer,
   piazzaReducer,
   editVideoReducer,
-  youtubeReducer
+  youtubeReducer,
+  piazzaQuestionReducer
 });

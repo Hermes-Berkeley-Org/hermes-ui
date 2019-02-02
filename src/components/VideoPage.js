@@ -18,6 +18,7 @@ import NotFound from './errors/NotFound.js'
 import InternalError from './errors/InternalError.js'
 import PiazzaQuestionForm from './PiazzaQuestionForm.js'
 import VitaminContainer from './VitaminContainer.js'
+import PiazzaQuestions from './PiazzaQuestions.js'
 
 import './VideoPage.css';
 
@@ -113,6 +114,18 @@ class Video extends Component {
                 vitamins={this.props.vitaminsAndResources.vitamins}
                 resources={this.props.vitaminsAndResources.resources}
               />
+            }
+            {!this.state.player || !this.props.lectureData || !this.props.courseData ? null :
+            <div className="piazza-questions">
+              <PiazzaQuestions
+                courseId={this.props.courseId}
+                lectureUrlName={this.props.lectureUrlName}
+                videoIndex={this.props.videoIndex}
+                lecturePiazzaId={this.props.lectureData['lecture_piazza_id']}
+                piazzaCourseId={this.props.courseData.info['piazza_course_id']}
+                player={this.state.player}
+              />
+            </div>
             }
           </div>
         </DocumentTitle>
