@@ -53,7 +53,7 @@ class CreateCourseForm extends Component {
               Piazza Course ID &nbsp;
             <div data-tip data-for='piazza-help' className="fas fa-question-circle" />
               <ReactTooltip id='piazza-help'>
-                <p>Navigate to the course on Piazza and paste the alphanumeric ID (piazza.com/class/&lt;course_id&gt;) here.</p>
+                <p>Navigate to the course on Piazza and paste the alphanumeric ID (piazza.com/class/&lt;course_id&gt;) here. Leave blank if you do not wish to enable Piazza.</p>
               </ReactTooltip>
             </label>
             <input

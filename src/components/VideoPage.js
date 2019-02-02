@@ -116,8 +116,14 @@ class Video extends Component {
                       piazzaCourseId={this.props.courseData.info['piazza_course_id']}
                       player={this.state.player}
                     />}
-                </div>
-              }
+                </div>}
+              {!this.props.vitaminsAndResources ? null :
+                <div className='resource-section'>
+                  {this.props.vitaminsAndResources.resources.map(({ title, link }, index) => (
+                      <a target="_blank" href={link}>{title}</a>
+                    )
+                  )}
+                </div>}
             </div>
             {!this.state.player || !this.props.vitaminsAndResources ? null :
               <VitaminContainer

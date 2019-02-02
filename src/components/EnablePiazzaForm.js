@@ -7,7 +7,7 @@ class EnablePiazzaForm extends Component {
     super(props);
     this.state = {
       piazzaCourseId: '',
-      setUpNewPiazza: this.props.course.info['piazza_master_post_id']
+      setUpNewPiazza: !this.props.course.info['piazza_master_post_id']
     };
   }
 
@@ -31,6 +31,12 @@ class EnablePiazzaForm extends Component {
     this.props.closePiazzaModal()
   }
 
+  togglePiazzaInput(event) {
+    this.setState({
+      setUpNewPiazza: !this.state.setUpNewPiazza
+    })
+  }
+
   render() {
     console.log(this.props)
     return (
@@ -38,18 +44,13 @@ class EnablePiazzaForm extends Component {
         <div onClick={this.props.closePiazzaModal} className="modal-close fas fa-times"></div>
         <h3>Enable Piazza</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
+          <div>
           {!this.props.course.info['piazza_master_post_id'] ? null :
-            <label htmlFor="set-up-new-piazza">
-              Set up a new course Piazza
-              <input
-                name="setUpNewPiazza"
-                id="set-up-new-piazza"
-                type="checkbox"
-                checked={this.state.setUpNewPiazza}
-                onChange={this.handleInputChange.bind(this)}
-              />
-            </label>
+            <a className='btn btn-link btn-small' onClick={this.togglePiazzaInput.bind(this)}><i className="ai ai-piazza"></i>
+             {!this.state.setUpNewPiazza ? "Set up a new course Piazza" : "Reenable existing Piazza"}
+            </a>
           }
+          </div>
           {!this.props.course.info['piazza_master_post_id'] || this.state.setUpNewPiazza ?
             <div>
               <div className='form-group'>
