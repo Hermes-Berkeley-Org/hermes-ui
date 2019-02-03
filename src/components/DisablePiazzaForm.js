@@ -15,14 +15,12 @@ class DisablePiazzaForm extends Component {
   render() {
     return (
       <div>
-      <div onClick={this.props.closePiazzaModal} className="modal-close fas fa-times"></div>
-      <h3>Disable Piazza</h3>
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <p>Are you sure you want to disable Piazza integration for your course?</p>
-        <div className="row">
+        <div onClick={this.props.closePiazzaModal} className="modal-close fas fa-times"></div>
+        <h3>Disable Piazza</h3>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <p>Are you sure you want to disable Piazza integration for your course?</p>
           <input type='submit' className='btn btn-default' value='Disable' />
-        </div>
-      </form>
+        </form>
       </div>
     );
   }

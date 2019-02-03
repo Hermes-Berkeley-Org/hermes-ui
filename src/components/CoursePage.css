@@ -26,10 +26,12 @@
 }
 
 .course-lecture-creation {
-  box-sizing: border-box;
-  padding: 0 1em 1em 1em;
   margin-bottom: 1.5em;
-  border: 1px solid #DDD;
-  border-radius: 4px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-enable-piazza hr {
+  border: none;
+  height: 1px;
+  background-color: #DDD;
+  margin: 1.5em -1.5em;
 }

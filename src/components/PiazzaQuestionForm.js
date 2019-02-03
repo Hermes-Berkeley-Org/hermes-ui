@@ -48,36 +48,38 @@ class PiazzaQuestionForm extends Component {
 
   render() {
     return (this.props.piazzaQuestionLoading ?
-        <Loading/> :
-        <form onSubmit={this.handleSubmit.bind(this)}>
-        <label htmlFor="piazza-course-id">
-          <div className="ai ai-piazza"/>&nbsp; Ask a question &nbsp;
-          <div data-tip data-for='piazza-help' className="fas fa-question-circle"/>
+      <Loading /> :
+      <div className='form-container form-video-piazza'>
+        <h3>Ask a question <span data-tip data-for='piazza-help' className='video-piazza-help fas fa-question-circle' /></h3>
+        <label>
           <ReactTooltip id='piazza-help'>
             <p>Enter your question here, and we'll post it to Piazza tagged at the timestamp in the video!</p>
           </ReactTooltip>
         </label>
-        <input
-          type='text'
-          className="form-control"
-          id='question'
-          name='question'
-          value={this.state.question}
-          onChange={this.handleInputChange.bind(this)}
-          onClick={() => this.props.player.pauseVideo()}
-        />
-        <label htmlFor="anonymous">
-        Post anonymously
-        <input
-              name="anonymous"
-              id="anonymous"
-              type="checkbox"
+        <form className onSubmit={this.handleSubmit.bind(this)}>
+          <input
+            type='text'
+            className='form-control'
+            id='question'
+            name='question'
+            placeholder={`e.g. What's a BST?`}
+            value={this.state.question}
+            onChange={this.handleInputChange.bind(this)}
+            onClick={() => this.props.player.pauseVideo()}
+          />
+          <label htmlFor='anonymous' className='light'>
+            <input
+              name='anonymous'
+              id='anonymous'
+              type='checkbox'
               checked={this.state.anonymous}
               onChange={this.handleInputChange.bind(this)}
-        />
-        </label>
-        <input type='submit' className='btn btn-default' value='Ask' />
+            />
+            Post anonymously
+          </label>
+          <input type='submit' className='btn btn-default' value='Ask' />
         </form>
+      </div>
     );
   }
 

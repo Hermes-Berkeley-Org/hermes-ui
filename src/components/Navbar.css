@@ -8,7 +8,7 @@
   color: #FFF;
   height: 3em;
   line-height: 3;
-  z-index: 10000;
+  z-index: 1000;
 }
 
 .navbar > .container {

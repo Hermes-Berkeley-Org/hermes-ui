@@ -30,7 +30,7 @@ export default class Lecture extends Component {
           <div className="lecture-date">{this.props.lecture.date}</div>
           <div className="lecture-action">
             {this.props.role === ROLE_INSTRUCTOR ?
-              <span className="modal-close fas fa-times" onClick={(event) => {
+              <span className="fas fa-times" onClick={(event) => {
                 event.stopPropagation();
                 this.props.deleteLecture(this.props.lecture)
               }} /> :

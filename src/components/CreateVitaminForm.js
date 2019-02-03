@@ -99,6 +99,16 @@ class CreateVitaminForm extends Component {
         <div onClick={this.props.closeVitaminModal} className="modal-close fas fa-times"></div>
         <h3>Create {this.state.questionTitle || 'vitamin'}</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
+          <label htmlFor="skippable" className='light'>
+            <input
+              name="skippable"
+              id="skippable"
+              type="checkbox"
+              checked={this.state.skippable}
+              onChange={this.handleInputChange.bind(this)}
+            />
+            Skippable?
+          </label>
           <label htmlFor="question-title">Title
           <input
             type='text'
@@ -109,6 +119,7 @@ class CreateVitaminForm extends Component {
             onChange={this.handleInputChange.bind(this)}
           />
           </label>
+          <label>Choices</label>
           {this.state.choices.map((choice, index) =>
               <div key={index} className="row">
                 <input
@@ -132,16 +143,6 @@ class CreateVitaminForm extends Component {
               </div>
             )
           }
-          <label htmlFor="skippable">
-            Skippable?
-            <input
-              name="skippable"
-              id="skippable"
-              type="checkbox"
-              checked={this.state.skippable}
-              onChange={this.handleInputChange.bind(this)}
-            />
-          </label>
           <input type='submit' className='btn btn-default' value={this.props.vitamin ? 'Edit' : 'Create'} />
         </form>
       </div>

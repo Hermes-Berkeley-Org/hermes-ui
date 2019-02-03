@@ -63,7 +63,7 @@ class CoursePage extends Component {
               </div>
               {this.props.role !== ROLE_INSTRUCTOR ? null :
                 <div className='course-lecture-actions'>
-                  <div className='course-lecture-creation'>
+                  <div className='form-container course-lecture-creation'>
                     <h3>Create a lecture</h3>
                     <AddLectureForm
                       courseId={this.props.courseId}
@@ -75,7 +75,7 @@ class CoursePage extends Component {
                     {this.props.courseLoading || this.props.piazzaLoading ? null :
                       this.props.courseData.info['piazza_active'] === 'active' ?
                         <a className='btn btn-link' onClick={this.openPiazzaModal}><i className="ai ai-piazza"></i> Disable piazza</a> :
-                        <a className='btn btn-link' onClick={this.openPiazzaModal}><i className="ai ai-piazza"></i> Enable piazza</a>}
+                        <a className='btn btn-link' onClick={this.openPiazzaModal}><i className="ai ai-piazza"></i> Link piazza</a>}
                   </div>
                 </div>}
             </div>
