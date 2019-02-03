@@ -91,6 +91,7 @@ class Video extends Component {
                     (this.props.transcriptNotFound ? 'No transcript is associated with this video' : 'Failed to load transcript') :
                     <Transcript
                       transcript={this.props.transcript}
+                      vitamins={this.props.vitaminsAndResources ? this.props.vitaminsAndResources.vitamins : []}
                       player={this.state.player}
                     />)}
               </div>
