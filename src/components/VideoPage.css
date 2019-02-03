@@ -116,6 +116,59 @@
   background-color: #FFF;
 }
 
+.video-transcript-vitamin {
+  border: 1px solid #DDD;
+  border-radius: 4px;
+}
+
+.video-transcript-vitamin-question {
+  padding: 0.5em;
+  border-bottom: 1px solid #DDD;
+  font-weight: 600;
+}
+
+.video-transcript-vitamin-choices {
+  list-style: none;
+  margin: 0;
+  padding: 0 0.5em;
+}
+
+.video-transcript-vitamin-choices * {
+  margin: 0.5em 0;
+  display: flex;
+  white-space: normal;
+}
+
+.video-transcript-vitamin-choices ::before {
+  flex: none;
+  border: 1px solid #DDD;
+  margin-right: 0.5em;
+  width: 1.25em;
+  height: 1.25em;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.video-transcript-vitamin-choices :nth-child(1)::before {
+  content: 'A'; 
+}
+
+.video-transcript-vitamin-choices :nth-child(2)::before {
+  content: 'B'; 
+}
+
+.video-transcript-vitamin-choices :nth-child(3)::before {
+  content: 'C'; 
+}
+
+.video-transcript-vitamin-choices :nth-child(4)::before {
+  content: 'D'; 
+}
+
+.video-transcript-vitamin-choices :nth-child(5)::before {
+  content: 'E'; 
+}
+
 .video-edit-comp-section {
   display: flex;
   flex-direction: column;

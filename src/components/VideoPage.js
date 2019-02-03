@@ -18,6 +18,7 @@ import NotFound from './errors/NotFound.js'
 import InternalError from './errors/InternalError.js'
 import PiazzaQuestionForm from './PiazzaQuestionForm.js'
 import VitaminContainer from './VitaminContainer.js'
+import PiazzaQuestions from './PiazzaQuestions.js'
 
 import './VideoPage.css';
 
@@ -90,6 +91,7 @@ class Video extends Component {
                     (this.props.transcriptNotFound ? 'No transcript is associated with this video' : 'Failed to load transcript') :
                     <Transcript
                       transcript={this.props.transcript}
+                      vitamins={this.props.vitaminsAndResources ? this.props.vitaminsAndResources.vitamins : []}
                       player={this.state.player}
                     />)}
               </div>
@@ -105,7 +107,17 @@ class Video extends Component {
                     video={this.props.videoData}
                     player={this.state.player}
                   />
-                </div>}
+                  {!this.state.player || !this.props.lectureData || !this.props.courseData ? null :
+                    <PiazzaQuestions
+                      courseId={this.props.courseId}
+                      lectureUrlName={this.props.lectureUrlName}
+                      videoIndex={this.props.videoIndex}
+                      lecturePiazzaId={this.props.lectureData['lecture_piazza_id']}
+                      piazzaCourseId={this.props.courseData.info['piazza_course_id']}
+                      player={this.state.player}
+                    />}
+                </div>
+              }
             </div>
             {!this.state.player || !this.props.vitaminsAndResources ? null :
               <VitaminContainer

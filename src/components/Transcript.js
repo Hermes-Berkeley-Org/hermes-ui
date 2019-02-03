@@ -7,11 +7,13 @@ class Transcript extends Component {
 
   constructor(props) {
     super(props);
-    this.transcriptTimes = this.props.transcript.map((transcriptElement) => (
-      transcriptElement.begin
+    this.transcriptWithTimes = this.props.transcript.map((transcriptElement, index) => ({
+      ...transcriptElement,
+      transcriptRow: index,
+      seconds: transcriptElement.begin
         .substring(0, transcriptElement.begin.length - 4)
-        .split(':').reduce((acc,time) => (60 * acc) + +time)
-    ));
+        .split(':').reduce((acc, time) => (60 * acc) + +time)
+    }));
 
     this.transcriptTable = null;
     this.transcriptRows = this.props.transcript.map(() => null);
@@ -28,20 +30,47 @@ class Transcript extends Component {
   }
 
   render() {
+    // TODO: Merge the entries faster
+    const entries = [
+      ...this.transcriptWithTimes, 
+      ...this.props.vitamins
+    ].sort((a, b) => a.seconds - b.seconds);
+
     return (
       <div className='video-transcript'>
         <table ref={this.setTranscriptTableRef}>
           <tbody>
-            {this.props.transcript.map((transcriptElement, index) => (
-              <tr key={index} ref={(element) => this.setTranscriptRowRef(element, index)}>
-                <td className='video-transcript-timestamp' key={`timestamp-${index}`} onClick={
-                  () => this.props.player.seekTo(this.transcriptTimes[index])
-                }>
-                  {transcriptElement.begin.substring(0, transcriptElement.begin.length - 4)}
-                </td>
-                <td className='video-transcript-text' key={`text-${index}`}>{transcriptElement.text}</td>
-              </tr>
-            ))}
+            {entries.map((entry, index) => {
+              const seconds = entry.seconds;
+              const entryIsVitamin = entry.vitamin_index !== undefined;
+
+              if (entryIsVitamin) {
+                return (
+                  <tr key={index}>
+                    <td className='video-transcript-timestamp' key={`timestamp-${index}`}>Vitamin</td>
+                    <td className='video-transcript-text' key={`text-${index}`}>
+                      <div className='video-transcript-vitamin'>
+                        <div className='video-transcript-vitamin-question'>{entry.question}</div>
+                        <ul className='video-transcript-vitamin-choices'>
+                          {entry.choices.map((choice, key) => <li key={key}>{choice}</li>)}
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              } else {
+                return (
+                  <tr key={index} ref={(element) => this.setTranscriptRowRef(element, entry.transcriptRow)}>
+                    <td className='video-transcript-timestamp' key={`timestamp-${index}`} onClick={
+                      () => this.props.player.seekTo(seconds)
+                    }>
+                      {entry.begin.substring(0, entry.begin.length - 4)}
+                    </td>
+                    <td className='video-transcript-text' key={`text-${index}`}>{entry.text}</td>
+                  </tr>
+                );
+              }
+            })}
           </tbody>
         </table>
       </div>
@@ -49,8 +78,8 @@ class Transcript extends Component {
   }
 
   findClosestTranscriptRow(currentTime, startIndex) {
-    for (let i = startIndex; i < this.transcriptTimes.length; i++) {
-      if (this.transcriptTimes[i] > currentTime) {
+    for (let i = startIndex; i < this.transcriptWithTimes.length; i++) {
+      if (this.transcriptWithTimes[i].seconds > currentTime) {
         return i - 1; // Offset for scroll timing delay
       }
     }
@@ -58,7 +87,7 @@ class Transcript extends Component {
   }
 
   componentDidUpdate() {
-    const videoPlaying = this.props.player && this.props.player.getPlayerState() === YouTube.PlayerState.PLAYING;
+    const videoPlaying = this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED;
     const videoJumped = this.props.videoCurrentTime == this.props.videoStartTime;
     const transcriptShouldScroll = videoJumped || (Math.round(this.props.videoCurrentTime) % 15 === 0);
 

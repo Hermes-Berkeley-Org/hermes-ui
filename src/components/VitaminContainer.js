@@ -45,7 +45,7 @@ class VitaminContainer extends Component {
   }
 
   componentDidUpdate() {
-    const videoPlaying = this.props.player && this.props.player.getPlayerState() === YouTube.PlayerState.PLAYING;
+    const videoPlaying = this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED;
     const hasNextVitamin = this.state.nextVitaminIndex < this.props.vitamins.length;
 
     if (videoPlaying && hasNextVitamin) {
