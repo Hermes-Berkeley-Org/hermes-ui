@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal'
 import YouTube from 'react-youtube';
+import { connect } from 'react-redux';
 
 import Vitamin from './Vitamin'
 
@@ -8,8 +9,8 @@ class VitaminContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      vitaminModalIsOpen: false,
-      activeVitamin: null
+      activeVitamin: null,
+      nextVitaminIndex: 0
     }
 
     this.openVitaminModal = this.openVitaminModal.bind(this);
@@ -19,7 +20,7 @@ class VitaminContainer extends Component {
   render() {
     return (
       <Modal
-        isOpen={this.state.vitaminModalIsOpen}
+        isOpen={!!this.state.activeVitamin}
         style={
           {
             content: {
@@ -43,35 +44,38 @@ class VitaminContainer extends Component {
     );
   }
 
-  componentDidMount() {
-    const vitamins = this.props.vitamins;
-    const player = this.props.player;
-    if (vitamins) {
-      setInterval(() => {
-        if (player.getPlayerState() === YouTube.PlayerState.PLAYING &&
-              vitamins.length > 0 && vitamins[0].seconds === Math.round(player.getCurrentTime())
-          ) {
-          this.openVitaminModal();
-          vitamins.shift();
-        }
-      }, 500)
+  componentDidUpdate() {
+    const videoPlaying = this.props.player && this.props.player.getPlayerState() === YouTube.PlayerState.PLAYING;
+    const hasNextVitamin = this.state.nextVitaminIndex < this.props.vitamins.length;
+
+    if (videoPlaying && hasNextVitamin) {
+      if (this.props.videoCurrentTime >= this.props.vitamins[this.state.nextVitaminIndex].seconds) {
+        this.openVitaminModal();
+      }
     }
   }
 
   openVitaminModal() {
+    // Pausing the video should prevent `openVitaminModal()` from running again when the modal's open
     this.props.player.pauseVideo();
+    this.props.player.seekTo(this.props.vitamins[this.state.nextVitaminIndex].seconds);
+
     this.setState({
-      vitaminModalIsOpen: true,
-      activeVitamin: this.props.vitamins[0]
+      activeVitamin: this.props.vitamins[this.state.nextVitaminIndex],
+      nextVitaminIndex: this.state.nextVitaminIndex + 1
     })
   }
 
   closeVitaminModal() {
     this.setState({
-      vitaminModalIsOpen: false
+      activeVitamin: null
     })
     this.props.player.playVideo();
   }
 }
 
-export default VitaminContainer;
+const mapStateToProps = state => ({
+  ...state.youtubeReducer
+});
+
+export default connect(mapStateToProps)(VitaminContainer);
