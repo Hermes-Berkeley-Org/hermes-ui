@@ -1,6 +1,6 @@
 import {
-    VIDEO_JUMPED, VIDEO_RESUMED
-} from './types.js'
+    VIDEO_JUMPED, VIDEO_HEARTBEAT
+} from './types.js';
 
 export const videoJumped = (seconds) => dispatch => {
   dispatch({
@@ -9,8 +9,9 @@ export const videoJumped = (seconds) => dispatch => {
   })
 }
 
-export const videoResumed = () => dispatch => {
+export const videoHeartbeat = (seconds) => dispatch => {
   dispatch({
-    type: VIDEO_RESUMED
+    type: VIDEO_HEARTBEAT,
+    payload: { seconds }
   })
 }

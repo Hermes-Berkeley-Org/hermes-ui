@@ -1,5 +1,5 @@
 import {
-  VIDEO_JUMPED, VIDEO_RESUMED
+  VIDEO_JUMPED, VIDEO_HEARTBEAT
 } from '../actions/types.js'
 
 export default (state = {}, action) => {
@@ -7,12 +7,13 @@ export default (state = {}, action) => {
     case VIDEO_JUMPED:
       return {
         ...state,
-        jumpedTo: action.payload.seconds
+        videoStartTime: action.payload.seconds,
+        videoCurrentTime: action.payload.seconds
       };
-    case VIDEO_RESUMED:
+    case VIDEO_HEARTBEAT:
       return {
         ...state,
-        jumpedTo: null
+        videoCurrentTime: action.payload.seconds
       }
     default:
       return state;

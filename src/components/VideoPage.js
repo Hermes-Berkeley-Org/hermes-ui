@@ -9,7 +9,7 @@ import { getVideoData } from '../actions/video.js';
 import { getLectureData } from '../actions/lecture.js';
 import { getTranscript } from '../actions/transcript.js';
 import { getVitaminsAndResources } from '../actions/editVideo.js'
-import { videoJumped } from '../actions/youtube.js'
+import { videoJumped, videoHeartbeat } from '../actions/youtube.js'
 
 import Layout from './Layout';
 import Transcript from './Transcript'
@@ -149,6 +149,17 @@ class Video extends Component {
       this.props.lectureUrlName
     );
     this.reloadVideoData()
+
+    this.props.videoJumped(0);
+    this.videoHeartbeatInterval = setInterval(() => {
+      if (this.state.player) {
+        this.props.videoHeartbeat(this.state.player.getCurrentTime());
+      }
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.videoHeartbeatInterval);
   }
 
   reloadVideoData() {
@@ -185,7 +196,8 @@ const mapDispatchToProps = dispatch => ({
   getLectureData: (...args) => dispatch(getLectureData(...args)),
   getTranscript: (...args) => dispatch(getTranscript(...args)),
   getVitaminsAndResources: (...args) => dispatch(getVitaminsAndResources(...args)),
-  videoJumped:  (...args) => dispatch(videoJumped(...args))
+  videoJumped:  (...args) => dispatch(videoJumped(...args)),
+  videoHeartbeat: (...args) => dispatch(videoHeartbeat(...args)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Video);
