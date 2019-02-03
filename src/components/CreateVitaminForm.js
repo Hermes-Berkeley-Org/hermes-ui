@@ -81,7 +81,7 @@ class CreateVitaminForm extends Component {
         this.props.lectureUrlName,
         this.props.videoIndex,
         {
-            seconds: Math.round(this.props.player.getCurrentTime()),
+            seconds: Math.ceil(this.props.player.getCurrentTime()),
             question: this.state.questionTitle,
             skippable: this.state.skippable,
             answer: this.state.choices[Number.parseInt(this.state.answerIndex, 10)],

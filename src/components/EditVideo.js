@@ -21,6 +21,8 @@ import InternalError from './errors/InternalError.js'
 import CreateVitaminForm from './CreateVitaminForm'
 import CreateResourceForm from './CreateResourceForm'
 
+import toast from '../utils/toast.js'
+
 import './VideoPage.css';
 
 class EditVideo extends Component {
@@ -210,10 +212,19 @@ class EditVideo extends Component {
   }
 
   openVitaminModal() {
-    this.state.player.pauseVideo();
-    this.setState({
-      vitaminModalIsOpen: true
-    })
+    if (this.state.player.getCurrentTime() > 0) {
+      const concurrentVitamins = this.props.vitaminsAndResources.vitamins.filter(vitamin => (vitamin.seconds === Math.round(this.state.player.getCurrentTime())))
+      if (concurrentVitamins.length === 0) {
+        this.state.player.pauseVideo();
+        this.setState({
+          vitaminModalIsOpen: true
+        })
+      } else {
+        toast.error("You already have a vitamin at this time in the video")
+      }
+    } else {
+      toast.error("You cannot create vitamins before the video begins")
+    }
   }
 
   closeVitaminModal() {
