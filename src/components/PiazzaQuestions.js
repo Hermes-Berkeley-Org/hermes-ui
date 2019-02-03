@@ -13,11 +13,14 @@ class PiazzaQuestions extends Component {
 
   render() {
     return (
-      <div>
-      {!this.props.piazzaData ? 'No questions to display' :
-        JSON.stringify(this.props.piazzaData)
-      }
-      </div>
+      <ul className='piazza-questions'>
+        {!this.props.piazzaData || !this.props.piazzaData.questions ? null :
+          this.props.piazzaData.questions.map((question, key) => {
+            const parser = new DOMParser();
+            const document = parser.parseFromString(question.content, 'text/html');
+            return <li key={key}>{document.body.textContent}</li>;
+          })}
+      </ul>
     );
   }
 

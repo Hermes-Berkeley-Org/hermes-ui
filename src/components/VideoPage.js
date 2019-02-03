@@ -106,7 +106,17 @@ class Video extends Component {
                     video={this.props.videoData}
                     player={this.state.player}
                   />
-                </div>}
+                  {!this.state.player || !this.props.lectureData || !this.props.courseData ? null :
+                    <PiazzaQuestions
+                      courseId={this.props.courseId}
+                      lectureUrlName={this.props.lectureUrlName}
+                      videoIndex={this.props.videoIndex}
+                      lecturePiazzaId={this.props.lectureData['lecture_piazza_id']}
+                      piazzaCourseId={this.props.courseData.info['piazza_course_id']}
+                      player={this.state.player}
+                    />}
+                </div>
+              }
             </div>
             {!this.state.player || !this.props.vitaminsAndResources ? null :
               <VitaminContainer
@@ -114,18 +124,6 @@ class Video extends Component {
                 vitamins={this.props.vitaminsAndResources.vitamins}
                 resources={this.props.vitaminsAndResources.resources}
               />
-            }
-            {!this.state.player || !this.props.lectureData || !this.props.courseData ? null :
-            <div className="piazza-questions">
-              <PiazzaQuestions
-                courseId={this.props.courseId}
-                lectureUrlName={this.props.lectureUrlName}
-                videoIndex={this.props.videoIndex}
-                lecturePiazzaId={this.props.lectureData['lecture_piazza_id']}
-                piazzaCourseId={this.props.courseData.info['piazza_course_id']}
-                player={this.state.player}
-              />
-            </div>
             }
           </div>
         </DocumentTitle>
