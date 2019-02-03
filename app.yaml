@@ -1,0 +1,10 @@
+service: ui
+runtime: python27
+api_version: 1
+threadsafe: true
+handlers:
+- url: /static
+  static_dir: build/static
+- url: /.*
+  static_files: build/index.html
+  upload: build/index.html
