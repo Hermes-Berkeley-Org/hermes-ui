@@ -51,10 +51,21 @@ a {
   font-weight: 700;
 }
 
+.form-container {
+  box-sizing: border-box;
+  padding: 0 1em 1em 1em;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
 form label {
   display: block;
-  font-weight: 600;
   margin: 0.5em 0 0.25em 0;
+}
+
+form label:not(.light) {
+  font-weight: 600;
 }
 
 form input {
@@ -69,6 +80,13 @@ form input {
   border-radius: 4px;
 }
 
+form input[type='checkbox'],
+form input[type='radio'] {
+  display: inline-block;
+  margin: 0 0.5em 0 0;
+  width: auto;
+}
+
 form input[type='submit'] {
   margin-top: 1em;
   margin-bottom: 0;
@@ -76,6 +94,21 @@ form input[type='submit'] {
   font-weight: 600;
   color: #FFF;
   border-color: #18BC9C;
+}
+
+form .row {
+  display: flex;
+  align-items: center;
+  margin: 0.5em 0;
+}
+
+form .row input {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.flex {
+  display: flex;
 }
 
 .flex-space {
@@ -137,6 +170,14 @@ form input[type='submit'] {
   border-color: #18BC9C;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
   cursor: default;
+}
+
+.btn-small {
+  border: 1px solid #DDD;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: border-color ease 0.2s, box-shadow ease 0.2s;
 }
 
 .fixed-center {

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import YouTube from 'react-youtube';
 import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title'
-import Modal from 'react-modal'
 
 import { getCourseData } from '../actions/course.js';
 import { getVideoData } from '../actions/video.js';
@@ -20,6 +19,7 @@ import NotFound from './errors/NotFound.js'
 import InternalError from './errors/InternalError.js'
 import CreateVitaminForm from './CreateVitaminForm'
 import CreateResourceForm from './CreateResourceForm'
+import Modal from './Modal.js';
 
 import toast from '../utils/toast.js'
 
@@ -96,11 +96,11 @@ class EditVideo extends Component {
               </div>
             </div>
             <div className='video-bottom-section'>
-              <div className='video-edit-comp-section'>
+              <div className='video-comp-section'>
                 {this.props.vitaminsAndResourcesLoading || !this.state.player ? <Loading /> :
                   (this.props.vitaminsAndResourcesError ? 'Failed to load vitamins' :
                     <React.Fragment>
-                      <h3>Vitamins</h3>
+                      <h3 className='video-comp-section-title'>Vitamins</h3>
                       <div className='video-comp-list-container'>
                         <ol className='video-comp-list'>
                           {this.props.vitaminsAndResources.vitamins.map((vitamin, index) => (
@@ -116,16 +116,16 @@ class EditVideo extends Component {
                       <button type='button' className='btn btn-link' onClick={this.openVitaminModal}>Create vitamin</button>
                     </React.Fragment>)}
               </div>
-              <div className='video-edit-comp-section'>
+              <div className='video-comp-section'>
                 {this.props.vitaminsAndResourcesLoading || !this.state.player ? <Loading /> :
                   (this.props.vitaminsAndResourcesError ? 'Failed to load resources' :
                     <React.Fragment>
-                      <h3>Resources</h3>
+                      <h3 className='video-comp-section-title'>Resources</h3>
                       <div className='video-comp-list-container'>
                         <ol className='video-comp-list'>
                           {this.props.vitaminsAndResources.resources.map((resource, index) => (
                             <li className='video-comp' key={`resource-${index}`}>
-                              <div className='video-comp-text'>{resource.title}: {resource.link}</div>
+                              <div className='video-comp-text'>{resource.title}</div>
                               <div className='video-comp-action'><span className="fa fa-edit" onClick={() => this.editResource(resource)} /></div>
                               <div className='video-comp-action'><span className="fas fa-times" onClick={() => this.deleteResource(resource['resource_index'])} /></div>
                             </li>
@@ -139,16 +139,7 @@ class EditVideo extends Component {
             <Modal
               isOpen={this.state.vitaminModalIsOpen}
               onRequestClose={this.closeVitaminModal}
-              style={{
-                content: {
-                  top: '50%',
-                  left: '50%',
-                  right: 'auto',
-                  bottom: 'auto',
-                  marginRight: '-50%',
-                  transform: 'translate(-50%, -50%)'
-                }
-              }}>
+            >
               <CreateVitaminForm
                 courseId={this.props.courseId}
                 lectureUrlName={this.props.lectureUrlName}
@@ -160,16 +151,7 @@ class EditVideo extends Component {
             <Modal
               isOpen={this.state.resourceModalIsOpen}
               onRequestClose={this.closeResourceModal}
-              style={{
-                content: {
-                  top: '50%',
-                  left: '50%',
-                  right: 'auto',
-                  bottom: 'auto',
-                  marginRight: '-50%',
-                  transform: 'translate(-50%, -50%)'
-                }
-              }}>
+            >
               <CreateResourceForm
                 courseId={this.props.courseId}
                 lectureUrlName={this.props.lectureUrlName}
@@ -251,10 +233,10 @@ class EditVideo extends Component {
   editVitamin(vitamin) {
     if (this.props.vitaminsAndResources) {
       this.setState({
-        vitaminSelected: vitamin
+        vitaminSelected: vitamin,
+        vitaminModalIsOpen: true
       })
     }
-    this.openVitaminModal();
   }
 
   deleteVitamin(vitaminIndex) {
@@ -269,10 +251,10 @@ class EditVideo extends Component {
   editResource(resource) {
     if (this.props.vitaminsAndResources) {
       this.setState({
-        resourceSelected: resource
+        resourceSelected: resource,
+        resourceModalIsOpen: true
       })
     }
-    this.openResourceModal();
   }
 
   deleteResource(resourceIndex) {

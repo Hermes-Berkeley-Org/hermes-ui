@@ -84,40 +84,57 @@ class Video extends Component {
               </div>
             </div>
             <div className='video-bottom-section'>
-              <div className='video-transcript-section'>
+              <div className='video-comp-section'>
                 {this.props.transcriptLoading || !this.state.player ?
                   <Loading /> :
-                  (!this.props.transcript ?
-                    (this.props.transcriptNotFound ? 'No transcript is associated with this video' : 'Failed to load transcript') :
-                    <Transcript
-                      transcript={this.props.transcript}
-                      vitamins={this.props.vitaminsAndResources ? this.props.vitaminsAndResources.vitamins : []}
-                      player={this.state.player}
-                    />)}
+                  (!this.props.transcript && !this.props.transcriptNotFound ? 'Failed to load transcript' :
+                    <React.Fragment>
+                      <h3 className='video-comp-section-title'>Transcript</h3>
+                      <div className='video-comp-list-container'>
+                        <Transcript
+                          transcript={this.props.transcript ? this.props.transcript : []}
+                          vitamins={this.props.vitaminsAndResources ? this.props.vitaminsAndResources.vitamins : []}
+                          player={this.state.player}
+                        />
+                      </div>
+                    </React.Fragment>)}
               </div>
-              {!this.props.courseData || this.props.courseData.info['piazza_active'] !== 'active' ?
-                null :
-                <div className='video-questions-section'>
-                  <PiazzaQuestionForm
-                    courseId={this.props.courseId}
-                    lectureUrlName={this.props.lectureUrlName}
-                    videoIndex={this.props.videoIndex}
-                    course={this.props.courseData}
-                    lecture={this.props.lectureData}
-                    video={this.props.videoData}
-                    player={this.state.player}
-                  />
-                  {!this.state.player || !this.props.lectureData || !this.props.courseData ? null :
-                    <PiazzaQuestions
+              <div className='video-comp-section'>
+                {!this.props.vitaminsAndResources || this.props.vitaminsAndResources.resources.length === 0 ? null :
+                  <div className='video-resources-container'>
+                    <h3 className='video-comp-section-title'>Resources</h3>
+                    <ul className='video-resources'>
+                      {this.props.vitaminsAndResources.resources.map(({ title, link }, index) => (
+                        <li key={index}><a target="_blank" href={link}>{title}</a></li>
+                      )
+                      )}
+                    </ul>
+                  </div>
+                }
+                {!this.props.courseData || this.props.courseData.info['piazza_active'] !== 'active' ?
+                  null :
+                  <div className='video-questions-container'>
+                    <h3 className='video-comp-section-title'><span className='ai ai-piazza' /> Piazza</h3>
+                    <PiazzaQuestionForm
                       courseId={this.props.courseId}
                       lectureUrlName={this.props.lectureUrlName}
                       videoIndex={this.props.videoIndex}
-                      lecturePiazzaId={this.props.lectureData['lecture_piazza_id']}
-                      piazzaCourseId={this.props.courseData.info['piazza_course_id']}
+                      course={this.props.courseData}
+                      lecture={this.props.lectureData}
+                      video={this.props.videoData}
                       player={this.state.player}
-                    />}
-                </div>
-              }
+                    />
+                    {!this.state.player || !this.props.lectureData || !this.props.courseData ? null :
+                      <PiazzaQuestions
+                        courseId={this.props.courseId}
+                        lectureUrlName={this.props.lectureUrlName}
+                        videoIndex={this.props.videoIndex}
+                        lecturePiazzaId={this.props.lectureData['lecture_piazza_id']}
+                        piazzaCourseId={this.props.courseData.info['piazza_course_id']}
+                        player={this.state.player}
+                      />}
+                  </div>}
+              </div>
             </div>
             {!this.state.player || !this.props.vitaminsAndResources ? null :
               <VitaminContainer

@@ -37,10 +37,10 @@ class Vitamin extends Component {
   render() {
     return (
       <div>
-        <h2>{this.props.vitamin.question}</h2>
+        <h3>{this.props.vitamin.question}</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.vitamin.choices.map((choice, index) =>
-              <div key={index} className="row">
+              <label key={index} htmlFor={`choice-${index}-radio`} className='light'>
                 <input
                   type="radio"
                   key={`choice-${index}-radio`}
@@ -51,7 +51,7 @@ class Vitamin extends Component {
                   onChange={this.handleChoiceChange.bind(this, index)}
                 />
                 {choice}
-              </div>
+              </label>
             )
           }
           {this.props.vitamin.skippable ?

@@ -34,8 +34,8 @@ class CreateCourseForm extends Component {
   render() {
     return (
       <div>
-        <div onClick={this.props.closeCreateCourseModal} className="fas fa-times"></div>
-        <h2>Create {this.state.displayName || 'course'}</h2>
+        <div onClick={this.props.closeCreateCourseModal} className="modal-close fas fa-times"></div>
+        <h3>Create {this.state.displayName || 'course'}</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div className='form-group'>
             <label htmlFor="display-name">Choose a name for the class:</label>
@@ -53,7 +53,7 @@ class CreateCourseForm extends Component {
               Piazza Course ID &nbsp;
             <div data-tip data-for='piazza-help' className="fas fa-question-circle" />
               <ReactTooltip id='piazza-help'>
-                <p>Navigate to the course on Piazza and paste the alphanumeric ID (piazza.com/class/&lt;course_id&gt;) here.</p>
+                <p>Navigate to the course on Piazza and paste the alphanumeric ID (piazza.com/class/&lt;course_id&gt;) here. Leave blank if you do not wish to enable Piazza.</p>
               </ReactTooltip>
             </label>
             <input

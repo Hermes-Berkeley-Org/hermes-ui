@@ -83,6 +83,8 @@
   display: flex;
 }
 
+/* Bottom section */
+
 .video-bottom-section > * {
   flex: 1 1 auto;
   width: 308px;
@@ -91,19 +93,79 @@
   overflow-y: auto;
 }
 
+/* Bottom column */
+
+.video-comp-section {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+}
+
+.video-comp-section-title {
+  margin: 0;
+}
+
+.video-comp-list-container {
+  flex: 1 1 auto;
+  height: 10px;
+  margin: 1em 0;
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  overflow-y: auto;
+}
+
+.video-comp-list-container:last-child {
+  margin-bottom: 0;
+}
+
+/* Bottom generic list */
+
+.video-comp-list {
+  margin: 0;
+  padding: 0;
+}
+
+.video-comp {
+  display: flex;
+  padding: 0.5em 1em;
+}
+
+.video-comp + .video-comp {
+  border-top: none;
+  border-top: 1px dashed #DDD;
+}
+
+.video-comp-timestamp {
+  margin-right: 1em;
+}
+
+.video-comp-text {
+  flex: 1 0 auto;
+  margin-right: 1em;
+}
+
+.video-comp-action:not(:last-child) {
+  margin-right: 0.5em;
+}
+
+/* Bottom transcript column */
+
 .video-transcript-section {
   flex-grow: 2;
 }
 
+.video-transcript {
+  flex: 1 1 auto;
+}
+
 .video-transcript table {
   border-collapse: collapse;
-  margin: -1px 0;
+  margin: -1px 0 0;
   min-width: 100%;
 }
 
 .video-transcript td {
   border-top: 1px dashed #EEE;
-  border-bottom: 1px dashed #EEE;
   padding: 0.25em;
   white-space: nowrap;
 }
@@ -169,48 +231,13 @@
   content: 'E'; 
 }
 
-.video-edit-comp-section {
-  display: flex;
-  flex-direction: column;
+/* Piazza */
+
+.form-video-piazza {
+  margin-top: 1em;
 }
 
-.video-edit-comp-section h3 {
-  margin: 0;
-}
-
-.video-comp-list-container {
-  flex: 1 1 auto;
-  height: 10px;
-  margin: 1em 0;
-  border-top: 1px solid #DDD;
-  border-bottom: 1px solid #DDD;
-  overflow-y: auto;
-}
-
-.video-comp-list {
-  margin: 0;
-  padding: 0;
-}
-
-.video-comp {
-  display: flex;
-  padding: 0.5em 1em;
-}
-
-.video-comp + .video-comp {
-  border-top: none;
-  border-top: 1px dashed #DDD;
-}
-
-.video-comp-timestamp {
-  margin-right: 1em;
-}
-
-.video-comp-text {
-  flex: 1 0 auto;
-  margin-right: 1em;
-}
-
-.video-comp-action:not(:last-child) {
-  margin-right: 0.5em;
+.video-piazza-help {
+  float: right;
+  margin-top: 0.125em;
 }

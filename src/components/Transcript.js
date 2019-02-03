@@ -36,6 +36,10 @@ class Transcript extends Component {
       ...this.props.vitamins
     ].sort((a, b) => a.seconds - b.seconds);
 
+    if (entries.length == 0) {
+      return 'No transcript is associated with this video';
+    }
+
     return (
       <div className='video-transcript'>
         <table ref={this.setTranscriptTableRef}>
@@ -93,7 +97,9 @@ class Transcript extends Component {
 
     if (videoPlaying && transcriptShouldScroll) {
       const closestTranscriptRowIndex = this.findClosestTranscriptRow(this.props.videoCurrentTime, 0);
-      this.transcriptRows[closestTranscriptRowIndex].scrollIntoView({ behavior: "smooth", block: "start" });
+      if (this.transcriptRows[closestTranscriptRowIndex]) {
+        this.transcriptRows[closestTranscriptRowIndex].scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   }
 }

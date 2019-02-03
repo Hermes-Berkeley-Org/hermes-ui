@@ -57,7 +57,7 @@
 }
 
 .lecture-video-item :first-child {
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 }
 
 .lecture-video-item a {
