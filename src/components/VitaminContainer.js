@@ -52,15 +52,17 @@ class VitaminContainer extends Component {
     this.props.player.pauseVideo();
     this.props.player.seekTo(this.state.vitamins[this.state.nextVitaminIndex].seconds);
 
-    this.setState({
-      activeVitamin: this.state.vitamins[this.state.nextVitaminIndex],
-      nextVitaminIndex: this.state.nextVitaminIndex + 1
-    })
+    if (this.state.activeVitamin != this.state.vitamins[this.state.nextVitaminIndex]) {
+      this.setState({
+        activeVitamin: this.state.vitamins[this.state.nextVitaminIndex]
+      })
+    }
   }
 
   closeVitaminModal() {
     this.setState({
-      activeVitamin: null
+      activeVitamin: null,
+      nextVitaminIndex: this.state.nextVitaminIndex + 1
     })
     this.props.player.playVideo();
   }
