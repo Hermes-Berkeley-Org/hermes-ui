@@ -30,12 +30,18 @@ class VitaminContainer extends Component {
     );
   }
 
+  componentDidMount() {
+    this.setState({
+      vitamins: this.props.vitamins.filter(vitamin => !vitamin.answered)
+    })
+  }
+
   componentDidUpdate() {
     const videoPlaying = this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED;
-    const hasNextVitamin = this.state.nextVitaminIndex < this.props.vitamins.length;
+    const hasNextVitamin = this.state.nextVitaminIndex < this.state.vitamins.length;
 
     if (videoPlaying && hasNextVitamin) {
-      if (this.props.videoCurrentTime >= this.props.vitamins[this.state.nextVitaminIndex].seconds) {
+      if (this.props.videoCurrentTime >= this.state.vitamins[this.state.nextVitaminIndex].seconds) {
         this.openVitaminModal();
       }
     }
@@ -44,10 +50,10 @@ class VitaminContainer extends Component {
   openVitaminModal() {
     // Pausing the video should prevent `openVitaminModal()` from running again when the modal's open
     this.props.player.pauseVideo();
-    this.props.player.seekTo(this.props.vitamins[this.state.nextVitaminIndex].seconds);
+    this.props.player.seekTo(this.state.vitamins[this.state.nextVitaminIndex].seconds);
 
     this.setState({
-      activeVitamin: this.props.vitamins[this.state.nextVitaminIndex],
+      activeVitamin: this.state.vitamins[this.state.nextVitaminIndex],
       nextVitaminIndex: this.state.nextVitaminIndex + 1
     })
   }

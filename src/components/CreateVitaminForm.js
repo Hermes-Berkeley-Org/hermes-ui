@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactTooltip from 'react-tooltip'
 
 import { createVitamin, editVitamin } from '../actions/editVideo.js'
 import toast from '../utils/toast.js'

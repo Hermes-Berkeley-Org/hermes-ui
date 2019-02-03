@@ -22,7 +22,7 @@ class OkAuthorized extends Component {
     if (this.state.okFailed) {
       return <InternalError/>
     }
-    return <Loading/>
+    return <Loading center />
   }
 
   componentDidMount() {

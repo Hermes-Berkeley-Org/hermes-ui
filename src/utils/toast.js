@@ -1,17 +1,15 @@
 import { toast } from 'react-toastify';
 
-if (!Array.prototype.random) {
-  Array.prototype.random = function () {
-    return this[Math.floor(Math.random() * this.length)];
-  };
-}
+const random = function (array) {
+  return array[Math.floor(Math.random() * array.length)];
+};
 
 function randomSuccessEmoji() {
-  return ['🌟', '🍩', '🎯', '🎉', '🎊', '🚀'].random()
+  return random(['🌟', '🍩', '🎯', '🎉', '🎊', '🚀'])
 }
 
 function randomErrorEmoji() {
-  return ['🔔', '😢', '👀'].random()
+  return random(['🔔', '😢', '👀'])
 }
 
 export default {

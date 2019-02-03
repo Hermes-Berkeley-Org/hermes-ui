@@ -32,11 +32,11 @@ class Transcript extends Component {
   render() {
     // TODO: Merge the entries faster
     const entries = [
-      ...this.transcriptWithTimes, 
+      ...this.transcriptWithTimes,
       ...this.props.vitamins
     ].sort((a, b) => a.seconds - b.seconds);
 
-    if (entries.length == 0) {
+    if (entries.length === 0) {
       return 'No transcript is associated with this video';
     }
 
@@ -92,7 +92,7 @@ class Transcript extends Component {
 
   componentDidUpdate() {
     const videoPlaying = this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED;
-    const videoJumped = this.props.videoCurrentTime == this.props.videoStartTime;
+    const videoJumped = this.props.videoCurrentTime === this.props.videoStartTime;
     const transcriptShouldScroll = videoJumped || (Math.round(this.props.videoCurrentTime) % 15 === 0);
 
     if (videoPlaying && transcriptShouldScroll) {

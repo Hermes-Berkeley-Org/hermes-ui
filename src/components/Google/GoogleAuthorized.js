@@ -12,7 +12,7 @@ const utf8 = require('utf8');
 class GoogleAuthorized extends Component {
 
   render() {
-    return <Loading/>;
+    return <Loading center />;
   }
 
   componentDidMount() {
@@ -20,7 +20,7 @@ class GoogleAuthorized extends Component {
     const state = JSON.parse(utf8.decode(base64.decode(urlParams.state)));
 
     const accessToken = urlParams['access_token'];
-    const expirationTime = new Date().getTime() + parseInt(urlParams['expires_in']) * 1000
+    const expirationTime = new Date().getTime() + parseInt(urlParams['expires_in'], 10) * 1000
     localStorage.setItem('googleToken', encrypt({
       accessToken,
       expirationTime

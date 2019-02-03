@@ -6,7 +6,7 @@ const URL = require('url-parse');
 
 const queryString = require('query-string');
 
-const cryptoRandomString = require('crypto-random-string');
+const crypto = require("crypto");
 
 const base64 = require('base-64');
 const utf8 = require('utf8')
@@ -18,7 +18,7 @@ class OkRedirect extends Component {
     const currentUrl = new URL(window.location.href);
 
     const state = JSON.stringify({
-        salt: cryptoRandomString(10),
+        salt: crypto.randomBytes(20).toString('hex'),
         next: this.props.nextUrl
     })
 

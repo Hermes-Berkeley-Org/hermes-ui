@@ -37,9 +37,9 @@ class PiazzaQuestions extends Component {
 
   componentDidUpdate(prevProps) {
     // Only consider reloading questions when the video time has changed
-    if (this.props.videoCurrentTime != prevProps.videoCurrentTime) {
+    if (this.props.videoCurrentTime !== prevProps.videoCurrentTime) {
       const videoPlaying = this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED;
-      const videoJumped = this.props.videoCurrentTime == this.props.videoStartTime;
+      const videoJumped = this.props.videoCurrentTime === this.props.videoStartTime;
       const questionsShouldUpdate = videoJumped || (Math.round(this.props.videoCurrentTime) % 30 === 0);
 
       if (videoPlaying && questionsShouldUpdate) {

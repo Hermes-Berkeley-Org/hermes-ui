@@ -2,7 +2,6 @@ import { GET_OK_ACCESS_TOKEN_SUCCESS, GET_OK_ACCESS_TOKEN_STARTED, GET_OK_ACCESS
 import { decrypt } from '../utils/security.js'
 
 const axios = require('axios');
-const queryString = require('query-string')
 
 export const sendFailure = () => dispatch => {
   dispatch({
@@ -32,7 +31,6 @@ export const authenticate = () => dispatch => {
         type: GET_OK_ACCESS_TOKEN_SUCCESS
       })
     }).catch(function (accessTokenError) {
-      const currentUrl = new URL(window.location.href);
       axios(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/ok_refresh?refresh_token=${refreshToken}`, {
         method: 'GET'
       }).then(function (response) {

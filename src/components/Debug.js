@@ -12,7 +12,9 @@ class Debug extends Component {
   }
 
   render() {
-    // TODO: Hide in production mode
+    if (process.env.NODE_ENV === 'production') {
+      return null;
+    }
     return (
       <div>
         <h3>Debug info</h3>

@@ -59,7 +59,7 @@ class CoursePage extends Component {
                         lecture,
                         this.props.courseData,
                       )} /> :
-                    <h3>📭 No lectures</h3>}
+                    <h3><span role="img" aria-label="">📭</span> No lectures</h3>}
               </div>
               {this.props.role !== ROLE_INSTRUCTOR ? null :
                 <div className='course-lecture-actions'>

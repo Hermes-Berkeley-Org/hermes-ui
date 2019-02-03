@@ -11,7 +11,7 @@ export default class InternalError extends Component {
       <Layout>
         <div className='container container-not-found'>
           <div>
-            <h1>🛸 We're out of service</h1>
+            <h1><span role="img" aria-label="">🛸</span> We're out of service</h1>
             <p>Please retry your request in a few minutes</p>
             <p><Link to='/'><span className='fa fa-arrow-left' /> Follow here to go back to home page</Link></p>
           </div>
