@@ -12,7 +12,6 @@ class PiazzaQuestions extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
       {!this.props.piazzaData ? 'No questions to display' :
@@ -33,19 +32,23 @@ class PiazzaQuestions extends Component {
     );
   }
 
-  componentDidMount() {
-    const player = this.props.player;
-    this.loadQuestions(0);
-    setInterval(() => {
-      if (player.getPlayerState() === YouTube.PlayerState.PLAYING) {
-        this.loadQuestions(player.getCurrentTime())
+  componentDidUpdate(prevProps) {
+    // Only consider reloading questions when the video time has changed
+    if (this.props.videoCurrentTime != prevProps.videoCurrentTime) {
+      const videoPlaying = this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED;
+      const videoJumped = this.props.videoCurrentTime == this.props.videoStartTime;
+      const questionsShouldUpdate = videoJumped || (Math.round(this.props.videoCurrentTime) % 30 === 0);
+
+      if (videoPlaying && questionsShouldUpdate) {
+        this.loadQuestions(this.props.videoCurrentTime);
       }
-    }, 30 * 1000)
+    }
   }
 }
 
 const mapStateToProps = state => ({
-  ...state.piazzaQuestionReducer
+  ...state.piazzaQuestionReducer,
+  ...state.youtubeReducer
 });
 
 const mapDispatchToProps = dispatch => ({

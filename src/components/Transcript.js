@@ -58,7 +58,7 @@ class Transcript extends Component {
   }
 
   componentDidUpdate() {
-    const videoPlaying = this.props.player && this.props.player.getPlayerState() === YouTube.PlayerState.PLAYING;
+    const videoPlaying = this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED;
     const videoJumped = this.props.videoCurrentTime == this.props.videoStartTime;
     const transcriptShouldScroll = videoJumped || (Math.round(this.props.videoCurrentTime) % 15 === 0);
 
