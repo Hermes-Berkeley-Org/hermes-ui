@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 
 import { connect } from 'react-redux';
-import { videoResumed } from '../actions/youtube.js'
 
 class Transcript extends Component {
 
@@ -59,7 +58,7 @@ class Transcript extends Component {
   }
 
   componentDidUpdate() {
-    const videoPlaying = this.props.player && this.props.player.getPlayerState() !== YouTube.PlayerState.PAUSED;
+    const videoPlaying = this.props.player && this.props.player.getPlayerState() === YouTube.PlayerState.PLAYING;
     const videoJumped = this.props.videoCurrentTime == this.props.videoStartTime;
     const transcriptShouldScroll = videoJumped || (Math.round(this.props.videoCurrentTime) % 15 === 0);
 
