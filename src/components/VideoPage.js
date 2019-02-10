@@ -100,10 +100,10 @@ class Video extends Component {
                     </React.Fragment>)}
               </div>
               <div className='video-comp-section'>
-                {!this.props.courseData || this.props.courseData.info['piazza_active'] !== 'active' ?
+                {!this.props.courseData || !this.props.lectureData || this.props.courseData.info['piazza_active'] !== 'active' ?
                   null :
                   <div className='video-questions-container'>
-                    <h3 className='video-comp-section-title'><span className='ai ai-piazza' /> Piazza</h3>
+                    <h3 className='video-comp-section-title'><span className='ai ai-piazza' /> Piazza <a className='video-comp-section-title-link' href={`https://piazza.com/class/${this.props.courseData.info.piazza_course_id}/?cid=${this.props.lectureData.lecture_piazza_id}`} target='_blank'>Go to thread <span className='fa fa-arrow-right' /></a></h3>
                     <PiazzaQuestionForm
                       courseId={this.props.courseId}
                       lectureUrlName={this.props.lectureUrlName}
