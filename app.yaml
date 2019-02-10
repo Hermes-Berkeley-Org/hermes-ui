@@ -13,6 +13,10 @@ handlers:
   static_files: build/manifest.json
   upload: build/manifest.json
   secure: always
+- url: /og-image.png
+  static_files: build/og-image.png
+  upload: build/og-image.png
+  secure: always
 - url: /.*
   static_files: build/index.html
   upload: build/index.html
