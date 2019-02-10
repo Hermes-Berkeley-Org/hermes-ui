@@ -20,7 +20,7 @@
 
 .video-player-section {
   position: relative;
-  flex: none;
+  flex: 1 1 auto;
   height: 50%;
 }
 
@@ -78,7 +78,8 @@
 }
 
 .video-bottom-section {
-  flex: 1 1 auto;
+  flex: 0 0 auto;
+  height: 33%;
   margin: 0 -1.5em 0 0;
   display: flex;
 }
