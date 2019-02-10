@@ -100,17 +100,6 @@ class Video extends Component {
                     </React.Fragment>)}
               </div>
               <div className='video-comp-section'>
-                {!this.props.vitaminsAndResources || this.props.vitaminsAndResources.resources.length === 0 ? null :
-                  <div className='video-resources-container'>
-                    <h3 className='video-comp-section-title'>Resources</h3>
-                    <ul className='video-resources'>
-                      {this.props.vitaminsAndResources.resources.map(({ title, link }, index) => (
-                        <li key={index}><a target="_blank" href={link}>{title}</a></li>
-                      )
-                      )}
-                    </ul>
-                  </div>
-                }
                 {!this.props.courseData || this.props.courseData.info['piazza_active'] !== 'active' ?
                   null :
                   <div className='video-questions-container'>
@@ -133,7 +122,19 @@ class Video extends Component {
                         piazzaCourseId={this.props.courseData.info['piazza_course_id']}
                         player={this.state.player}
                       />} */}
-                  </div>}
+                  </div>
+                }
+                {!this.props.vitaminsAndResources || this.props.vitaminsAndResources.resources.length === 0 ? null :
+                  <div className='video-resources-container'>
+                    <h3 className='video-comp-section-title'>Resources</h3>
+                    <ul className='video-resources'>
+                      {this.props.vitaminsAndResources.resources.map(({ title, link }, index) => (
+                        <li key={index}><a target="_blank" href={link}>{title}</a></li>
+                      )
+                      )}
+                    </ul>
+                  </div>
+                }
               </div>
             </div>
             {!this.state.player || !this.props.vitaminsAndResources ? null :
