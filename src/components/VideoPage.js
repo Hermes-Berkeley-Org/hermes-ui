@@ -124,7 +124,7 @@ class Video extends Component {
                       video={this.props.videoData}
                       player={this.state.player}
                     />
-                    {!this.state.player || !this.props.lectureData || !this.props.courseData ? null :
+                    {/* {!this.state.player || !this.props.lectureData || !this.props.courseData ? null :
                       <PiazzaQuestions
                         courseId={this.props.courseId}
                         lectureUrlName={this.props.lectureUrlName}
@@ -132,7 +132,7 @@ class Video extends Component {
                         lecturePiazzaId={this.props.lectureData['lecture_piazza_id']}
                         piazzaCourseId={this.props.courseData.info['piazza_course_id']}
                         player={this.state.player}
-                      />}
+                      />} */}
                   </div>}
               </div>
             </div>
