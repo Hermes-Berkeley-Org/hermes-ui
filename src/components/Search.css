@@ -1,0 +1,32 @@
+input.search {
+    line-height: 2;
+    font-size: 18px;
+    height: auto;
+    padding-left: 20px;
+    margin-left: 40px;
+  }
+
+  input.search:focus {
+      outline:none;
+  }
+
+  ul.suggestions {
+    margin: 0;
+
+  }
+
+  span.search-match {
+    text-align: left
+  }
+
+  span.search-match-info {
+    text-align: right
+  }
+
+  li.suggestion {
+    list-style: none;
+    margin-top: -1px;
+    line-height: 2;
+    padding: 5px 20px;
+    display: block;
+  }

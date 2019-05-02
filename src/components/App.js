@@ -14,6 +14,7 @@ import EditVideo from './EditVideo'
 import OkPrivate from './Ok/OkPrivate'
 import InstructorAuthenticated from './InstructorAuthenticated'
 import NotFound from './errors/NotFound'
+import Search from './Search'
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
       <DocumentTitle title="Hermes">
         <Switch>
           <Route exact path="/" component={PublicHomePage}/>
+          <Route exact path="/search" component={Search}/>
           <Route exact path="/home" render={({ location, match }) => (
               <OkPrivate nextUrl={location.pathname}>
                 <HomePage/>

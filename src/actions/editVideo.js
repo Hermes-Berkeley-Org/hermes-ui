@@ -10,7 +10,7 @@ export const getVitaminsAndResources = (courseId, lectureUrlName, videoIndex) =>
   dispatch({
     type: GET_EDIT_DATA_STARTED
   });
-  axios.get(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/edit`,
+  axios.get(`${process.env.REACT_APP_HERMES_RESOURCE_SERVER}/course/${courseId}/lecture/${lectureUrlName}/video/${videoIndex}/vitamins_and_resources`,
     {
       headers: {
         'Authorization': `Bearer ${okAccessToken}`
@@ -47,7 +47,7 @@ export const createVitamin = (courseId, lectureUrlName, videoIndex, vitaminData)
       getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully created your vitamin!')
     }).catch(function (error) {
-      if (error.response.status === 400) {
+      if (error.response && error.response.status === 400) {
         toast.error(error.response.data.message)
       } else {
         toast.error('Failed to create your vitamin, please refresh the page and try again')
@@ -74,7 +74,7 @@ export const editVitamin = (courseId, lectureUrlName, videoIndex, vitaminIndex, 
       getVitaminsAndResources(courseId, lectureUrlName, videoIndex)(dispatch);
       toast.success('Successfully edited your vitamin!')
     }).catch(function (error) {
-      if (error.response.status === 400) {
+      if (error.response || error.response.status === 400) {
         toast.error(error.response.data.message)
       } else {
         toast.error('Failed to edit your vitamin, please refresh the page and try again')

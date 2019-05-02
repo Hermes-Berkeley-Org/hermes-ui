@@ -11,6 +11,7 @@ import piazzaReducer from './piazzaReducer'
 import editVideoReducer from './editVideoReducer'
 import youtubeReducer from './youtubeReducer'
 import piazzaQuestionReducer from './piazzaQuestionReducer'
+import searchReducer from './searchReducer'
 
 export default combineReducers({
   okAuthReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
   piazzaReducer,
   editVideoReducer,
   youtubeReducer,
-  piazzaQuestionReducer
+  piazzaQuestionReducer,
+  searchReducer
 });

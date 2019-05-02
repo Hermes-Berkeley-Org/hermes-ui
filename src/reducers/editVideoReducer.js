@@ -18,7 +18,6 @@ export default (state = {}, action) => {
         vitaminsAndResourcesError: null
       };
     case GET_EDIT_DATA_FAILURE:
-      console.log(action.payload)
       return {
         ...state,
         vitaminsAndResourcesLoading: false,
