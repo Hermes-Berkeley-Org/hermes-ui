@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-import SuggestionsList from './SuggestionsList'
+import Suggestion from './Suggestion'
 
 import { search } from '../actions/search.js'
 
@@ -33,16 +33,32 @@ class Search extends Component {
  render() {
    return (
      <form>
+      <table className="suggestions">
+       <tr>
+       <th className="search-input">
        <input
          placeholder="Search all classes"
          ref={input => this.search = input}
          onChange={this.handleInputChange.bind(this)}
          className="search"
        />
-       <SuggestionsList results={this.props.searchResults} query={this.state.query || ''}/>
+       </th>
+       </tr>
+       {this.state.query && this.props.searchResults.length === 0 ?
+         <tr><td>No search results found!</td></tr> :
+         this.props.searchResults.map((result, i) => (
+           <Suggestion key={i} result={result} query={this.state.query}/>
+         ))
+       }
+
+      </table>
      </form>
    )
  }
+}
+
+Search.defaultProps = {
+  searchResults: []
 }
 
 const mapStateToProps = state => ({
